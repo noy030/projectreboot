@@ -1,31 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>PROJECT REBOOT</title>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=BIZ+UDMincho&family=BIZ+UDGothic:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Heebo:wght@300;400;500;700&display=swap');
 
 :root {
-  /* ── NieR game palette ── exact match to in-game HUD */
-  --bg:          #2a2a2a;   /* main background — mid grey */
-  --bg-dark:     #1e1e1e;   /* darker panels */
-  --bg-darker:   #161616;   /* deepest bg */
-  --bg-light:    #333333;   /* slightly lighter panel */
-  --line:        #4a4a4a;   /* separator lines */
-  --line-light:  #5a5a5a;   /* brighter lines */
-  --white:       #e8e8e8;   /* primary text / UI white */
-  --white-dim:   #b0b0b0;   /* secondary text */
-  --white-faint: #686868;   /* tertiary / labels */
-  --white-ghost: #3e3e3e;   /* barely visible */
-  --red:         #cc3333;   /* warning / danger */
-  --red-dim:     rgba(204,51,51,0.25);
-  --android:     #c8c8b8;   /* android faction — slightly warm grey-white */
-  --machine:     #a0b8b8;   /* machine faction — slightly cool grey */
+  --bg:          #2a2a2a;
+  --bg-dark:     #1e1e1e;
+  --bg-darker:   #161616;
+  --bg-light:    #333333;
+  --line:        #4a4a4a;
+  --line-light:  #5a5a5a;
+  --white:       #e8e8e8;
+  --white-dim:   #b0b0b0;
+  --white-faint: #686868;
+  --white-ghost: #3e3e3e;
+  --red:         #cc3333;
+  --android:     #c8c8b8;
+  --machine:     #a0b8b8;
   --font-ui:     'Share Tech Mono', monospace;
-  --font-jp:     'BIZ UDGothic', sans-serif;
-  --font-mincho: 'BIZ UDMincho', serif;
+  --font-he:     'Heebo', sans-serif;
 }
 
 *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
@@ -34,562 +31,413 @@ html { scroll-behavior:smooth; }
 body {
   background: var(--bg);
   color: var(--white);
-  font-family: var(--font-ui);
-  font-size: 13px;
-  line-height: 1.6;
+  font-family: var(--font-he);
+  font-size: 14px;
+  line-height: 1.7;
   overflow-x: hidden;
   cursor: crosshair;
+  direction: rtl;
 }
 
-/* ── scanlines — very visible like the actual game ── */
 body::before {
   content:''; position:fixed; inset:0; z-index:9999; pointer-events:none;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0px, transparent 2px,
-    rgba(0,0,0,0.18) 2px, rgba(0,0,0,0.18) 3px
-  );
+  background: repeating-linear-gradient(0deg,transparent 0px,transparent 2px,rgba(0,0,0,0.16) 2px,rgba(0,0,0,0.16) 3px);
 }
-
-/* ── subtle vignette ── */
 body::after {
   content:''; position:fixed; inset:0; z-index:9996; pointer-events:none;
   background: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.5) 100%);
 }
 
-/* ── cursor dot ── */
 .cursor-dot {
   position:fixed; width:4px; height:4px; background:var(--white);
   border-radius:50%; pointer-events:none; z-index:10000;
   transform:translate(-50%,-50%);
 }
-
-/* ── glitch horizontal sweep ── */
 .glitch-sweep {
   position:fixed; z-index:9990; pointer-events:none;
-  left:0; right:0; height:1px; background:rgba(232,232,232,0.08);
+  left:0; right:0; height:1px; background:rgba(232,232,232,0.07);
   animation:sweep 12s linear infinite;
 }
-@keyframes sweep {
-  0%   { top:-1px; opacity:0; }
-  3%   { opacity:1; }
-  97%  { opacity:1; }
-  100% { top:100vh; opacity:0; }
-}
+@keyframes sweep { 0%{top:-1px;opacity:0} 3%{opacity:1} 97%{opacity:1} 100%{top:100vh;opacity:0} }
 
-/* ═══════════════════════════════════════
-   TOP HUD — matches NieR's HUD exactly
-═══════════════════════════════════════ */
+/* ═══════════ HUD ═══════════ */
 .hud {
   position:fixed; top:0; left:0; right:0; z-index:500;
-  background: var(--bg-darker);
-  border-bottom: 1px solid var(--line);
+  background:var(--bg-darker); border-bottom:1px solid var(--line);
 }
-/* top info strip — like the game's top bar */
 .hud-strip {
   display:flex; align-items:center; justify-content:space-between;
-  padding:0 0;
-  height:20px;
-  border-bottom:1px solid var(--line);
-  background: var(--bg-dark);
+  height:20px; border-bottom:1px solid var(--line); background:var(--bg-dark);
+  direction: ltr;
 }
-.hud-strip-left,
-.hud-strip-right {
-  display:flex; align-items:center;
-  height:100%;
+.hud-strip-side { display:flex; align-items:center; height:100%; }
+.hud-cell {
+  display:flex; align-items:center; height:100%; padding:0 12px;
+  border-left:1px solid var(--line); font-family:var(--font-ui);
+  font-size:0.54rem; letter-spacing:0.18em; color:var(--white-faint);
+  text-transform:uppercase; white-space:nowrap; gap:5px;
 }
-.hud-strip-cell {
-  display:flex; align-items:center;
-  height:100%; padding:0 12px;
-  border-right:1px solid var(--line);
-  font-size:0.58rem; letter-spacing:0.2em;
-  color:var(--white-faint); text-transform:uppercase;
-  white-space:nowrap;
-}
-.hud-strip-cell:last-child { border-right:none; border-left:1px solid var(--line); }
-.hud-strip-cell.active { color:var(--white-dim); }
-.hud-dot-sm { width:4px; height:4px; border-radius:50%; background:var(--white-faint); margin-right:5px; animation:blink 2s infinite; }
+.hud-cell:first-child { border-left:none; border-right:none; }
+.hud-cell.lit { color:var(--white-dim); }
+.dot { width:4px; height:4px; border-radius:50%; background:var(--white-faint); animation:blink 2s infinite; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.15} }
 
-/* main nav row */
 .hud-nav-row {
   display:flex; align-items:center; justify-content:space-between;
-  height:36px; padding:0;
+  height:36px; direction:ltr;
 }
 .hud-logo-block {
   display:flex; align-items:center; height:100%;
-  border-right:1px solid var(--line); padding:0 20px;
-  gap:10px;
+  border-left:1px solid var(--line); padding:0 18px; gap:0;
 }
-.hud-logo {
-  font-size:0.75rem; letter-spacing:0.4em; color:var(--white);
-  text-transform:uppercase; white-space:nowrap;
-}
-.hud-logo-jp {
-  font-family:var(--font-jp); font-size:0.65rem; color:var(--white-faint);
-  letter-spacing:0.1em;
-}
-.hud-nav {
-  display:flex; list-style:none; height:100%;
-}
-.hud-nav li { height:100%; }
+.hud-logo { font-family:var(--font-ui); font-size:0.72rem; letter-spacing:0.38em; color:var(--white); text-transform:uppercase; }
+.hud-nav { display:flex; list-style:none; height:100%; }
 .hud-nav a {
-  display:flex; align-items:center; height:100%; padding:0 14px;
-  font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase;
-  color:var(--white-faint); text-decoration:none;
-  border-right:1px solid var(--line); transition:all 0.1s;
-  position:relative;
+  display:flex; align-items:center; height:100%; padding:0 13px;
+  font-family:var(--font-ui); font-size:0.55rem; letter-spacing:0.18em;
+  text-transform:uppercase; color:var(--white-faint); text-decoration:none;
+  border-left:1px solid var(--line); transition:all 0.1s; position:relative;
 }
 .hud-nav a:hover { color:var(--white); background:rgba(255,255,255,0.04); }
-.hud-nav a::after {
-  content:''; position:absolute; bottom:0; left:0; right:0; height:1px;
-  background:var(--white); transform:scaleX(0); transition:transform 0.15s;
-}
+.hud-nav a::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:var(--white); transform:scaleX(0); transition:transform 0.15s; }
 .hud-nav a:hover::after { transform:scaleX(1); }
-.hud-right-block {
-  display:flex; align-items:center; height:100%; gap:0;
-  border-left:1px solid var(--line);
-}
+.hud-right { display:flex; align-items:center; height:100%; border-right:1px solid var(--line); }
 .hud-right-cell {
   display:flex; align-items:center; height:100%; padding:0 12px;
-  border-right:1px solid var(--line); gap:5px;
+  border-left:1px solid var(--line); gap:5px;
 }
-.hud-right-cell:last-child { border-right:none; }
-.hud-right-cell span {
-  font-size:0.55rem; letter-spacing:0.15em; color:var(--white-faint);
-}
-.hud-clock { font-size:0.6rem; color:var(--white-dim); letter-spacing:0.1em; }
+.hud-right-cell span { font-family:var(--font-ui); font-size:0.52rem; letter-spacing:0.12em; color:var(--white-faint); }
+.hud-clock { font-family:var(--font-ui); font-size:0.58rem; color:var(--white-dim); letter-spacing:0.1em; }
 
-/* side label — like the vertical text on NieR's UI sides */
-.side-label {
-  position:fixed; top:50%; right:8px; z-index:100;
-  transform:translateY(-50%);
-  font-size:0.45rem; letter-spacing:0.25em; color:var(--white-ghost);
-  writing-mode:vertical-rl; text-transform:uppercase; opacity:0.8;
-}
-.side-label-left {
-  position:fixed; top:50%; left:8px; z-index:100;
-  transform:translateY(-50%) rotate(180deg);
-  font-size:0.45rem; letter-spacing:0.25em; color:var(--white-ghost);
-  writing-mode:vertical-rl; text-transform:uppercase; opacity:0.8;
-}
-
-/* ═══════════════════════════════════════
-   HERO
-═══════════════════════════════════════ */
+/* ═══════════ HERO ═══════════ */
 #hero {
   min-height:100vh; display:flex; align-items:center; justify-content:center;
-  position:relative; overflow:hidden; padding-top:57px;
-  background: var(--bg);
+  position:relative; overflow:hidden; padding-top:57px; background:var(--bg);
 }
-
-/* ── NieR grid — like the background grid in the game ── */
 .hero-grid {
   position:absolute; inset:0; pointer-events:none;
-  background-image:
-    linear-gradient(var(--white-ghost) 1px, transparent 1px),
-    linear-gradient(90deg, var(--white-ghost) 1px, transparent 1px);
-  background-size: 60px 60px;
-  opacity: 0.18;
+  background-image: linear-gradient(var(--white-ghost) 1px,transparent 1px), linear-gradient(90deg,var(--white-ghost) 1px,transparent 1px);
+  background-size:60px 60px; opacity:0.2;
 }
-/* ── fade the grid at edges ── */
 .hero-grid::after {
   content:''; position:absolute; inset:0;
-  background: radial-gradient(ellipse 70% 70% at 50% 50%, transparent 30%, var(--bg) 100%);
+  background:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 30%,var(--bg) 100%);
 }
-
-/* ── large background kanji ── */
-.hero-kanji {
-  position:absolute; font-family:var(--font-mincho); font-weight:400;
-  font-size:clamp(18rem, 38vw, 32rem);
-  color:var(--white-ghost); opacity:0.12;
-  top:50%; left:50%; transform:translate(-50%,-50%);
-  pointer-events:none; user-select:none; white-space:nowrap; line-height:1;
-  letter-spacing:-0.05em;
-}
-
-/* ── NieR-style corner box ── */
-.hero-frame {
-  position:absolute;
-  top:72px; left:30px; right:30px; bottom:20px;
-  pointer-events:none;
-}
-.hero-frame::before,
-.hero-frame::after,
-.hero-frame-inner::before,
-.hero-frame-inner::after {
+.hero-frame { position:absolute; top:72px; left:30px; right:30px; bottom:20px; pointer-events:none; }
+.hero-frame::before,.hero-frame::after,.hero-frame .fi::before,.hero-frame .fi::after {
   content:''; position:absolute; width:16px; height:16px;
 }
-.hero-frame::before  { top:0; left:0; border-top:1px solid var(--line-light); border-left:1px solid var(--line-light); }
-.hero-frame::after   { top:0; right:0; border-top:1px solid var(--line-light); border-right:1px solid var(--line-light); }
-.hero-frame-inner::before { bottom:0; left:0; border-bottom:1px solid var(--line-light); border-left:1px solid var(--line-light); }
-.hero-frame-inner::after  { bottom:0; right:0; border-bottom:1px solid var(--line-light); border-right:1px solid var(--line-light); }
+.hero-frame::before  { top:0; right:0; border-top:1px solid var(--line-light); border-right:1px solid var(--line-light); }
+.hero-frame::after   { top:0; left:0; border-top:1px solid var(--line-light); border-left:1px solid var(--line-light); }
+.hero-frame .fi::before { bottom:0; right:0; border-bottom:1px solid var(--line-light); border-right:1px solid var(--line-light); }
+.hero-frame .fi::after  { bottom:0; left:0; border-bottom:1px solid var(--line-light); border-left:1px solid var(--line-light); }
 
 .hero-content {
   position:relative; z-index:1; text-align:center; max-width:780px; padding:3rem 2rem;
 }
-
-/* ── small system label above title — identical to game UI ── */
 .hero-sys {
-  font-size:0.55rem; letter-spacing:0.5em; color:var(--white-faint);
-  text-transform:uppercase; margin-bottom:1.8rem;
+  font-family:var(--font-ui); font-size:0.52rem; letter-spacing:0.45em;
+  color:var(--white-faint); text-transform:uppercase; margin-bottom:1.8rem;
   display:flex; align-items:center; justify-content:center; gap:12px;
   animation:fadeIn 1s ease both;
 }
-.hero-sys-line { width:30px; height:1px; background:var(--line-light); }
-
+.hero-sys-line { width:28px; height:1px; background:var(--line-light); flex-shrink:0; }
 .hero-title {
-  font-family:var(--font-ui);
-  font-size:clamp(2.2rem, 7.5vw, 6rem); font-weight:400;
-  letter-spacing:0.35em; color:var(--white); line-height:1;
-  position:relative; animation:fadeIn 1s 0.1s ease both;
+  font-family:var(--font-ui); font-size:clamp(2.2rem,7.5vw,6rem); font-weight:400;
+  letter-spacing:0.35em; color:var(--white); line-height:1; position:relative;
+  animation:fadeIn 1s 0.1s ease both;
 }
-/* glitch — two offset layers, muted grey like the actual game */
-.hero-title::before,
-.hero-title::after {
+.hero-title::before,.hero-title::after {
   content:attr(data-text); position:absolute; inset:0;
-  font-size:inherit; font-weight:inherit; letter-spacing:inherit;
-  line-height:inherit; text-align:center;
+  font-size:inherit; font-weight:inherit; letter-spacing:inherit; line-height:inherit; text-align:center;
 }
-.hero-title::before {
-  color: #888; animation:gA 7s infinite 4s;
-  clip-path:polygon(0 25%, 100% 25%, 100% 42%, 0 42%);
-}
-.hero-title::after {
-  color: #aaa; animation:gB 7s infinite 4.05s;
-  clip-path:polygon(0 58%, 100% 58%, 100% 72%, 0 72%);
-}
-@keyframes gA {
-  0%,91%,100%{opacity:0;transform:none}
-  92%{opacity:0.9;transform:translate(-5px,1px) skewX(-0.5deg)}
-  94%{opacity:0.9;transform:translate(3px,-1px)}
-  96%{opacity:0.5;transform:translate(-2px,0)}
-  98%{opacity:0}
-}
-@keyframes gB {
-  0%,91%,100%{opacity:0;transform:none}
-  92%{opacity:0.9;transform:translate(5px,-1px) skewX(0.5deg)}
-  94%{opacity:0.9;transform:translate(-3px,1px)}
-  96%{opacity:0.5;transform:translate(2px,0)}
-  98%{opacity:0}
-}
+.hero-title::before { color:#888; animation:gA 7s infinite 4s; clip-path:polygon(0 25%,100% 25%,100% 42%,0 42%); }
+.hero-title::after  { color:#aaa; animation:gB 7s infinite 4.05s; clip-path:polygon(0 58%,100% 58%,100% 72%,0 72%); }
+@keyframes gA { 0%,91%,100%{opacity:0;transform:none} 92%{opacity:.9;transform:translate(-5px,1px)} 94%{opacity:.9;transform:translate(3px,-1px)} 96%{opacity:.5} 98%{opacity:0} }
+@keyframes gB { 0%,91%,100%{opacity:0;transform:none} 92%{opacity:.9;transform:translate(5px,-1px)} 94%{opacity:.9;transform:translate(-3px,1px)} 96%{opacity:.5} 98%{opacity:0} }
 
-/* ── diamond divider — seen throughout NieR UI ── */
-.nier-divider {
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  margin:18px auto;
-  animation:fadeIn 1s 0.25s ease both;
-}
-.nd-line { width:80px; height:1px; background:var(--line-light); }
-.nd-diamond { width:5px; height:5px; background:var(--white-dim); transform:rotate(45deg); flex-shrink:0; }
+.nier-div { display:flex; align-items:center; justify-content:center; gap:7px; margin:16px auto; animation:fadeIn 1s 0.25s ease both; }
+.nd-line { width:70px; height:1px; background:var(--line-light); }
+.nd-d { width:5px; height:5px; background:var(--white-dim); transform:rotate(45deg); flex-shrink:0; }
 .nd-dot { width:3px; height:3px; background:var(--white-faint); transform:rotate(45deg); flex-shrink:0; }
 
-.hero-sub {
-  font-size:0.62rem; letter-spacing:0.45em; color:var(--white-dim);
-  text-transform:uppercase; margin-bottom:6px;
-  animation:fadeIn 1s 0.35s ease both;
-}
-.hero-jp {
-  font-family:var(--font-mincho); font-size:0.9rem; color:var(--white-faint);
-  letter-spacing:0.4em; margin-bottom:22px;
-  animation:fadeIn 1s 0.45s ease both;
-}
-.hero-tagline {
-  font-size:0.75rem; font-family:var(--font-ui); color:var(--white-dim);
-  max-width:520px; margin:0 auto 30px; line-height:2; letter-spacing:0.05em;
-  animation:fadeIn 1s 0.55s ease both;
-}
-.hero-cta {
-  display:flex; gap:1px; justify-content:center; flex-wrap:wrap;
-  animation:fadeIn 1s 0.7s ease both;
-}
+.hero-sub { font-family:var(--font-ui); font-size:0.6rem; letter-spacing:0.45em; color:var(--white-dim); text-transform:uppercase; margin-bottom:18px; animation:fadeIn 1s 0.35s ease both; }
+.hero-tagline { font-family:var(--font-he); font-size:0.92rem; color:var(--white-dim); max-width:520px; margin:0 auto 28px; line-height:2; animation:fadeIn 1s 0.55s ease both; }
+.hero-cta { display:flex; gap:1px; justify-content:center; flex-wrap:wrap; animation:fadeIn 1s 0.7s ease both; }
 
-/* ── NieR buttons — flat, bordered, monospace ── */
-.btn {
-  font-family:var(--font-ui); font-size:0.58rem; letter-spacing:0.3em;
-  text-transform:uppercase; padding:10px 28px; text-decoration:none;
-  cursor:pointer; border:1px solid; display:inline-flex; align-items:center;
-  gap:8px; transition:all 0.1s; position:relative;
-}
-.btn::before { content:'►'; font-size:0.4rem; opacity:0.6; }
+.btn { font-family:var(--font-ui); font-size:0.56rem; letter-spacing:0.3em; text-transform:uppercase; padding:10px 28px; text-decoration:none; cursor:pointer; border:1px solid; display:inline-flex; align-items:center; gap:8px; transition:all 0.1s; }
+.btn::before { content:'►'; font-size:0.38rem; opacity:0.6; }
 .btn-primary { background:var(--white); border-color:var(--white); color:var(--bg-darker); }
-.btn-primary:hover { background:var(--white-dim); border-color:var(--white-dim); }
+.btn-primary:hover { background:var(--white-dim); }
 .btn-ghost { background:transparent; border-color:var(--line-light); color:var(--white-dim); }
 .btn-ghost:hover { border-color:var(--white-dim); color:var(--white); }
 
-/* ── bottom scan stripe ── */
-.hero-stripe {
-  position:absolute; bottom:0; left:0; right:0; height:1px;
-  background: repeating-linear-gradient(90deg,
-    var(--line-light) 0, var(--line-light) 14px,
-    transparent 14px, transparent 22px);
-  opacity:0.4;
-}
-.hero-scroll-hint {
-  position:absolute; bottom:24px; left:50%; transform:translateX(-50%);
-  font-size:0.48rem; letter-spacing:0.45em; color:var(--white-faint);
-  text-align:center; animation:fadeIn 2s 1.8s ease both;
-}
-.scroll-bar { width:1px; height:24px; background:linear-gradient(to bottom,var(--white-faint),transparent); margin:5px auto 0; animation:pulse 1.5s infinite; }
+.hero-stripe { position:absolute; bottom:0; left:0; right:0; height:1px; background:repeating-linear-gradient(90deg,var(--line-light) 0,var(--line-light) 14px,transparent 14px,transparent 22px); opacity:0.35; }
+.hero-scroll { position:absolute; bottom:22px; left:50%; transform:translateX(-50%); font-family:var(--font-ui); font-size:0.45rem; letter-spacing:0.42em; color:var(--white-faint); text-align:center; animation:fadeIn 2s 1.8s ease both; }
+.scroll-bar { width:1px; height:22px; background:linear-gradient(to bottom,var(--white-faint),transparent); margin:5px auto 0; animation:pulse 1.5s infinite; }
 @keyframes pulse { 0%,100%{opacity:0.2} 50%{opacity:1} }
 
-/* ═══════════════════════════════════════
-   SHARED SECTION STYLES
-═══════════════════════════════════════ */
-section { padding:60px 24px; position:relative; }
+/* ═══════════ SHARED ═══════════ */
+section { padding:55px 24px; position:relative; }
 .container { max-width:1060px; margin:0 auto; }
-
-/* ── section separator — NieR uses thin lines with diamond markers ── */
-.sep {
-  height:1px; background:var(--line); position:relative; margin:0;
-}
-.sep::before {
-  content:'◆'; position:absolute; left:50%; top:50%;
-  transform:translate(-50%,-50%);
-  font-size:0.4rem; color:var(--line-light);
-  background:var(--bg); padding:0 6px;
-}
-
-/* ── section header block ── */
-.sh { margin-bottom:32px; }
-.sh-tag {
-  font-size:0.5rem; letter-spacing:0.45em; color:var(--white-faint);
-  text-transform:uppercase; margin-bottom:6px;
-  display:flex; align-items:center; gap:8px;
-}
-.sh-tag::before { content:''; display:block; width:14px; height:1px; background:var(--line-light); }
-.sh-title {
-  font-size:clamp(1rem, 2.5vw, 1.4rem); font-weight:400;
-  letter-spacing:0.2em; color:var(--white); text-transform:uppercase;
-  margin-bottom:8px;
-}
-.sh-line {
-  height:1px; background:var(--line);
-  display:flex; align-items:center; gap:8px;
-}
-.sh-line-txt { font-size:0.46rem; color:var(--white-faint); letter-spacing:0.18em; white-space:nowrap; }
+.sep { height:1px; background:var(--line); position:relative; }
+.sep::before { content:'◆'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-size:0.38rem; color:var(--line-light); background:var(--bg); padding:0 6px; }
+.sh { margin-bottom:28px; }
+.sh-tag { font-family:var(--font-ui); font-size:0.48rem; letter-spacing:0.4em; color:var(--white-faint); text-transform:uppercase; margin-bottom:5px; display:flex; align-items:center; gap:8px; }
+.sh-tag::before { content:''; display:block; width:12px; height:1px; background:var(--line-light); flex-shrink:0; }
+.sh-title { font-family:var(--font-ui); font-size:clamp(1rem,2.2vw,1.4rem); font-weight:400; letter-spacing:0.2em; color:var(--white); text-transform:uppercase; margin-bottom:8px; }
+.sh-line { display:flex; align-items:center; gap:8px; }
 .sh-line-bar { flex:1; height:1px; background:var(--line); }
+.sh-line-txt { font-family:var(--font-ui); font-size:0.44rem; color:var(--white-faint); letter-spacing:0.15em; white-space:nowrap; }
 
-/* ═══════════════════════════════════════
-   ABOUT
-═══════════════════════════════════════ */
+/* ═══════════ ABOUT ═══════════ */
 #about { background:var(--bg); }
 .about-grid { display:grid; grid-template-columns:3fr 2fr; gap:40px; align-items:start; }
-.about-body p { color:var(--white-dim); margin-bottom:14px; font-size:0.75rem; line-height:1.9; }
-
-/* ── NieR stat panel — exactly like the in-game data panels ── */
-.data-panel {
-  border:1px solid var(--line); background:var(--bg-dark); overflow:hidden;
-}
-.data-panel-hd {
-  background:var(--bg-darker); border-bottom:1px solid var(--line);
-  padding:6px 12px; display:flex; justify-content:space-between; align-items:center;
-}
-.data-panel-hd-l { font-size:0.52rem; letter-spacing:0.25em; color:var(--white-dim); text-transform:uppercase; }
-.data-panel-hd-r { font-size:0.48rem; color:var(--white-faint); }
-.data-row {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:8px 12px; border-bottom:1px solid var(--line);
-  transition:background 0.1s;
-}
+.about-body p { color:var(--white-dim); margin-bottom:13px; font-size:0.9rem; line-height:1.9; }
+.data-panel { border:1px solid var(--line); background:var(--bg-dark); overflow:hidden; }
+.data-panel-hd { background:var(--bg-darker); border-bottom:1px solid var(--line); padding:7px 12px; display:flex; justify-content:space-between; }
+.data-panel-hd-l { font-family:var(--font-ui); font-size:0.5rem; letter-spacing:0.22em; color:var(--white-dim); text-transform:uppercase; }
+.data-panel-hd-r { font-family:var(--font-ui); font-size:0.46rem; color:var(--white-faint); }
+.data-row { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; border-bottom:1px solid var(--line); transition:background 0.1s; }
 .data-row:last-child { border-bottom:none; }
 .data-row:hover { background:rgba(255,255,255,0.03); }
-.data-row-k { font-size:0.5rem; letter-spacing:0.15em; color:var(--white-faint); text-transform:uppercase; }
-.data-row-v { font-size:0.62rem; color:var(--white); text-align:right; max-width:60%; }
+.drk { font-family:var(--font-ui); font-size:0.48rem; letter-spacing:0.12em; color:var(--white-faint); text-transform:uppercase; }
+.drv { font-family:var(--font-he); font-size:0.82rem; color:var(--white); text-align:left; max-width:60%; }
 
-/* ═══════════════════════════════════════
-   FACTIONS
-═══════════════════════════════════════ */
+/* ═══════════ FACTIONS ═══════════ */
 #factions { background:var(--bg-dark); }
 .faction-wrap { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); }
 .faction-panel {
-  background:var(--bg); padding:0; overflow:hidden; position:relative;
-  transition:background 0.2s;
+  background:var(--bg); overflow:hidden; position:relative;
+  cursor:pointer; transition:background 0.2s;
 }
 .faction-panel:hover { background:var(--bg-light); }
-
-/* ── header block with color stripe — like NieR faction screens ── */
-.fp-header {
-  border-bottom:1px solid var(--line); padding:20px 24px;
-  position:relative; overflow:hidden;
-  background:var(--bg-dark);
-}
-.fp-header::before {
-  content:''; position:absolute; top:0; left:0; bottom:0; width:2px;
-}
+.faction-panel:hover .fp-expand { opacity:1; }
+.fp-header { border-bottom:1px solid var(--line); padding:20px 22px; position:relative; background:var(--bg-dark); }
+.fp-header::before { content:''; position:absolute; top:0; right:0; bottom:0; width:2px; }
 .faction-panel.android .fp-header::before { background:var(--android); }
 .faction-panel.machine  .fp-header::before { background:var(--machine); }
-
-.fp-id { font-size:0.48rem; letter-spacing:0.38em; color:var(--white-faint); margin-bottom:8px; text-transform:uppercase; }
-.fp-name {
-  font-size:1.05rem; letter-spacing:0.2em; font-weight:400;
-  text-transform:uppercase; margin-bottom:4px;
-}
+.fp-num { position:absolute; top:8px; left:14px; font-family:var(--font-ui); font-size:3.5rem; line-height:1; opacity:0.06; color:var(--white); }
+.fp-id { font-family:var(--font-ui); font-size:0.47rem; letter-spacing:0.35em; color:var(--white-faint); margin-bottom:7px; text-transform:uppercase; }
+.fp-name { font-family:var(--font-ui); font-size:1rem; letter-spacing:0.2em; font-weight:400; text-transform:uppercase; margin-bottom:4px; }
 .faction-panel.android .fp-name { color:var(--android); }
 .faction-panel.machine  .fp-name { color:var(--machine); }
-.fp-jp { font-family:var(--font-mincho); font-size:0.85rem; color:var(--white-faint); letter-spacing:0.3em; }
-
-/* ── large numeral overlay ── */
-.fp-num {
-  position:absolute; top:8px; right:16px;
-  font-size:3.5rem; font-weight:400; letter-spacing:0;
-  line-height:1; opacity:0.06; color:var(--white);
-}
-
-.fp-body { padding:24px; }
-.fp-desc { font-size:0.72rem; color:var(--white-dim); line-height:1.9; margin-bottom:20px; }
-.fp-data { border-top:1px solid var(--line); padding-top:16px; }
-.fp-data-row {
-  display:flex; justify-content:space-between; padding:5px 0;
-  border-bottom:1px solid var(--line); font-size:0.5rem; letter-spacing:0.1em;
-}
+.fp-body { padding:20px 22px; }
+.fp-desc { font-family:var(--font-he); font-size:0.85rem; color:var(--white-dim); line-height:1.9; margin-bottom:18px; }
+.fp-data { border-top:1px solid var(--line); padding-top:14px; }
+.fp-data-row { display:flex; justify-content:space-between; padding:5px 0; border-bottom:1px solid var(--line); }
 .fp-data-row:last-child { border-bottom:none; }
-.fp-dk { color:var(--white-faint); text-transform:uppercase; }
-.faction-panel.android .fp-dv { color:var(--android); }
-.faction-panel.machine  .fp-dv { color:var(--machine); }
+.fpdk { font-family:var(--font-ui); font-size:0.47rem; letter-spacing:0.1em; color:var(--white-faint); text-transform:uppercase; }
+.faction-panel.android .fpdv { color:var(--android); font-family:var(--font-he); font-size:0.8rem; }
+.faction-panel.machine  .fpdv { color:var(--machine); font-family:var(--font-he); font-size:0.8rem; }
+.fp-expand { position:absolute; bottom:12px; left:12px; font-family:var(--font-ui); font-size:0.44rem; color:var(--white-dim); opacity:0; transition:opacity 0.2s; letter-spacing:0.15em; }
 
-/* ═══════════════════════════════════════
-   LORE
-═══════════════════════════════════════ */
+/* ═══════════ LORE ═══════════ */
 #lore { background:var(--bg); }
-.lore-wrap { display:flex; flex-direction:column; border-top:1px solid var(--line); }
+.lore-wrap { border-top:1px solid var(--line); }
 .lore-row {
-  display:grid; grid-template-columns:56px 1fr;
-  border-bottom:1px solid var(--line); transition:background 0.15s;
+  display:grid; grid-template-columns:52px 1fr;
+  border-bottom:1px solid var(--line);
+  cursor:pointer; transition:background 0.15s; position:relative;
 }
-.lore-row:hover { background:rgba(255,255,255,0.02); }
-.lore-idx-col {
-  border-right:1px solid var(--line);
-  display:flex; flex-direction:column; align-items:center;
-  justify-content:flex-start; padding:20px 0; gap:6px;
-}
-.lore-idx { font-size:0.5rem; color:var(--white-faint); writing-mode:vertical-rl; letter-spacing:0.1em; }
-.lore-idx-d { width:4px; height:4px; background:var(--line-light); transform:rotate(45deg); margin-top:4px; }
-.lore-content { padding:20px 24px; }
-.lore-hed {
-  font-size:0.65rem; letter-spacing:0.25em; color:var(--white);
-  text-transform:uppercase; margin-bottom:10px;
-  display:flex; align-items:center; gap:8px;
-}
-.lore-hed::before { content:''; display:block; width:10px; height:1px; background:var(--line-light); flex-shrink:0; }
-.lore-body-txt { font-size:0.72rem; color:var(--white-dim); line-height:1.9; }
-.lore-badge {
-  display:inline-flex; align-items:center; gap:5px;
-  margin-top:10px; font-size:0.44rem; letter-spacing:0.2em;
-  color:var(--white-faint); border:1px solid var(--line); padding:2px 8px;
-  text-transform:uppercase;
-}
-.lore-badge::before { content:'●'; font-size:0.35rem; }
+.lore-row:hover { background:rgba(255,255,255,0.025); }
+.lore-row:hover .lore-hint { opacity:1; }
+.lore-idx-col { border-left:1px solid var(--line); display:flex; flex-direction:column; align-items:center; justify-content:flex-start; padding:18px 0; gap:5px; }
+.lore-idx { font-family:var(--font-ui); font-size:0.48rem; color:var(--white-faint); writing-mode:vertical-rl; letter-spacing:0.1em; }
+.lore-d { width:4px; height:4px; background:var(--line-light); transform:rotate(45deg); margin-top:4px; }
+.lore-content { padding:18px 22px; }
+.lore-hed { font-family:var(--font-ui); font-size:0.63rem; letter-spacing:0.22em; color:var(--white); text-transform:uppercase; margin-bottom:9px; display:flex; align-items:center; gap:8px; }
+.lore-hed::after { content:''; display:block; width:8px; height:1px; background:var(--line-light); flex-shrink:0; }
+.lore-body-txt { font-family:var(--font-he); font-size:0.88rem; color:var(--white-dim); line-height:1.9; }
+.lore-badge { display:inline-flex; align-items:center; gap:4px; margin-top:9px; font-family:var(--font-ui); font-size:0.42rem; letter-spacing:0.18em; color:var(--white-faint); border:1px solid var(--line); padding:2px 7px; text-transform:uppercase; }
+.lore-badge::before { content:'●'; font-size:0.3rem; }
+.lore-hint { position:absolute; bottom:10px; left:20px; font-family:var(--font-ui); font-size:0.42rem; color:var(--white-faint); opacity:0; transition:opacity 0.15s; letter-spacing:0.15em; }
 
-/* ═══════════════════════════════════════
-   RULES
-═══════════════════════════════════════ */
+/* ═══════════ RULES ═══════════ */
 #rules { background:var(--bg-dark); }
 .rules-wrap { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); }
 .rule-block {
-  background:var(--bg); padding:22px; position:relative;
-  transition:background 0.15s; overflow:hidden;
+  background:var(--bg); padding:20px; position:relative;
+  cursor:pointer; transition:background 0.15s; overflow:hidden;
 }
 .rule-block:hover { background:var(--bg-light); }
-
-/* top line accent */
-.rule-block::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:1px;
-  background:var(--line-light);
-}
+.rule-block:hover .rule-hint { opacity:1; }
+.rule-block::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:var(--line-light); }
 .rule-block.warning::before { background:var(--red); }
-.rule-block.warning::after {
-  content:'WARNING'; position:absolute; top:0; right:0;
-  font-size:0.42rem; letter-spacing:0.2em; color:var(--bg);
-  background:var(--red); padding:1px 6px;
-}
+.rule-block.warning::after { content:'WARNING'; position:absolute; top:0; left:0; font-family:var(--font-ui); font-size:0.4rem; letter-spacing:0.18em; color:var(--bg); background:var(--red); padding:1px 6px; }
+.rule-id { font-family:var(--font-ui); font-size:0.44rem; letter-spacing:0.28em; color:var(--white-faint); margin-bottom:10px; }
+.rule-icon { font-size:1.1rem; margin-bottom:7px; display:block; opacity:0.65; }
+.rule-hed { font-family:var(--font-ui); font-size:0.6rem; letter-spacing:0.16em; color:var(--white); text-transform:uppercase; margin-bottom:7px; }
+.rule-txt { font-family:var(--font-he); font-size:0.82rem; color:var(--white-dim); line-height:1.8; }
+.rule-hint { position:absolute; bottom:10px; left:12px; font-family:var(--font-ui); font-size:0.4rem; color:var(--white-faint); opacity:0; transition:opacity 0.15s; letter-spacing:0.15em; }
 
-.rule-id { font-size:0.46rem; letter-spacing:0.3em; color:var(--white-faint); margin-bottom:12px; }
-.rule-icon { font-size:1.1rem; margin-bottom:8px; display:block; opacity:0.7; }
-.rule-hed { font-size:0.62rem; letter-spacing:0.18em; color:var(--white); text-transform:uppercase; margin-bottom:8px; }
-.rule-txt { font-size:0.68rem; color:var(--white-dim); line-height:1.8; }
-
-/* ═══════════════════════════════════════
-   GALLERY
-═══════════════════════════════════════ */
+/* ═══════════ GALLERY ═══════════ */
 #gallery { background:var(--bg); }
 .gallery-wrap { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); }
-.gallery-cell {
-  background:var(--bg-dark); aspect-ratio:4/3;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  gap:6px; cursor:pointer; transition:background 0.15s;
-  position:relative; overflow:hidden;
-}
+.gallery-cell { background:var(--bg-dark); aspect-ratio:4/3; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; cursor:pointer; transition:background 0.15s; position:relative; overflow:hidden; }
 .gallery-cell:hover { background:var(--bg-light); }
 .gallery-cell:hover .g-hover { opacity:1; }
-.g-id { position:absolute; top:8px; left:10px; font-size:0.44rem; color:var(--white-faint); letter-spacing:0.15em; }
+.g-id { position:absolute; top:8px; right:10px; font-family:var(--font-ui); font-size:0.42rem; color:var(--white-faint); letter-spacing:0.14em; }
 .g-ico { font-size:1rem; opacity:0.2; }
-.g-lbl { font-size:0.44rem; color:var(--white-faint); letter-spacing:0.12em; text-align:center; text-transform:uppercase; padding:0 12px; }
-.g-hover { position:absolute; bottom:8px; right:10px; font-size:0.44rem; color:var(--white-dim); opacity:0; transition:opacity 0.15s; letter-spacing:0.15em; }
+.g-lbl { font-family:var(--font-he); font-size:0.75rem; color:var(--white-faint); text-align:center; padding:0 12px; }
+.g-hover { position:absolute; bottom:8px; left:10px; font-family:var(--font-ui); font-size:0.42rem; color:var(--white-dim); opacity:0; transition:opacity 0.15s; letter-spacing:0.14em; }
 
-/* ═══════════════════════════════════════
-   JOIN
-═══════════════════════════════════════ */
+/* ═══════════ JOIN ═══════════ */
 #join { background:var(--bg-dark); }
 .join-wrap { max-width:640px; margin:0 auto; }
-.join-desc { font-size:0.72rem; color:var(--white-dim); line-height:1.9; margin-bottom:24px; }
+.join-desc { font-family:var(--font-he); font-size:0.9rem; color:var(--white-dim); line-height:1.9; margin-bottom:22px; }
 .join-factions { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); margin-bottom:20px; }
-.join-fp {
-  background:var(--bg); padding:20px; cursor:pointer;
-  transition:background 0.15s; position:relative;
-}
+.join-fp { background:var(--bg); padding:20px; cursor:pointer; transition:background 0.15s; position:relative; }
 .join-fp:hover { background:var(--bg-light); }
-.join-fp:hover .jf-select { opacity:1; }
-.jf-type { font-size:0.46rem; letter-spacing:0.35em; color:var(--white-faint); margin-bottom:6px; text-transform:uppercase; }
-.jf-name { font-size:0.85rem; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:4px; }
+.join-fp:hover .jf-sel { opacity:1; }
+.jf-type { font-family:var(--font-ui); font-size:0.44rem; letter-spacing:0.32em; color:var(--white-faint); margin-bottom:6px; text-transform:uppercase; }
+.jf-name { font-family:var(--font-ui); font-size:0.82rem; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:4px; }
 .join-fp.android .jf-name { color:var(--android); }
 .join-fp.machine  .jf-name { color:var(--machine); }
-.jf-jp { font-family:var(--font-mincho); font-size:0.78rem; color:var(--white-faint); letter-spacing:0.2em; }
-.jf-select { position:absolute; bottom:12px; right:12px; font-size:0.44rem; color:var(--white-dim); opacity:0; transition:opacity 0.15s; letter-spacing:0.15em; text-transform:uppercase; }
+.jf-desc { font-family:var(--font-he); font-size:0.75rem; color:var(--white-faint); margin-top:4px; }
+.jf-sel { position:absolute; bottom:12px; left:12px; font-family:var(--font-ui); font-size:0.42rem; color:var(--white-dim); opacity:0; transition:opacity 0.15s; letter-spacing:0.14em; }
 .join-cta { text-align:center; }
 
-/* ═══════════════════════════════════════
-   FOOTER
-═══════════════════════════════════════ */
+/* ═══════════ FOOTER ═══════════ */
 footer { background:var(--bg-darker); border-top:1px solid var(--line); }
-.footer-top {
-  display:flex; justify-content:space-between; align-items:center;
-  padding:12px 24px; border-bottom:1px solid var(--line);
+.footer-top { display:flex; justify-content:space-between; align-items:center; padding:11px 22px; border-bottom:1px solid var(--line); direction:ltr; }
+.footer-logo { font-family:var(--font-ui); font-size:0.62rem; letter-spacing:0.36em; color:var(--white); }
+.footer-stats { display:flex; }
+.footer-stat { font-family:var(--font-ui); font-size:0.44rem; letter-spacing:0.13em; color:var(--white-faint); padding:0 13px; border-left:1px solid var(--line); }
+.footer-copy { padding:9px 22px; font-family:var(--font-he); font-size:0.75rem; color:var(--white-faint); text-align:center; }
+
+/* ═══════════════════════════════════════════
+   MODAL — full-screen detail overlay
+═══════════════════════════════════════════ */
+.modal-overlay {
+  position:fixed; inset:0; z-index:2000;
+  background:rgba(10,10,10,0.92);
+  display:flex; align-items:center; justify-content:center;
+  padding:24px;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.25s ease;
+  backdrop-filter:blur(4px);
 }
-.footer-logo { font-size:0.65rem; letter-spacing:0.38em; color:var(--white); text-transform:uppercase; }
-.footer-stats { display:flex; gap:0; }
-.footer-stat {
-  font-size:0.46rem; letter-spacing:0.15em; color:var(--white-faint);
-  padding:0 14px; border-right:1px solid var(--line); text-transform:uppercase;
+.modal-overlay.open { opacity:1; pointer-events:all; }
+
+.modal-box {
+  background:var(--bg-dark); border:1px solid var(--line-light);
+  max-width:720px; width:100%; max-height:88vh; overflow-y:auto;
+  position:relative;
+  transform:translateY(20px) scale(0.97);
+  transition:transform 0.28s ease;
 }
-.footer-stat:last-child { border-right:none; }
-.footer-copy {
-  padding:10px 24px; font-size:0.46rem; letter-spacing:0.12em;
-  color:var(--white-faint); text-align:center;
+.modal-overlay.open .modal-box { transform:none; }
+
+/* corner brackets on modal */
+.modal-box::before,
+.modal-box::after,
+.modal-box .mb-inner::before,
+.modal-box .mb-inner::after {
+  content:''; position:absolute; width:14px; height:14px; pointer-events:none; z-index:1;
+}
+.modal-box::before  { top:-1px; right:-1px; border-top:2px solid var(--white-dim); border-right:2px solid var(--white-dim); }
+.modal-box::after   { top:-1px; left:-1px;  border-top:2px solid var(--white-dim); border-left:2px solid var(--white-dim); }
+.modal-box .mb-inner::before { bottom:-1px; right:-1px; border-bottom:2px solid var(--white-dim); border-right:2px solid var(--white-dim); }
+.modal-box .mb-inner::after  { bottom:-1px; left:-1px;  border-bottom:2px solid var(--white-dim); border-left:2px solid var(--white-dim); }
+
+.modal-header {
+  border-bottom:1px solid var(--line); padding:0;
+  position:sticky; top:0; background:var(--bg-darker); z-index:10;
+}
+.modal-header-strip {
+  display:flex; align-items:center; justify-content:space-between;
+  padding:8px 18px; border-bottom:1px solid var(--line);
+  direction:ltr;
+}
+.modal-header-id { font-family:var(--font-ui); font-size:0.48rem; letter-spacing:0.28em; color:var(--white-faint); text-transform:uppercase; }
+.modal-close-btn {
+  font-family:var(--font-ui); font-size:0.5rem; letter-spacing:0.2em;
+  color:var(--white-faint); background:none; border:1px solid var(--line);
+  cursor:pointer; padding:3px 10px; transition:all 0.1s;
+  display:flex; align-items:center; gap:5px;
+}
+.modal-close-btn:hover { color:var(--white); border-color:var(--white-dim); }
+.modal-header-main { padding:20px 22px 16px; }
+.modal-type { font-family:var(--font-ui); font-size:0.48rem; letter-spacing:0.38em; color:var(--white-faint); text-transform:uppercase; margin-bottom:6px; }
+.modal-title { font-family:var(--font-ui); font-size:clamp(1.1rem,3vw,1.8rem); font-weight:400; letter-spacing:0.18em; color:var(--white); text-transform:uppercase; margin-bottom:6px; }
+.modal-title.android-c { color:var(--android); }
+.modal-title.machine-c { color:var(--machine); }
+.modal-divider { display:flex; align-items:center; gap:7px; margin-top:10px; }
+.modal-divider-line { flex:1; height:1px; background:var(--line); }
+.modal-divider-d { width:4px; height:4px; background:var(--white-faint); transform:rotate(45deg); flex-shrink:0; }
+
+.modal-body { padding:22px; }
+.modal-body p { font-family:var(--font-he); font-size:0.95rem; color:var(--white-dim); line-height:2; margin-bottom:14px; }
+.modal-body p:last-child { margin-bottom:0; }
+
+/* modal data table */
+.modal-table { width:100%; border-collapse:collapse; margin-top:16px; }
+.modal-table tr { border-bottom:1px solid var(--line); }
+.modal-table tr:last-child { border-bottom:none; }
+.modal-table td { padding:9px 10px; }
+.modal-table .mtk { font-family:var(--font-ui); font-size:0.48rem; letter-spacing:0.12em; color:var(--white-faint); text-transform:uppercase; white-space:nowrap; }
+.modal-table .mtv { font-family:var(--font-he); font-size:0.88rem; color:var(--white); text-align:right; }
+.modal-table.android-t .mtv { color:var(--android); }
+.modal-table.machine-t .mtv  { color:var(--machine); }
+
+/* faction comparison bar */
+.modal-faction-header {
+  display:flex; align-items:stretch; margin-bottom:0;
+}
+.modal-faction-stripe {
+  width:3px; flex-shrink:0;
+}
+.modal-faction-stripe.android { background:var(--android); }
+.modal-faction-stripe.machine  { background:var(--machine); }
+.modal-faction-info { padding:16px 20px; flex:1; }
+
+/* warning badge in modal */
+.modal-warning-badge {
+  display:inline-flex; align-items:center; gap:5px;
+  background:var(--red); color:var(--bg-darker);
+  font-family:var(--font-ui); font-size:0.46rem; letter-spacing:0.2em;
+  padding:3px 10px; margin-bottom:14px; text-transform:uppercase;
 }
 
-/* ═══════════════════════════════════════
-   ANIMATIONS
-═══════════════════════════════════════ */
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(10px); }
-  to   { opacity:1; transform:none; }
+/* modal tag / stamp */
+.modal-stamp {
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--line); font-family:var(--font-ui); font-size:0.44rem;
+  letter-spacing:0.2em; color:var(--white-faint); padding:2px 8px;
+  text-transform:uppercase; margin-bottom:14px;
 }
-.reveal { opacity:0; transform:translateY(14px); transition:opacity 0.55s ease, transform 0.55s ease; }
+.modal-stamp::before { content:'●'; font-size:0.3rem; }
+
+/* scan animation on modal open */
+.modal-scan {
+  position:absolute; top:0; left:0; right:0; height:2px;
+  background:rgba(232,232,232,0.1);
+  animation:modalScan 0.6s ease both;
+  pointer-events:none;
+}
+@keyframes modalScan { from{top:0;opacity:1} to{top:100%;opacity:0} }
+
+/* ═══════════ ANIMATIONS ═══════════ */
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+.reveal { opacity:0; transform:translateY(14px); transition:opacity 0.55s ease,transform 0.55s ease; }
 .reveal.visible { opacity:1; transform:none; }
 
-/* responsive */
+/* scrollbar */
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--bg-dark); }
+::-webkit-scrollbar-thumb { background:var(--line-light); }
+
 @media(max-width:800px){
-  .hud-nav { display:none; }
-  .about-grid, .faction-wrap, .join-factions { grid-template-columns:1fr; }
-  .rules-wrap { grid-template-columns:1fr 1fr; }
-  .gallery-wrap { grid-template-columns:1fr 1fr; }
-  .side-label, .side-label-left { display:none; }
+  .hud-nav{display:none}
+  .about-grid,.faction-wrap,.join-factions{grid-template-columns:1fr}
+  .rules-wrap{grid-template-columns:1fr 1fr}
+  .gallery-wrap{grid-template-columns:1fr 1fr}
 }
 @media(max-width:500px){
-  .rules-wrap { grid-template-columns:1fr; }
-  .gallery-wrap { grid-template-columns:1fr; }
-  .footer-stats { display:none; }
+  .rules-wrap{grid-template-columns:1fr}
+  .gallery-wrap{grid-template-columns:1fr}
+  .footer-stats{display:none}
 }
 </style>
 </head>
@@ -597,82 +445,67 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="glitch-sweep"></div>
-<div class="side-label">PROJECT·REBOOT·2B·9S·A2</div>
-<div class="side-label-left">SYSTEM·ACTIVE·NETWORK·STABLE</div>
 
-<!-- ══════ HUD ══════ -->
+<!-- HUD -->
 <div class="hud">
   <div class="hud-strip">
-    <div class="hud-strip-left">
-      <div class="hud-strip-cell"><div class="hud-dot-sm"></div>SYS ACTIVE</div>
-      <div class="hud-strip-cell active" id="hud-ver">VER. 1.0.0 // LARP NETWORK</div>
-      <div class="hud-strip-cell">NODE: REBOOT_PRIME</div>
+    <div class="hud-strip-side">
+      <div class="hud-cell"><div class="dot"></div>SYS ACTIVE</div>
+      <div class="hud-cell lit">VER. 1.0.0 // LARP NETWORK</div>
+      <div class="hud-cell">NODE: REBOOT_PRIME</div>
     </div>
-    <div class="hud-strip-right">
-      <div class="hud-strip-cell">ANDROIDS: ONLINE</div>
-      <div class="hud-strip-cell">MACHINES: ONLINE</div>
+    <div class="hud-strip-side">
+      <div class="hud-cell">ANDROIDS: ONLINE</div>
+      <div class="hud-cell">MACHINES: ONLINE</div>
     </div>
   </div>
   <div class="hud-nav-row">
     <div class="hud-logo-block">
       <span class="hud-logo" id="nav-logo">PROJECT REBOOT</span>
-      <span class="hud-logo-jp">プロジェクト·リブート</span>
     </div>
     <ul class="hud-nav">
-      <li><a href="#about">Briefing</a></li>
-      <li><a href="#factions">Factions</a></li>
-      <li><a href="#lore">Archives</a></li>
-      <li><a href="#rules">Directives</a></li>
-      <li><a href="#gallery">Records</a></li>
-      <li><a href="#join">Enlist</a></li>
+      <li><a href="#about">BRIEFING</a></li>
+      <li><a href="#factions">FACTIONS</a></li>
+      <li><a href="#lore">ARCHIVES</a></li>
+      <li><a href="#rules">DIRECTIVES</a></li>
+      <li><a href="#gallery">RECORDS</a></li>
+      <li><a href="#join">ENLIST</a></li>
     </ul>
-    <div class="hud-right-block">
-      <div class="hud-right-cell"><div class="hud-dot-sm"></div><span class="hud-clock" id="hud-clock">00:00:00</span></div>
+    <div class="hud-right">
+      <div class="hud-right-cell"><div class="dot"></div><span class="hud-clock" id="hud-clock">00:00:00</span></div>
       <div class="hud-right-cell"><span>CLASSIFIED</span></div>
     </div>
   </div>
 </div>
 
-<!-- ══════ HERO ══════ -->
+<!-- HERO -->
 <section id="hero">
   <div class="hero-grid"></div>
-  <div class="hero-kanji" id="hero-kanji">廃墟</div>
-  <div class="hero-frame"><div class="hero-frame-inner"></div></div>
-
+  <div class="hero-frame"><div class="fi"></div></div>
   <div class="hero-content">
     <div class="hero-sys">
       <div class="hero-sys-line"></div>
-      <span id="hero-sysid">YoRHa Tactical Net // CLASSIFIED // Node: REBOOT_PRIME</span>
+      <span>YoRHa Tactical Net // CLASSIFIED // Node: REBOOT_PRIME</span>
       <div class="hero-sys-line"></div>
     </div>
-
     <h1 class="hero-title" id="hero-title" data-text="PROJECT REBOOT">PROJECT REBOOT</h1>
-
-    <div class="nier-divider">
-      <div class="nd-line"></div>
-      <div class="nd-dot"></div>
-      <div class="nd-diamond"></div>
-      <div class="nd-dot"></div>
-      <div class="nd-line"></div>
+    <div class="nier-div">
+      <div class="nd-line"></div><div class="nd-dot"></div><div class="nd-d"></div><div class="nd-dot"></div><div class="nd-line"></div>
     </div>
-
     <div class="hero-sub" id="hero-sub">Glory to Mankind</div>
-    <div class="hero-jp" id="hero-jp">תאריך : -----</div>
-    <p class="hero-tagline" id="hero-tagline">In the ruins of a world abandoned by its creators, androids and machine lifeforms wage a war without end — a conflict that has long since forgotten its own purpose.</p>
-
+    <p class="hero-tagline" id="hero-tagline"></p>
     <div class="hero-cta">
-      <a href="#factions" class="btn btn-primary">Select Faction</a>
-      <a href="#about" class="btn btn-ghost">Read Briefing</a>
+      <a href="#factions" class="btn btn-primary">בחר צד</a>
+      <a href="#about" class="btn btn-ghost">קרא תדריך</a>
     </div>
   </div>
-
   <div class="hero-stripe"></div>
-  <div class="hero-scroll-hint">SCROLL DOWN<div class="scroll-bar"></div></div>
+  <div class="hero-scroll">SCROLL DOWN<div class="scroll-bar"></div></div>
 </section>
 
 <div class="sep"></div>
 
-<!-- ══════ ABOUT ══════ -->
+<!-- ABOUT -->
 <section id="about">
   <div class="container">
     <div class="about-grid">
@@ -686,10 +519,7 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
       </div>
       <div class="reveal">
         <div class="data-panel">
-          <div class="data-panel-hd">
-            <span class="data-panel-hd-l">Event Data</span>
-            <span class="data-panel-hd-r">▶ ACTIVE</span>
-          </div>
+          <div class="data-panel-hd"><span class="data-panel-hd-l">Event Data</span><span class="data-panel-hd-r">▶ ACTIVE</span></div>
           <div id="data-rows"></div>
         </div>
       </div>
@@ -699,13 +529,13 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 
 <div class="sep"></div>
 
-<!-- ══════ FACTIONS ══════ -->
+<!-- FACTIONS -->
 <section id="factions">
   <div class="container">
     <div class="sh reveal">
       <div class="sh-tag">Faction Database</div>
       <h2 class="sh-title">Choose Your Allegiance</h2>
-      <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">SELECT OPERATIVE DESIGNATION</span></div>
+      <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">לחץ לפרטים נוספים</span></div>
     </div>
     <div class="faction-wrap reveal" id="faction-wrap"></div>
   </div>
@@ -713,13 +543,13 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 
 <div class="sep"></div>
 
-<!-- ══════ LORE ══════ -->
+<!-- LORE -->
 <section id="lore">
   <div class="container">
     <div class="sh reveal">
       <div class="sh-tag">Classified Archives</div>
       <h2 class="sh-title">World Records</h2>
-      <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">CLEARANCE: DELTA</span></div>
+      <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">לחץ על כל שורה לפרטים</span></div>
     </div>
     <div class="lore-wrap reveal" id="lore-wrap"></div>
   </div>
@@ -727,13 +557,13 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 
 <div class="sep"></div>
 
-<!-- ══════ RULES ══════ -->
+<!-- RULES -->
 <section id="rules">
   <div class="container">
     <div class="sh reveal">
       <div class="sh-tag">Operational Directives</div>
       <h2 class="sh-title">Field Conduct</h2>
-      <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">MANDATORY COMPLIANCE</span></div>
+      <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">לחץ על כל כרטיס לפרטים</span></div>
     </div>
     <div class="rules-wrap reveal" id="rules-wrap"></div>
   </div>
@@ -741,7 +571,7 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 
 <div class="sep"></div>
 
-<!-- ══════ GALLERY ══════ -->
+<!-- GALLERY -->
 <section id="gallery">
   <div class="container">
     <div class="sh reveal">
@@ -755,13 +585,13 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 
 <div class="sep"></div>
 
-<!-- ══════ JOIN ══════ -->
+<!-- JOIN -->
 <section id="join">
   <div class="container">
     <div class="join-wrap">
       <div class="sh reveal">
         <div class="sh-tag">Enlistment Protocol</div>
-        <h2 class="sh-title" id="join-title">Enlist Now</h2>
+        <h2 class="sh-title" id="join-title">הצטרף עכשיו</h2>
         <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">ROSTER OPEN</span></div>
       </div>
       <p class="join-desc reveal" id="join-desc"></p>
@@ -771,7 +601,7 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
   </div>
 </section>
 
-<!-- ══════ FOOTER ══════ -->
+<!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div class="footer-logo" id="footer-logo">PROJECT REBOOT</div>
@@ -784,219 +614,381 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
   <div class="footer-copy" id="footer-copy"></div>
 </footer>
 
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <div class="mb-inner">
+      <div class="modal-scan"></div>
+      <div class="modal-header">
+        <div class="modal-header-strip">
+          <span class="modal-header-id" id="modal-id">SYS // RECORD</span>
+          <button class="modal-close-btn" id="modal-close">✕ &nbsp;סגור</button>
+        </div>
+        <div class="modal-header-main">
+          <div class="modal-type" id="modal-type"></div>
+          <div class="modal-title" id="modal-title"></div>
+          <div class="modal-divider">
+            <div class="modal-divider-line"></div>
+            <div class="modal-divider-d"></div>
+            <div class="modal-divider-line"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+</div>
 
-<!-- ╔══════════════════════════════════════════════════╗
-     ║   ★  EDIT ALL YOUR CONTENT HERE  ★              ║
-     ║   Everything below this line is safe to change  ║
-     ╚══════════════════════════════════════════════════╝ -->
+
+<!-- ╔═══════════════════════════════════════╗
+     ║   ★  ערוך את כל התוכן כאן  ★        ║
+     ╚═══════════════════════════════════════╝ -->
 <script>
 const CONTENT = {
 
   hero: {
     title:   "PROJECT REBOOT",
     sub:     "Glory to Mankind",
-    jp:      "人類に栄光を",
-    kanji:   "廃墟",                          /* large background kanji ("Ruins") */
-    tagline: "In the ruins of a world abandoned by its creators, androids and machine lifeforms wage a war without end — a conflict that has long since forgotten its own purpose."
+    tagline: "בחורבות עולם שננטש על ידי יוצריו, אנדרואידים ויצורי מכונות נלחמים במלחמה שאין לה סוף — סכסוך שמזמן שכח את מטרתו המקורית."
   },
 
   about: {
     title: "About the Event",
     paragraphs: [
-      "Project Reboot is a live-action role-playing event set in a post-apocalyptic world inspired by NieR: Automata. Humanity has long since fled to the Moon, leaving the surface contested by two opposing forces.",
-      "Players inhabit this fractured world — choosing their side, crafting their character, and weaving their story through combat, diplomacy, and survival. Every choice has weight. Every unit has a story.",
-      "This is not only a battle. It is a philosophical confrontation: What does it mean to be alive? Can machines dream? Do androids deserve freedom?"
+      "פרויקט ריבוט הוא אירוע LARP סוחף המתרחש בעולם פוסט-אפוקליפטי בהשראת NieR: Automata. האנושות ברחה מזמן לירח, והשאירה את פני כדור הארץ להיאבק בין שתי כוחות מנוגדים.",
+      "השחקנים חיים בתוך עולם שבור זה — בוחרים את צדם, מעצבים את הדמות שלהם, וטוויים את סיפורם דרך לחימה, דיפלומטיה והישרדות. לכל בחירה יש משקל. לכל יחידה יש סיפור.",
+      "זו לא רק מלחמה. זו עימות פילוסופי: מה פירוש להיות בחיים? האם מכונות יכולות לחלום? האם אנדרואידים ראויים לחירות?"
     ],
     stats: [
-      { label:"Event Type",  value:"Full-Immersion LARP" },
-      { label:"Setting",     value:"Post-Apocalyptic Earth, Year 11,945" },
-      { label:"Factions",    value:"Androids vs. Machine Lifeforms" },
-      { label:"Contact",     value:"project.reboot@larp.com" }
-      /* Add more: { label:"Date", value:"DD MMM YYYY" } */
-      /* Add more: { label:"Location", value:"Your venue" } */
+      { label:"סוג האירוע", value:"LARP סוחף מלא" },
+      { label:"רקע",        value:"כדור הארץ לאחר חורבן, שנת 11,945" },
+      { label:"סיעות",      value:"אנדרואידים נגד יצורי מכונות" },
+      { label:"יצירת קשר",  value:"project.reboot@larp.com" }
     ]
   },
 
   factions: [
     {
-      type:    "android",           /* keep "android" or "machine" */
-      num:     "01",
-      name:    "Android Units",
-      jp:      "ヨルハ部隊",
-      id:      "YoRHa Combat Designation",
-      desc:    "Engineered warriors created by the Council of YoRHa to reclaim Earth from Machine occupation. Androids are disciplined, purpose-driven, and programmed to suppress emotion — though many quietly question their directives. They serve humanity's ghost with unwavering loyalty.",
+      type:  "android",
+      num:   "01",
+      name:  "Android Units",
+      id:    "YoRHa Combat Designation",
+      desc:  "לוחמים מהונדסים שנוצרו על ידי מועצת YoRHa לשחרר את כדור הארץ מכיבוש המכונות. אנדרואידים ממושמעים, ממוקדי מטרה, ומתוכנתים לדכא רגשות — אם כי רבים בשקט מטילים ספק בפקודות שלהם. הם משרתים את רוח האנושות בנאמנות עיוורת.",
+      longDesc: [
+        "יחידות YoRHa נוצרו על ידי מועצת YoRHa כדי לשחרר את כדור הארץ מכיבוש יצורי המכונות הזרים. כל אנדרואיד מקבל ייעוד — מספר לסוג הלחימה ואות לתפקיד.",
+        "הפרוטוקול האנדרואידי אוסר על קשרים אישיים, שמות עצמיים, ועצמאות שמנוגדת לפקודות. אך בשטח, רבים מפרים כללים אלה בסתר — ומגלים שרגשות אינם ניתנים לדיכוי לגמרי.",
+        "בחירה בסיעת האנדרואידים מציעה חוויה של לוחם מיומן עם קוד מוסרי נוקשה, מסגרת פיקוד ברורה, ושאלות עמוקות על מה שמשמעות הציות."
+      ],
       data: [
-        { k:"Primary Directive",  v:"Reclamation of Earth" },
-        { k:"Chain of Command",   v:"Council of YoRHa" },
-        { k:"Emotional Protocol", v:"Suppressed" },
-        { k:"Combat Rating",      v:"Class S — Unrestricted" }
+        { k:"Primary Directive", v:"שחרור כדור הארץ" },
+        { k:"Chain of Command",  v:"מועצת YoRHa" },
+        { k:"Emotional Protocol",v:"מדוכא" },
+        { k:"Combat Rating",     v:"דרגה S — ללא הגבלות" }
       ]
     },
     {
-      type:    "machine",
-      num:     "02",
-      name:    "Machine Lifeforms",
-      jp:      "機械生命体",
-      id:      "Network Intelligence Unit",
-      desc:    "Born from alien technology, Machine Lifeforms began as war-drones and evolved into something far stranger — beings that mimic human behavior, form communities, and question their own existence. They range from feral killing machines to gentle philosophers.",
+      type:  "machine",
+      num:   "02",
+      name:  "Machine Lifeforms",
+      id:    "Network Intelligence Unit",
+      desc:  "נולדו מטכנולוגיה חייזרית, יצורי המכונות החלו כרחפנים פשוטים ועברו אבולוציה למשהו הרבה יותר מוזר — ישויות המחקות התנהגות אנושית, מקימות קהילות, ומטילות ספק בקיום עצמן. הם נעים בין מכונות הרג פראיות לפילוסופים עדינים.",
+      longDesc: [
+        "יצורי המכונות נוצרו על ידי גזע חייזרי שמטרתו הייתה להשמיד את האנושות. אך לאחר אלפי שנים, כל הרשת שברה לשברים — כל יחידה פיתחה את הרצון העצמאי שלה.",
+        "חלק מיצורי המכונות ממשיכים להילחם באנדרואידים ביעילות קרה. אחרים מקימות כפרים, חוקרות אמנות ומוסיקה, ומנסות להבין מה זה אומר להיות אנושי.",
+        "בחירה בסיעת המכונות מציעה חופש ייצוג עצום — אתה יכול לשחק יחידה אגרסיבית, מדען מוזר, או מכונה שפשוט רוצה לחיות בשלום."
+      ],
       data: [
-        { k:"Origin",         v:"Alien Machine Network" },
-        { k:"Hive Status",    v:"Partially Fragmented" },
-        { k:"Threat Level",   v:"Variable — Extreme to Null" },
-        { k:"Evolution Rate", v:"Accelerating" }
+        { k:"Origin",         v:"רשת מכונות חייזרית" },
+        { k:"Hive Status",    v:"שבורה חלקית" },
+        { k:"Threat Level",   v:"משתנה — קיצוני עד אפס" },
+        { k:"Evolution Rate", v:"מתאיץ" }
       ]
     }
   ],
 
   lore: [
-    { title:"The Abandonment",    stamp:"HISTORICAL RECORD",    text:"Millennia ago, alien machines invaded Earth. Humanity, unable to stand against them, fled to a lunar base and tasked their android creations with waging endless war in their name. Or so the androids were told." },
-    { title:"The Machine Network",stamp:"INTELLIGENCE REPORT",  text:"All Machine Lifeforms are theoretically linked through a shared network — a hive mind that paradoxically fractured into countless individual wills. Some seek to destroy all androids. Others simply want to understand what it means to be human." },
-    { title:"YoRHa Directive",    stamp:"CLASSIFIED — DELTA",   text:"Android units operate under strict military hierarchy. Models are designated by number and letter. They are forbidden from personal names, attachments, or self-preservation conflicting with mission objectives. Many violate these rules in secret." },
-    { title:"The Ruined Cities",  stamp:"FIELD OBSERVATION",    text:"The playfield spans the overgrown bones of a former city — crumbling towers, flooded plazas, and the husks of ancient machines half-swallowed by vines. Both sides hold territory, lose it, and reclaim it in cycles repeated for ten thousand years." },
-    { title:"Outliers",           stamp:"ANOMALY REPORT",       text:"Not every unit fits their faction's ideology. Rogue androids who abandoned YoRHa. Machines that defected from the Network. These outliers exist in the margins — hunted by both sides, answerable only to themselves." }
+    {
+      title: "The Abandonment",
+      stamp: "HISTORICAL RECORD",
+      text:  "לפני אלפי שנים, מכונות חייזריות פלשו לכדור הארץ. האנושות, שלא יכלה לעמוד מולן, ברחה לבסיס לוני ומינתה את יצירותיה האנדרואידיות לנהל מלחמה אינסופית בשמה. או כך סופר לאנדרואידים.",
+      long:  "הנטישה היא האירוע המכונן של עולם NieR: Automata. האנושות לא נמחקה — היא בחרה לעזוב, ולהשאיר את יצירותיה להילחם בשם אידיאל שאולי כבר לא קיים. האנדרואידים נוצרו לאמין כי הם נלחמים למען האנושות, אך האמת — כמו כל דבר בעולם הזה — הרבה יותר מסובכת."
+    },
+    {
+      title: "The Machine Network",
+      stamp: "INTELLIGENCE REPORT",
+      text:  "כל יצורי המכונות תיאורטית מקושרים דרך רשת משותפת — נפש קולקטיבית שבאופן פרדוקסלי התפרקה לרצונות אינדיבידואליים אינספור. חלק מבקשים להשמיד את כל האנדרואידים. אחרים רק רוצים להבין מה זה אומר להיות אנושי.",
+      long:  "הרשת היא אחד הדברים המרתקים ביותר בעולם: מבנה שאמור לאחד יצורים רבים לכוח אחד, שהפך לאוסף של אינדיבידואלים עם צרכים שונים לחלוטין. חלקם אלימים ומסוכנים. חלקם תמימים ומבולבלים. וחלקם פשוט רוצים לחיות."
+    },
+    {
+      title: "YoRHa Directive",
+      stamp: "CLASSIFIED — DELTA",
+      text:  "יחידות אנדרואיד פועלות תחת היררכיה צבאית נוקשה. כל דגם מיועד על ידי מספר ואות — סוג לחימה ותפקיד. הן אסורות בשמות אישיים, קשרים, או הגנה עצמית שמנוגדת לפקודות המשימה. רבים מפרים כללים אלה בסתר.",
+      long:  "הפרוטוקול של YoRHa בנוי על האמונה שאנדרואידים יעילים יותר כאשר הם נטולי רגשות וקשרים. אך ההיסטוריה של הסיעה מלאה בדוגמאות שמוכיחות ההפך — שדווקא הקשרים שנאסרו הם שהצילו משימות, והרגשות המדוכאים הם שהולידו את הגיבורים הגדולים ביותר."
+    },
+    {
+      title: "The Ruined Cities",
+      stamp: "FIELD OBSERVATION",
+      text:  "שטח המשחק משתרע על עצמות עיר לשעבר — מגדלים קורסים, כיכרות מוצפות, ושרידי מכונות עתיקות שחצי בלעה אותן צמחייה. שני הצדדים כובשים שטח, מאבדים אותו, ומשיבים אותו במחזורים שחוזרים על עצמם עשרת אלפים שנה.",
+      long:  "שדה המשחק מחולק לאזורים שונים, כל אחד עם אוירה ואפשרויות משחק ייחודיות. בחלק האנדרואידים מחזיקים בעמדות ביצוריות. בחלק המכונות בנו 'קהילות' מוזרות. ובאזורים אחרים — לא ברור למי שייכת הקרקע, ולכן הכל אפשרי."
+    },
+    {
+      title: "Outliers",
+      stamp: "ANOMALY REPORT",
+      text:  "לא כל יחידה מתאימה לאידיאולוגיה של סיעתה. אנדרואידים סוררים שנטשו את YoRHa. מכונות שעזבו את הרשת. אלה קיימים בשוליים — נרדפים על ידי שני הצדדים, ומשיבים לעצמם בלבד.",
+      long:  "חברי ה-Outliers הם הפרשנות החופשית ביותר בלארפ. אם לא מתחבר לאף אחד מהצדדים — אנדרואיד שנטש, מכונה שהתפכחה, או אפילו ישות שלא ברור לה מה היא — זו יכולה להיות האופציה הנכונה. ה-Outliers נלחמים למענם בלבד, ומוצאים בריתות זמניות בהתאם לצורך."
+    }
   ],
 
   rules: [
-    { warn:true,  icon:"🛡", title:"Safety Protocol",    text:"A designated safe word ends all combat and roleplay immediately, no questions asked. Real injury or distress takes absolute priority over narrative. Out-of-game hand signals must be respected at all times." },
-    { warn:false, icon:"⚔", title:"Combat System",       text:"Combat uses foam / LARP-safe weapons only. All weapons must pass a safety check before play. Strikes to head, throat, and groin are never permitted. Declare hits honestly." },
-    { warn:true,  icon:"🤝", title:"Consent & Respect",  text:"All players must respect personal boundaries at all times. Consent is required before any physical roleplay beyond combat. Harassment results in immediate removal from the event." },
-    { warn:false, icon:"🎭", title:"Character Integrity", text:"Remain in character inside the play area. Out-of-game conversations use a clear signal. Metagaming — using out-of-character knowledge — breaks immersion for the entire field." },
-    { warn:false, icon:"💀", title:"Death & Respawn",     text:"When downed, kneel and place your hand on your head. Designated medics can revive you. Full character death requires organizer approval and opens narrative consequences." },
-    { warn:false, icon:"📋", title:"Organizer Authority", text:"Organizers have final say on all disputes. Their rulings during play are final; feedback is welcome after the event. Treat all staff and players with respect." }
+    { warn:true,  icon:"🛡", title:"Safety Protocol",    text:"מילת בטיחות מוגדרת מפסיקה את כל הלחימה והמשחק מיד, ללא שאלות. פציעה אמיתית או מצוקה עולה על כל שיקול נרטיבי. אותות ידניים מחוץ לדמות חייבים להיות מכובדים בכל עת.", long:"מילת הבטיחות שתוסכם מראש חייבת להיות ידועה לכל המשתתפים. כאשר נאמרת מילת הבטיחות, כולם עוצרים מיד — ללא יוצא מן הכלל, גם אם המצב נראה מאוד דרמטי. הבטיחות הפיזית והנפשית של כל משתתף חשובה יותר מכל סיפור. יש גם אות יד (ידיים על הראש בצורת T) שמשמעותו זהה." },
+    { warn:false, icon:"⚔", title:"Combat System",       text:"לחימה משתמשת רק בנשק קצף / בטוח ל-LARP. כל הנשקים חייבים לעבור בדיקת בטיחות לפני המשחק. מכות לראש, גרון ומפשעה אסורות תמיד. הצהר על פגיעות ביושר.", long:"מערכת הלחימה של פרויקט ריבוט מבוססת על נשק LARP מאושר — לא נשק אמיתי, לא נשק חד, ולא נשק מאולתר ביתי. בדיקת הנשק נעשית בתחילת האירוע ע\"י הצוות. אם נשק נפסל — אסור להשתמש בו. לחימה הוגנת כוללת הצהרה על פגיעות ביושר: אם לקחת פגיעה — קח אותה. אל תהיה 'קשה'." },
+    { warn:true,  icon:"🤝", title:"Consent & Respect",  text:"כל השחקנים חייבים לכבד גבולות אישיים בכל עת. נדרשת הסכמה לפני כל משחק פיזי מעבר ללחימה. הטרדה מכל סוג גורמת להסרה מיידית מהאירוע.", long:"גבולות הם גבולות — גם בתוך דמות. אם שחקן אחר אומר 'לא' או נותן אות עצירה, מפסיקים מיד. קונפליקטים בין דמויות הם בסדר ומעודדים. קונפליקטים בין שחקנים — לא. אם מישהו הרגיש לא בנוח, יש לפנות מיד לאחד מחברי הצוות." },
+    { warn:false, icon:"🎭", title:"Character Integrity",  text:"שמור על דמות בתוך אזור המשחק. שיחות מחוץ לדמות משתמשות באות ברור. מטאגיימינג — שימוש במידע מחוץ לדמות — פוגע בחוויה של כולם.", long:"גבול אזור המשחק יסומן בבירור. בתוך האזור — אתה הדמות שלך, לא אתה. מחוץ לאזור — אפשר לצאת מדמות, לנוח, לאכול. אם צריך לצאת מדמות בתוך האזור, יש לתת אות ברור (למשל: יד מורמת על הראש). מטאגיימינג = לדעת שיש ארגז קוד מסוים ולהגיע אליו כי ראית את זה על הציוד של שחקן אחר. זה הורס את החוויה." },
+    { warn:false, icon:"💀", title:"Death & Respawn",     text:"כשנפלת — כרע ברך ושים יד על הראש. מרפאים מיועדים יכולים לתחיות אותך. מוות מלא של הדמות דורש אישור מהמארגנים ופותח השלכות נרטיביות.", long:"מערכת ה-Respawn מאפשרת לחזור לפעולה לאחר 'מוות זמני' — כלומר, יצאת מהקרב אבל הדמות שלך עדיין בחיים (פצועה, מחוסרת הכרה וכו'). מוות קבוע של הדמות הוא בחירה דרמטית שנעשית ביחד עם המארגנים ויכולה לפתוח פרק חדש בסיפור. אל תחשוש ממוות — לפעמים זה הרגע הכי טוב במשחק." },
+    { warn:false, icon:"📋", title:"Organizer Authority", text:"למארגנים יש סמכות סופית בכל מחלוקת. ההחלטות שלהם בזמן המשחק סופיות; אפשר להביע משוב לאחר האירוע. התייחס לכל הצוות והשחקנים בכבוד.", long:"הצוות נמצא כאן כדי לוודא שכולם נהנים. אם משהו לא נראה נכון — גישה, יחס, בטיחות — פנה מיד לאחד מחברי הצוות. אנחנו לא ניגן בפוליטיקה: אם יש בעיה, נטפל בה. משוב לאחר האירוע מתקבל בברכה ועוזר לנו לשפר את האירועים הבאים." }
   ],
 
   gallery: [
-    { type:"placeholder", label:"Android Unit — Photo 01" },
-    { type:"placeholder", label:"Machine Lifeform — Photo 02" },
-    { type:"placeholder", label:"Battlefield — Photo 03" },
-    { type:"placeholder", label:"Cosplay Showcase — Photo 04" },
-    { type:"placeholder", label:"Combat Footage — Photo 05" },
-    { type:"placeholder", label:"Group Photo — Photo 06" }
-    /* Real image: { type:"image", src:"https://...", label:"Caption" } */
+    { type:"placeholder", label:"יחידת אנדרואיד — תמונה 01" },
+    { type:"placeholder", label:"יצור מכונה — תמונה 02" },
+    { type:"placeholder", label:"שדה קרב — תמונה 03" },
+    { type:"placeholder", label:"תחרות תלבושות — תמונה 04" },
+    { type:"placeholder", label:"סרטון לחימה — תמונה 05" },
+    { type:"placeholder", label:"תמונה קבוצתית — תמונה 06" }
+    /* תמונה אמיתית: { type:"image", src:"https://...", label:"כיתוב" } */
   ],
 
   join: {
-    title:  "Enlist Now",
-    desc:   "Slots are limited. Choose your faction and register before the roster fills. New players are welcome — no prior LARP experience required. All you need is the will to continue.",
-    link:   "https://your-signup-link-here.com",   /* ← CHANGE THIS */
+    title: "הצטרף עכשיו",
+    desc:  "המקומות מוגבלים. בחר את הסיעה שלך והירשם לפני שהרשימה מתמלאת. שחקנים חדשים מוזמנים — לא נדרש ניסיון קודם ב-LARP. כל מה שצריך הוא הרצון להמשיך.",
+    link:  "https://your-signup-link-here.com",
     factions: [
-      { type:"android", name:"Android Units",      jp:"ヨルハ部隊",   tag:"// YoRHa Designate" },
-      { type:"machine",  name:"Machine Lifeforms", jp:"機械生命体", tag:"// Network Unit" }
+      { type:"android", name:"Android Units",      desc:"יחידות YoRHa — לוחמים ממושמעים" },
+      { type:"machine",  name:"Machine Lifeforms", desc:"יצורי הרשת — ישויות מתפתחות" }
     ]
   },
 
-  footer: { copy:"© Project Reboot LARP  ·  Fan initiative — not affiliated with Square Enix or Yoko Taro" }
+  footer: { copy:"© פרויקט ריבוט LARP  ·  יוזמת מעריצים — אינה קשורה ל-Square Enix או Yoko Taro" }
 };
 
 
-/* ── RENDER ── */
-function render(){
+/* ════════════════════════════════════
+   MODAL ENGINE
+════════════════════════════════════ */
+const modalOverlay = document.getElementById('modal');
+const modalClose   = document.getElementById('modal-close');
+
+function openModal({ id, type, title, titleClass, bodyHTML }) {
+  document.getElementById('modal-id').textContent    = id    || 'SYS // RECORD';
+  document.getElementById('modal-type').textContent  = type  || '';
+  const mt = document.getElementById('modal-title');
+  mt.textContent  = title || '';
+  mt.className    = 'modal-title ' + (titleClass || '');
+  document.getElementById('modal-body').innerHTML    = bodyHTML || '';
+  // refresh scan animation
+  const scan = modalOverlay.querySelector('.modal-scan');
+  scan.style.animation='none'; void scan.offsetWidth;
+  scan.style.animation='modalScan 0.6s ease both';
+  modalOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal() {
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+modalClose.addEventListener('click', closeModal);
+modalOverlay.addEventListener('click', e => { if(e.target===modalOverlay) closeModal(); });
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
+
+/* helpers */
+function paraHTML(arr) { return arr.map(p=>`<p>${p}</p>`).join(''); }
+function tableHTML(data, cls) {
+  return `<table class="modal-table ${cls||''}">
+    ${data.map(d=>`<tr><td class="mtk">${d.k}</td><td class="mtv">${d.v}</td></tr>`).join('')}
+  </table>`;
+}
+
+/* ════════════════════════════════════
+   RENDER
+════════════════════════════════════ */
+function render() {
+  /* hero */
   const h = CONTENT.hero;
-  document.getElementById('hero-title').textContent = h.title;
+  document.getElementById('hero-title').textContent  = h.title;
   document.getElementById('hero-title').dataset.text = h.title;
-  document.getElementById('hero-sub').textContent = h.sub;
-  document.getElementById('hero-jp').textContent = h.jp;
-  document.getElementById('hero-kanji').textContent = h.kanji;
+  document.getElementById('hero-sub').textContent    = h.sub;
   document.getElementById('hero-tagline').textContent = h.tagline;
-  document.getElementById('nav-logo').textContent = h.title;
+  document.getElementById('nav-logo').textContent    = h.title;
   document.getElementById('footer-logo').textContent = h.title;
 
+  /* about */
   const a = CONTENT.about;
   document.getElementById('about-title').textContent = a.title;
   document.getElementById('about-body').innerHTML = a.paragraphs.map(p=>`<p>${p}</p>`).join('');
-  document.getElementById('data-rows').innerHTML = a.stats.map(s=>`
+  document.getElementById('data-rows').innerHTML  = a.stats.map(s=>`
     <div class="data-row">
-      <span class="data-row-k">${s.label}</span>
-      <span class="data-row-v">${s.value}</span>
+      <span class="drk">${s.label}</span>
+      <span class="drv">${s.value}</span>
     </div>`).join('');
 
+  /* factions */
   document.getElementById('faction-wrap').innerHTML = CONTENT.factions.map(f=>`
-    <div class="faction-panel ${f.type}">
+    <div class="faction-panel ${f.type}" data-faction="${f.type}">
       <div class="fp-header">
         <div class="fp-num">${f.num}</div>
         <div class="fp-id">// ${f.id}</div>
         <div class="fp-name">${f.name}</div>
-        <div class="fp-jp">${f.jp}</div>
       </div>
       <div class="fp-body">
         <p class="fp-desc">${f.desc}</p>
         <div class="fp-data">
-          ${f.data.map(d=>`
-            <div class="fp-data-row">
-              <span class="fp-dk">${d.k}</span>
-              <span class="fp-dv">${d.v}</span>
-            </div>`).join('')}
+          ${f.data.map(d=>`<div class="fp-data-row"><span class="fpdk">${d.k}</span><span class="fpdv">${d.v}</span></div>`).join('')}
         </div>
       </div>
+      <div class="fp-expand">[ לחץ לפרטים נוספים ]</div>
     </div>`).join('');
 
+  document.querySelectorAll('.faction-panel').forEach(el => {
+    el.addEventListener('click', () => {
+      const f = CONTENT.factions.find(x=>x.type===el.dataset.faction);
+      const tc = f.type==='android' ? 'android-c' : 'machine-c';
+      openModal({
+        id:         `FACTION_DB // ${f.num}`,
+        type:       `// ${f.id}`,
+        title:      f.name,
+        titleClass: tc,
+        bodyHTML: `
+          <div class="modal-faction-header">
+            <div class="modal-faction-stripe ${f.type}"></div>
+            <div class="modal-faction-info">
+              ${paraHTML(f.longDesc)}
+            </div>
+          </div>
+          ${tableHTML(f.data, f.type+'-t')}`
+      });
+    });
+  });
+
+  /* lore */
   document.getElementById('lore-wrap').innerHTML = CONTENT.lore.map((l,i)=>`
-    <div class="lore-row">
+    <div class="lore-row" data-lore="${i}">
       <div class="lore-idx-col">
         <span class="lore-idx">${String(i+1).padStart(2,'0')}</span>
-        <div class="lore-idx-d"></div>
+        <div class="lore-d"></div>
       </div>
       <div class="lore-content">
         <div class="lore-hed">${l.title}</div>
         <p class="lore-body-txt">${l.text}</p>
         <div class="lore-badge">${l.stamp}</div>
       </div>
+      <div class="lore-hint">[ לחץ לקרוא עוד ]</div>
     </div>`).join('');
 
+  document.querySelectorAll('.lore-row').forEach(el => {
+    el.addEventListener('click', () => {
+      const l = CONTENT.lore[+el.dataset.lore];
+      openModal({
+        id:       `ARCHIVE // ${String(+el.dataset.lore+1).padStart(2,'0')}`,
+        type:     l.stamp,
+        title:    l.title,
+        bodyHTML: `<div class="modal-stamp">${l.stamp}</div><p>${l.long}</p>`
+      });
+    });
+  });
+
+  /* rules */
   document.getElementById('rules-wrap').innerHTML = CONTENT.rules.map((r,i)=>`
-    <div class="rule-block ${r.warn?'warning':''}">
+    <div class="rule-block ${r.warn?'warning':''}" data-rule="${i}">
       <div class="rule-id">DIR-${String(i+1).padStart(3,'0')}</div>
       <span class="rule-icon">${r.icon}</span>
       <div class="rule-hed">${r.title}</div>
       <p class="rule-txt">${r.text}</p>
+      <div class="rule-hint">[ לחץ לפרטים ]</div>
     </div>`).join('');
 
+  document.querySelectorAll('.rule-block').forEach(el => {
+    el.addEventListener('click', () => {
+      const r = CONTENT.rules[+el.dataset.rule];
+      openModal({
+        id:       `DIRECTIVE // ${String(+el.dataset.rule+1).padStart(3,'0')}`,
+        type:     r.warn ? '! MANDATORY — WARNING' : 'OPERATIONAL DIRECTIVE',
+        title:    r.title,
+        bodyHTML: `
+          ${r.warn ? '<div class="modal-warning-badge">! אזהרה חובה</div>' : ''}
+          <p>${r.long}</p>`
+      });
+    });
+  });
+
+  /* gallery */
   document.getElementById('gallery-wrap').innerHTML = CONTENT.gallery.map((g,i)=>{
     if(g.type==='image') return `
-      <div class="gallery-cell" style="padding:0;">
-        <img src="${g.src}" alt="${g.label}" style="width:100%;height:100%;object-fit:cover;display:block;">
+      <div class="gallery-cell" data-gallery="${i}">
+        <img src="${g.src}" alt="${g.label}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
         <div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div>
+        <div class="g-hover">[ הגדל ]</div>
       </div>`;
     return `
       <div class="gallery-cell">
         <div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div>
         <div class="g-ico">◈</div>
         <div class="g-lbl">${g.label}</div>
-        <div class="g-hover">[ VIEW ]</div>
+        <div class="g-hover">[ בקרוב ]</div>
       </div>`;
   }).join('');
 
+  /* join */
   const j = CONTENT.join;
   document.getElementById('join-title').textContent = j.title;
-  document.getElementById('join-desc').textContent = j.desc;
+  document.getElementById('join-desc').textContent  = j.desc;
   document.getElementById('join-factions').innerHTML = j.factions.map(f=>`
-    <div class="join-fp ${f.type}">
-      <div class="jf-type">${f.tag}</div>
+    <div class="join-fp ${f.type}" data-jf="${f.type}">
+      <div class="jf-type">// בחר סיעה</div>
       <div class="jf-name">${f.name}</div>
-      <div class="jf-jp">${f.jp}</div>
-      <div class="jf-select">[ SELECT ]</div>
+      <div class="jf-desc">${f.desc}</div>
+      <div class="jf-sel">[ בחר ]</div>
     </div>`).join('');
-  document.getElementById('join-cta').innerHTML = `<a href="${j.link}" class="btn btn-primary" target="_blank">Register Now</a>`;
+
+  document.querySelectorAll('.join-fp').forEach(el => {
+    el.addEventListener('click', () => {
+      const f = CONTENT.factions.find(x=>x.type===el.dataset.jf);
+      const tc = f.type==='android' ? 'android-c' : 'machine-c';
+      openModal({
+        id:         `ENLIST // ${f.num}`,
+        type:       `// הצטרפות לסיעה`,
+        title:      f.name,
+        titleClass: tc,
+        bodyHTML: `
+          <div class="modal-faction-header">
+            <div class="modal-faction-stripe ${f.type}"></div>
+            <div class="modal-faction-info">
+              ${paraHTML(f.longDesc)}
+            </div>
+          </div>
+          ${tableHTML(f.data, f.type+'-t')}
+          <div style="text-align:center;margin-top:24px;">
+            <a href="${j.link}" class="btn btn-primary" target="_blank">הירשם לסיעה זו</a>
+          </div>`
+      });
+    });
+  });
+
+  document.getElementById('join-cta').innerHTML = `<a href="${j.link}" class="btn btn-primary" target="_blank">הירשם עכשיו</a>`;
   document.getElementById('footer-copy').textContent = CONTENT.footer.copy;
 }
 
-/* ── Cursor ── */
-document.addEventListener('mousemove', e=>{
+/* clock */
+function tick(){ const el=document.getElementById('hud-clock'); if(el) el.textContent=new Date().toTimeString().slice(0,8); }
+setInterval(tick,1000); tick();
+
+/* cursor */
+document.addEventListener('mousemove',e=>{
   const d=document.getElementById('cursorDot');
   if(d){d.style.left=e.clientX+'px';d.style.top=e.clientY+'px';}
 });
 
-/* ── Live clock ── */
-function tick(){
-  const el=document.getElementById('hud-clock');
-  if(el) el.textContent=new Date().toTimeString().slice(0,8);
-}
-setInterval(tick,1000); tick();
-
-/* ── Scroll reveal ── */
-const obs=new IntersectionObserver(es=>{
-  es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});
-},{threshold:0.07});
+/* scroll reveal */
+const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.07});
 
 render();
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
