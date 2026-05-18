@@ -43,6 +43,52 @@ body::after {
 .cursor-dot { position:fixed; width:4px; height:4px; background:var(--white); border-radius:50%; pointer-events:none; z-index:10000; transform:translate(-50%,-50%); }
 .glitch-sweep { position:fixed; z-index:9990; pointer-events:none; left:0; right:0; height:1px; background:rgba(232,232,232,0.07); animation:sweep 12s linear infinite; }
 @keyframes sweep { 0%{top:-1px;opacity:0} 3%{opacity:1} 97%{opacity:1} 100%{top:100vh;opacity:0} }
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.15} }
+@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+@keyframes pulse { 0%,100%{opacity:0.2} 50%{opacity:1} }
+@keyframes gA { 0%,91%,100%{opacity:0;transform:none} 92%{opacity:.9;transform:translate(-5px,1px)} 94%{opacity:.9;transform:translate(3px,-1px)} 96%{opacity:.5} 98%{opacity:0} }
+@keyframes gB { 0%,91%,100%{opacity:0;transform:none} 92%{opacity:.9;transform:translate(5px,-1px)} 94%{opacity:.9;transform:translate(-3px,1px)} 96%{opacity:.5} 98%{opacity:0} }
+@keyframes modalScan { from{top:0;opacity:1} to{top:100%;opacity:0} }
+@keyframes ringPulse { 0%,100%{opacity:0.2;transform:scale(1)} 50%{opacity:0.8;transform:scale(1.02)} }
+
+/* ═══ INTRO SCREEN ═══ */
+#intro-screen {
+  position:fixed; inset:0; z-index:9000;
+  background:var(--bg-darker);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  overflow:hidden;
+  transition:opacity 0.8s ease, visibility 0.8s ease;
+}
+#intro-screen.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+.intro-grid { position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(var(--white-ghost) 1px,transparent 1px),linear-gradient(90deg,var(--white-ghost) 1px,transparent 1px); background-size:60px 60px; opacity:0.15; }
+.intro-grid::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 65% 65% at 50% 50%,transparent 20%,var(--bg-darker) 100%); }
+.intro-scan { position:absolute; inset:0; pointer-events:none; background:repeating-linear-gradient(0deg,transparent 0,transparent 2px,rgba(0,0,0,0.18) 2px,rgba(0,0,0,0.18) 3px); }
+.intro-sweep { position:absolute; left:0; right:0; height:1px; background:rgba(232,232,232,0.07); animation:sweep 6s linear infinite; }
+.intro-corner { position:absolute; width:40px; height:40px; pointer-events:none; }
+.intro-corner.tl { top:30px; right:30px; border-top:1px solid var(--line-light); border-right:1px solid var(--line-light); }
+.intro-corner.tr { top:30px; left:30px;  border-top:1px solid var(--line-light); border-left:1px solid var(--line-light); }
+.intro-corner.bl { bottom:30px; right:30px; border-bottom:1px solid var(--line-light); border-right:1px solid var(--line-light); }
+.intro-corner.br { bottom:30px; left:30px;  border-bottom:1px solid var(--line-light); border-left:1px solid var(--line-light); }
+.intro-content { position:relative; z-index:1; text-align:center; max-width:700px; padding:2rem; }
+.intro-sys { font-family:var(--font-ui); font-size:0.5rem; letter-spacing:0.5em; color:var(--white-faint); text-transform:uppercase; margin-bottom:2rem; animation:fadeIn 1.2s ease both; }
+.intro-title { font-family:var(--font-ui); font-size:clamp(2.5rem,9vw,6.5rem); font-weight:400; letter-spacing:0.35em; color:var(--white); line-height:1; margin-bottom:1rem; animation:fadeIn 1.2s 0.2s ease both; position:relative; }
+.intro-title::before { content:attr(data-text); position:absolute; inset:0; color:#777; animation:gA 5s infinite 3s; clip-path:polygon(0 30%,100% 30%,100% 48%,0 48%); }
+.intro-divider { display:flex; align-items:center; justify-content:center; gap:8px; margin:1.2rem auto; animation:fadeIn 1.2s 0.4s ease both; }
+.intro-div-line { width:60px; height:1px; background:var(--line-light); }
+.intro-div-d { width:5px; height:5px; background:var(--white-dim); transform:rotate(45deg); }
+.intro-div-dot { width:3px; height:3px; background:var(--white-faint); transform:rotate(45deg); }
+.intro-sub { font-family:var(--font-ui); font-size:0.6rem; letter-spacing:0.45em; color:var(--white-dim); text-transform:uppercase; margin-bottom:2.5rem; animation:fadeIn 1.2s 0.5s ease both; }
+.intro-play-wrap { position:relative; display:inline-block; animation:fadeIn 1.2s 0.8s ease both; }
+.intro-play-wrap::before { content:''; position:absolute; top:-8px; left:-8px; right:-8px; bottom:-8px; border:1px solid rgba(232,232,232,0.15); animation:ringPulse 2.5s ease-in-out infinite; clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px)); }
+.intro-play-btn { position:relative; display:inline-flex; align-items:center; justify-content:center; gap:14px; padding:18px 52px; font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.4em; text-transform:uppercase; color:var(--bg-darker); background:var(--white); border:none; cursor:pointer; clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px)); transition:background 0.15s, transform 0.1s; }
+.intro-play-btn:hover { background:var(--white-dim); transform:scale(1.03); }
+.intro-play-btn:active { transform:scale(0.98); }
+.intro-hint { font-family:var(--font-ui); font-size:0.45rem; letter-spacing:0.3em; color:var(--white-faint); margin-top:1.8rem; text-transform:uppercase; animation:fadeIn 1.5s 1.5s ease both; }
+.intro-loading { font-family:var(--font-ui); font-size:0.48rem; letter-spacing:0.25em; color:var(--white-faint); margin-top:2rem; animation:fadeIn 1s 1.2s ease both; min-height:1.2em; }
+.intro-loading::after { content:'_'; animation:blink 1s infinite; }
+.intro-status { position:absolute; bottom:0; left:0; right:0; display:flex; align-items:center; justify-content:space-between; padding:6px 24px; border-top:1px solid var(--line); background:rgba(10,10,10,0.6); direction:ltr; }
+.intro-status-cell { font-family:var(--font-ui); font-size:0.44rem; letter-spacing:0.18em; color:var(--white-faint); text-transform:uppercase; display:flex; align-items:center; gap:5px; }
 
 /* ═══ HUD ═══ */
 .hud { position:fixed; top:0; left:0; right:0; z-index:500; background:var(--bg-darker); border-bottom:1px solid var(--line); }
@@ -52,7 +98,6 @@ body::after {
 .hud-cell:first-child { border-left:none; }
 .hud-cell.lit { color:var(--white-dim); }
 .dot { width:4px; height:4px; border-radius:50%; background:var(--white-faint); animation:blink 2s infinite; flex-shrink:0; }
-@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.15} }
 .hud-nav-row { display:flex; align-items:center; justify-content:space-between; height:36px; direction:ltr; }
 .hud-logo-block { display:flex; align-items:center; height:100%; border-left:1px solid var(--line); padding:0 18px; }
 .hud-logo { font-family:var(--font-ui); font-size:0.72rem; letter-spacing:0.38em; color:var(--white); text-transform:uppercase; }
@@ -83,8 +128,6 @@ body::after {
 .hero-title::before,.hero-title::after { content:attr(data-text); position:absolute; inset:0; font-size:inherit; font-weight:inherit; letter-spacing:inherit; line-height:inherit; text-align:center; }
 .hero-title::before { color:#888; animation:gA 7s infinite 4s; clip-path:polygon(0 25%,100% 25%,100% 42%,0 42%); }
 .hero-title::after  { color:#aaa; animation:gB 7s infinite 4.05s; clip-path:polygon(0 58%,100% 58%,100% 72%,0 72%); }
-@keyframes gA { 0%,91%,100%{opacity:0;transform:none} 92%{opacity:.9;transform:translate(-5px,1px)} 94%{opacity:.9;transform:translate(3px,-1px)} 96%{opacity:.5} 98%{opacity:0} }
-@keyframes gB { 0%,91%,100%{opacity:0;transform:none} 92%{opacity:.9;transform:translate(5px,-1px)} 94%{opacity:.9;transform:translate(-3px,1px)} 96%{opacity:.5} 98%{opacity:0} }
 .nier-div { display:flex; align-items:center; justify-content:center; gap:7px; margin:16px auto; animation:fadeIn 1s 0.25s ease both; }
 .nd-line { width:70px; height:1px; background:var(--line-light); }
 .nd-d { width:5px; height:5px; background:var(--white-dim); transform:rotate(45deg); flex-shrink:0; }
@@ -101,22 +144,24 @@ body::after {
 .hero-stripe { position:absolute; bottom:0; left:0; right:0; height:1px; background:repeating-linear-gradient(90deg,var(--line-light) 0,var(--line-light) 14px,transparent 14px,transparent 22px); opacity:0.35; }
 .hero-scroll { position:absolute; bottom:22px; left:50%; transform:translateX(-50%); font-family:var(--font-ui); font-size:0.45rem; letter-spacing:0.42em; color:var(--white-faint); text-align:center; animation:fadeIn 2s 1.8s ease both; }
 .scroll-bar { width:1px; height:22px; background:linear-gradient(to bottom,var(--white-faint),transparent); margin:5px auto 0; animation:pulse 1.5s infinite; }
-@keyframes pulse { 0%,100%{opacity:0.2} 50%{opacity:1} }
 
-/* ═══ SHARED SECTIONS ═══ */
+/* ═══ SHARED ═══ */
 section { padding:75px 32px; position:relative; }
 .container { max-width:1160px; margin:0 auto; }
 .sep { height:1px; background:var(--line); position:relative; }
 .sep::before { content:'◆'; position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); font-size:0.38rem; color:var(--line-light); background:var(--bg); padding:0 6px; }
-
-/* ── Centered section header ── */
 .sh { margin-bottom:48px; text-align:center; }
 .sh-tag { font-family:var(--font-ui); font-size:0.55rem; letter-spacing:0.4em; color:var(--white-faint); text-transform:uppercase; margin-bottom:10px; display:flex; align-items:center; justify-content:center; gap:10px; }
-.sh-tag::before, .sh-tag::after { content:''; display:block; width:20px; height:1px; background:var(--line-light); flex-shrink:0; }
+.sh-tag::before,.sh-tag::after { content:''; display:block; width:20px; height:1px; background:var(--line-light); flex-shrink:0; }
 .sh-title { font-family:var(--font-ui); font-size:clamp(1.2rem,2.5vw,1.8rem); font-weight:400; letter-spacing:0.2em; color:var(--white); text-transform:uppercase; margin-bottom:12px; }
 .sh-line { display:flex; align-items:center; justify-content:center; gap:8px; }
 .sh-line-bar { width:40px; height:1px; background:var(--line); }
 .sh-line-txt { font-family:var(--font-ui); font-size:0.5rem; color:var(--white-faint); letter-spacing:0.15em; white-space:nowrap; }
+.reveal { opacity:0; transform:translateY(14px); transition:opacity 0.55s ease,transform 0.55s ease; }
+.reveal.visible { opacity:1; transform:none; }
+::-webkit-scrollbar { width:4px; }
+::-webkit-scrollbar-track { background:var(--bg-dark); }
+::-webkit-scrollbar-thumb { background:var(--line-light); }
 
 /* ═══ ABOUT ═══ */
 #about { background:var(--bg); }
@@ -126,19 +171,19 @@ section { padding:75px 32px; position:relative; }
 .data-panel-hd { background:var(--bg-darker); border-bottom:1px solid var(--line); padding:7px 12px; display:flex; justify-content:space-between; }
 .data-panel-hd-l { font-family:var(--font-ui); font-size:0.5rem; letter-spacing:0.22em; color:var(--white-dim); text-transform:uppercase; }
 .data-panel-hd-r { font-family:var(--font-ui); font-size:0.46rem; color:var(--white-faint); }
-.data-row { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; border-bottom:1px solid var(--line); transition:background 0.1s; }
+.data-row { display:flex; justify-content:space-between; align-items:center; padding:10px 14px; border-bottom:1px solid var(--line); transition:background 0.1s; }
 .data-row:last-child { border-bottom:none; }
 .data-row:hover { background:rgba(255,255,255,0.03); }
 .drk { font-family:var(--font-ui); font-size:0.55rem; letter-spacing:0.12em; color:var(--white-faint); text-transform:uppercase; }
 .drv { font-family:var(--font-he); font-size:0.95rem; color:var(--white); text-align:left; max-width:60%; }
 
-/* ═══ FACTIONS (keep modal — it's side selection) ═══ */
+/* ═══ FACTIONS ═══ */
 #factions { background:var(--bg-dark); }
 .faction-wrap { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); }
 .faction-panel { background:var(--bg); overflow:hidden; position:relative; cursor:pointer; transition:background 0.2s; }
 .faction-panel:hover { background:var(--bg-light); }
 .faction-panel:hover .fp-expand { opacity:1; }
-.fp-header { border-bottom:1px solid var(--line); padding:20px 22px; position:relative; background:var(--bg-dark); }
+.fp-header { border-bottom:1px solid var(--line); padding:22px 24px; position:relative; background:var(--bg-dark); }
 .fp-header::before { content:''; position:absolute; top:0; right:0; bottom:0; width:2px; }
 .faction-panel.android .fp-header::before { background:var(--android); }
 .faction-panel.machine  .fp-header::before { background:var(--machine); }
@@ -147,7 +192,7 @@ section { padding:75px 32px; position:relative; }
 .fp-name { font-family:var(--font-ui); font-size:1.2rem; letter-spacing:0.2em; font-weight:400; text-transform:uppercase; margin-bottom:4px; }
 .faction-panel.android .fp-name { color:var(--android); }
 .faction-panel.machine  .fp-name { color:var(--machine); }
-.fp-body { padding:20px 22px; }
+.fp-body { padding:22px 24px; }
 .fp-desc { font-family:var(--font-he); font-size:1rem; color:var(--white-dim); line-height:2; margin-bottom:20px; }
 .fp-data { border-top:1px solid var(--line); padding-top:16px; }
 .fp-data-row { display:flex; justify-content:space-between; padding:7px 0; border-bottom:1px solid var(--line); }
@@ -157,79 +202,33 @@ section { padding:75px 32px; position:relative; }
 .faction-panel.machine  .fpdv { color:var(--machine); font-family:var(--font-he); font-size:0.95rem; }
 .fp-expand { position:absolute; bottom:12px; left:12px; font-family:var(--font-ui); font-size:0.44rem; color:var(--white-dim); opacity:0; transition:opacity 0.2s; letter-spacing:0.15em; }
 
-/* ═══ LORE — TIMELINE ACCORDION ═══ */
+/* ═══ LORE TIMELINE ═══ */
 #lore { background:var(--bg); }
-.timeline {
-  position:relative; max-width:780px; margin:0 auto;
-  padding-right:36px;
-}
-/* the vertical line — on the right in RTL */
-.timeline::before {
-  content:''; position:absolute;
-  top:0; bottom:0; right:17px;
-  width:1px; background:var(--line);
-}
+.timeline { position:relative; max-width:780px; margin:0 auto; padding-right:36px; }
+.timeline::before { content:''; position:absolute; top:0; bottom:0; right:17px; width:1px; background:var(--line); }
 .tl-item { position:relative; border-bottom:1px solid var(--line); }
 .tl-item:last-child { border-bottom:none; }
-/* diamond dot */
-.tl-item::before {
-  content:''; position:absolute;
-  top:22px; right:-26px;
-  width:8px; height:8px;
-  background:var(--bg); border:1px solid var(--line-light);
-  transform:rotate(45deg); z-index:1;
-  transition:background 0.25s, border-color 0.25s;
-}
+.tl-item::before { content:''; position:absolute; top:24px; right:-26px; width:8px; height:8px; background:var(--bg); border:1px solid var(--line-light); transform:rotate(45deg); z-index:1; transition:background 0.25s,border-color 0.25s; }
 .tl-item.open::before { background:var(--white-dim); border-color:var(--white); }
-
-/* clickable title row */
-.tl-trigger {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:22px 0; cursor:pointer; user-select:none; gap:16px;
-}
+.tl-trigger { display:flex; align-items:center; justify-content:space-between; padding:22px 0; cursor:pointer; user-select:none; gap:16px; }
 .tl-trigger:hover .tl-title { color:var(--white); }
-.tl-left  { display:flex; align-items:center; gap:16px; }
-.tl-num   { font-family:var(--font-ui); font-size:0.52rem; color:var(--white-faint); letter-spacing:0.1em; min-width:26px; text-align:center; }
-.tl-title {
-  font-family:var(--font-ui); font-size:0.85rem; letter-spacing:0.2em;
-  color:var(--white-dim); text-transform:uppercase; transition:color 0.2s;
-}
+.tl-left { display:flex; align-items:center; gap:16px; }
+.tl-num { font-family:var(--font-ui); font-size:0.52rem; color:var(--white-faint); letter-spacing:0.1em; min-width:26px; text-align:center; }
+.tl-title { font-family:var(--font-ui); font-size:0.85rem; letter-spacing:0.2em; color:var(--white-dim); text-transform:uppercase; transition:color 0.2s; }
 .tl-item.open .tl-title { color:var(--white); }
-.tl-stamp {
-  font-family:var(--font-ui); font-size:0.46rem; letter-spacing:0.15em;
-  color:var(--white-faint); border:1px solid var(--line); padding:3px 8px;
-  text-transform:uppercase; white-space:nowrap;
-}
-.tl-arrow {
-  font-family:var(--font-ui); font-size:0.65rem; color:var(--white-faint);
-  transition:transform 0.3s ease; flex-shrink:0; line-height:1;
-}
+.tl-stamp { font-family:var(--font-ui); font-size:0.46rem; letter-spacing:0.15em; color:var(--white-faint); border:1px solid var(--line); padding:3px 8px; text-transform:uppercase; white-space:nowrap; }
+.tl-arrow { font-family:var(--font-ui); font-size:0.65rem; color:var(--white-faint); transition:transform 0.3s ease; flex-shrink:0; line-height:1; }
 .tl-item.open .tl-arrow { transform:rotate(90deg); }
-
-/* expandable content */
-.tl-body {
-  max-height:0; overflow:hidden; opacity:0;
-  transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1), opacity 0.3s ease;
-}
+.tl-body { max-height:0; overflow:hidden; opacity:0; transition:max-height 0.45s cubic-bezier(0.4,0,0.2,1),opacity 0.3s ease; }
 .tl-item.open .tl-body { opacity:1; }
 .tl-body-inner { padding-bottom:26px; padding-right:42px; }
-.tl-summary {
-  font-family:var(--font-he); font-size:1rem; color:var(--white-dim);
-  line-height:2; border-right:2px solid var(--line-light); padding-right:16px;
-  margin-bottom:14px;
-}
-.tl-long {
-  font-family:var(--font-he); font-size:0.97rem; color:var(--white-faint);
-  line-height:2; border-top:1px dashed var(--line); padding-top:14px;
-}
+.tl-summary { font-family:var(--font-he); font-size:1rem; color:var(--white-dim); line-height:2; border-right:2px solid var(--line-light); padding-right:16px; margin-bottom:14px; }
+.tl-long { font-family:var(--font-he); font-size:0.97rem; color:var(--white-faint); line-height:2; border-top:1px dashed var(--line); padding-top:14px; }
 
-/* ═══ RULES — full inline, no popup ═══ */
+/* ═══ RULES ═══ */
 #rules { background:var(--bg-dark); }
 .rules-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); }
-.rule-card {
-  background:var(--bg); padding:28px 24px; position:relative; overflow:hidden;
-  transition:background 0.15s;
-}
+.rule-card { background:var(--bg); padding:28px 24px; position:relative; overflow:hidden; transition:background 0.15s; }
 .rule-card:hover { background:var(--bg-light); }
 .rule-card::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:var(--line-light); }
 .rule-card.warn::before { background:var(--red); }
@@ -238,10 +237,7 @@ section { padding:75px 32px; position:relative; }
 .rule-icon { font-size:1.4rem; margin-bottom:9px; display:block; opacity:0.65; }
 .rule-title { font-family:var(--font-ui); font-size:0.72rem; letter-spacing:0.16em; color:var(--white); text-transform:uppercase; margin-bottom:10px; }
 .rule-short { font-family:var(--font-he); font-size:0.95rem; color:var(--white-dim); line-height:1.9; margin-bottom:12px; }
-.rule-detail {
-  font-family:var(--font-he); font-size:0.9rem; color:var(--white-faint);
-  line-height:1.9; border-top:1px dashed var(--line); padding-top:12px;
-}
+.rule-detail { font-family:var(--font-he); font-size:0.9rem; color:var(--white-faint); line-height:1.9; border-top:1px dashed var(--line); padding-top:12px; }
 
 /* ═══ GALLERY ═══ */
 #gallery { background:var(--bg); }
@@ -252,7 +248,7 @@ section { padding:75px 32px; position:relative; }
 .g-ico { font-size:1rem; opacity:0.2; }
 .g-lbl { font-family:var(--font-he); font-size:0.9rem; color:var(--white-faint); text-align:center; padding:0 12px; }
 
-/* ═══ TEAM — inline, no popup ═══ */
+/* ═══ TEAM ═══ */
 #team { background:var(--bg-dark); }
 .team-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); }
 .team-card { background:var(--bg); position:relative; overflow:hidden; transition:background 0.2s; display:grid; grid-template-columns:180px 1fr; }
@@ -278,19 +274,19 @@ section { padding:75px 32px; position:relative; }
 .team-tags { display:flex; flex-wrap:wrap; gap:5px; }
 .team-tag { font-family:var(--font-ui); font-size:0.46rem; letter-spacing:0.15em; color:var(--white-faint); border:1px solid var(--line); padding:3px 9px; text-transform:uppercase; }
 
-/* ═══ JOIN (keep modal) ═══ */
+/* ═══ JOIN ═══ */
 #join { background:var(--bg); }
 .join-wrap { max-width:640px; margin:0 auto; }
 .join-desc { font-family:var(--font-he); font-size:1.05rem; color:var(--white-dim); line-height:2; margin-bottom:26px; }
 .join-factions { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--line); margin-bottom:20px; }
-.join-fp { background:var(--bg-dark); padding:20px; cursor:pointer; transition:background 0.15s; position:relative; }
+.join-fp { background:var(--bg-dark); padding:22px; cursor:pointer; transition:background 0.15s; position:relative; }
 .join-fp:hover { background:var(--bg-light); }
 .join-fp:hover .jf-sel { opacity:1; }
 .jf-type { font-family:var(--font-ui); font-size:0.44rem; letter-spacing:0.32em; color:var(--white-faint); margin-bottom:6px; text-transform:uppercase; }
-.jf-name { font-family:var(--font-ui); font-size:0.82rem; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:4px; }
+.jf-name { font-family:var(--font-ui); font-size:0.9rem; letter-spacing:0.18em; text-transform:uppercase; margin-bottom:4px; }
 .join-fp.android .jf-name { color:var(--android); }
 .join-fp.machine  .jf-name { color:var(--machine); }
-.jf-desc { font-family:var(--font-he); font-size:0.75rem; color:var(--white-faint); margin-top:4px; }
+.jf-desc { font-family:var(--font-he); font-size:0.85rem; color:var(--white-faint); margin-top:4px; }
 .jf-sel { position:absolute; bottom:12px; left:12px; font-family:var(--font-ui); font-size:0.42rem; color:var(--white-dim); opacity:0; transition:opacity 0.15s; letter-spacing:0.14em; }
 .join-cta { text-align:center; }
 
@@ -300,39 +296,23 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 .footer-logo { font-family:var(--font-ui); font-size:0.62rem; letter-spacing:0.36em; color:var(--white); }
 .footer-stats { display:flex; }
 .footer-stat { font-family:var(--font-ui); font-size:0.44rem; letter-spacing:0.13em; color:var(--white-faint); padding:0 13px; border-left:1px solid var(--line); }
-
-/* Discord + Spotify links */
-.footer-links {
-  display:flex; align-items:stretch; border-bottom:1px solid var(--line);
-  direction:ltr;
-}
-.footer-link-btn {
-  display:flex; align-items:center; gap:12px;
-  flex:1; padding:14px 22px; text-decoration:none;
-  border-left:1px solid var(--line); transition:background 0.15s;
-  position:relative; overflow:hidden;
-}
+.footer-links { display:flex; align-items:stretch; border-bottom:1px solid var(--line); direction:ltr; }
+.footer-link-btn { display:flex; align-items:center; gap:12px; flex:1; padding:16px 22px; text-decoration:none; border-left:1px solid var(--line); transition:background 0.15s; position:relative; overflow:hidden; }
 .footer-link-btn:first-child { border-left:none; }
 .footer-link-btn:hover { background:rgba(255,255,255,0.04); }
-.footer-link-btn::before {
-  content:''; position:absolute; top:0; left:0; right:0; height:1px;
-  transition:transform 0.2s;
-  transform:scaleX(0); transform-origin:left;
-}
+.footer-link-btn::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; transition:transform 0.2s; transform:scaleX(0); transform-origin:left; }
 .footer-link-btn:hover::before { transform:scaleX(1); }
 .discord-btn::before { background:#5865f2; }
 .spotify-btn::before { background:#1db954; }
-
-.fl-icon { font-size:1.3rem; opacity:0.7; flex-shrink:0; }
+.fl-icon { font-size:1.4rem; opacity:0.7; flex-shrink:0; }
 .fl-texts { display:flex; flex-direction:column; gap:2px; }
-.fl-label { font-family:var(--font-ui); font-size:0.4rem; letter-spacing:0.3em; color:var(--white-faint); text-transform:uppercase; }
-.fl-name  { font-family:var(--font-ui); font-size:0.65rem; letter-spacing:0.2em; color:var(--white); text-transform:uppercase; }
+.fl-label { font-family:var(--font-ui); font-size:0.42rem; letter-spacing:0.3em; color:var(--white-faint); text-transform:uppercase; }
+.fl-name  { font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.2em; color:var(--white); text-transform:uppercase; }
 .discord-btn .fl-name { color:#9ba8f5; }
 .spotify-btn .fl-name { color:#6dd97a; }
-
 .footer-copy { padding:9px 22px; font-family:var(--font-he); font-size:0.75rem; color:var(--white-faint); text-align:center; }
 
-/* ═══ MODAL (factions + join only) ═══ */
+/* ═══ MODAL ═══ */
 .modal-overlay { position:fixed; inset:0; z-index:2000; background:rgba(10,10,10,0.92); display:flex; align-items:center; justify-content:center; padding:24px; opacity:0; pointer-events:none; transition:opacity 0.25s ease; backdrop-filter:blur(4px); }
 .modal-overlay.open { opacity:1; pointer-events:all; }
 .modal-box { background:var(--bg-dark); border:1px solid var(--line-light); max-width:720px; width:100%; max-height:88vh; overflow-y:auto; position:relative; transform:translateY(20px) scale(0.97); transition:transform 0.28s ease; }
@@ -371,167 +351,51 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 .modal-faction-stripe.machine  { background:var(--machine); }
 .modal-faction-info { padding:16px 20px; flex:1; }
 .modal-scan { position:absolute; top:0; left:0; right:0; height:2px; background:rgba(232,232,232,0.1); animation:modalScan 0.6s ease both; pointer-events:none; }
-@keyframes modalScan { from{top:0;opacity:1} to{top:100%;opacity:0} }
 
-/* ═══ ANIMATIONS ═══ */
-@keyframes fadeIn { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
-.reveal { opacity:0; transform:translateY(14px); transition:opacity 0.55s ease,transform 0.55s ease; }
-.reveal.visible { opacity:1; transform:none; }
-::-webkit-scrollbar { width:4px; }
-::-webkit-scrollbar-track { background:var(--bg-dark); }
-::-webkit-scrollbar-thumb { background:var(--line-light); }
+/* ═══ AUDIO PLAYER ═══ */
+#audioPlayer { position:fixed; bottom:20px; left:20px; z-index:600; background:var(--bg-darker); border:1px solid var(--line-light); width:200px; direction:ltr; }
+#audioPlayer::before { content:''; position:absolute; top:-1px; right:-1px; width:10px; height:10px; border-top:1px solid var(--white-faint); border-right:1px solid var(--white-faint); }
+#audioPlayer::after  { content:''; position:absolute; bottom:-1px; left:-1px; width:10px; height:10px; border-bottom:1px solid var(--white-faint); border-left:1px solid var(--white-faint); }
+.ap-header { display:flex; align-items:center; justify-content:space-between; padding:5px 10px; border-bottom:1px solid var(--line); background:var(--bg-dark); }
+.ap-label  { font-family:var(--font-ui); font-size:0.44rem; letter-spacing:0.25em; color:var(--white-faint); text-transform:uppercase; display:flex; align-items:center; gap:5px; }
+.ap-dot    { width:4px; height:4px; border-radius:50%; background:var(--white-faint); flex-shrink:0; }
+.ap-dot.on { background:#88cc88; animation:blink 1.5s infinite; }
+.ap-collapse { font-family:var(--font-ui); font-size:0.55rem; color:var(--white-faint); background:none; border:none; cursor:pointer; padding:0 2px; line-height:1; transition:color 0.1s; }
+.ap-collapse:hover { color:var(--white); }
+.ap-body { padding:10px; }
+#audioPlayer.collapsed .ap-body { display:none; }
+.ap-track-name { font-family:var(--font-ui); font-size:0.46rem; letter-spacing:0.12em; color:var(--white-dim); margin-bottom:8px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; text-transform:uppercase; }
+.ap-viz { display:flex; align-items:flex-end; gap:2px; height:20px; margin-bottom:8px; }
+.ap-bar  { flex:1; background:var(--line-light); min-height:2px; transition:height 0.1s ease; }
+.ap-viz.on .ap-bar { background:var(--white-dim); }
+.ap-controls { display:flex; align-items:center; gap:6px; }
+.ap-btn { font-family:var(--font-ui); font-size:0.5rem; color:var(--white-faint); background:none; border:1px solid var(--line); cursor:pointer; padding:4px 8px; transition:all 0.1s; }
+.ap-btn:hover { color:var(--white); border-color:var(--white-faint); }
+.ap-btn.playing { color:var(--bg-darker); background:var(--white-dim); border-color:var(--white-dim); }
+.ap-vol { flex:1; -webkit-appearance:none; appearance:none; height:2px; background:var(--line); outline:none; cursor:pointer; }
+.ap-vol::-webkit-slider-thumb { -webkit-appearance:none; width:7px; height:7px; background:var(--white-faint); border-radius:0; transform:rotate(45deg); cursor:pointer; }
+.ap-vol::-moz-range-thumb { width:7px; height:7px; background:var(--white-faint); border:none; border-radius:0; cursor:pointer; }
 
-@media(max-width:800px){
-  .hud-nav{display:none}
-  .about-grid,.faction-wrap,.join-factions,.team-grid{grid-template-columns:1fr}
-  .rules-grid{grid-template-columns:1fr 1fr}
-  .gallery-grid{grid-template-columns:1fr 1fr}
-  .team-card{grid-template-columns:130px 1fr}
-  .timeline{padding-right:28px}
+/* ═══ RESPONSIVE ═══ */
+@media(max-width:800px) {
+  .hud-nav { display:none; }
+  .about-grid,.faction-wrap,.join-factions,.team-grid { grid-template-columns:1fr; }
+  .rules-grid { grid-template-columns:1fr 1fr; }
+  .gallery-grid { grid-template-columns:1fr 1fr; }
+  .team-card { grid-template-columns:130px 1fr; }
+  .timeline { padding-right:28px; }
 }
-/* ═══ INTRO SCREEN ═══ */
-#intro-screen {
-  position:fixed; inset:0; z-index:9000;
-  background:var(--bg-darker);
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  overflow:hidden;
-  transition:opacity 0.8s ease, visibility 0.8s ease;
+@media(max-width:500px) {
+  .rules-grid,.gallery-grid { grid-template-columns:1fr; }
+  .team-card { grid-template-columns:1fr; }
+  .team-photo { min-height:180px; }
+  .footer-stats { display:none; }
 }
-#intro-screen.hidden { opacity:0; visibility:hidden; pointer-events:none; }
-
-/* grid background same as hero */
-.intro-grid {
-  position:absolute; inset:0; pointer-events:none;
-  background-image:
-    linear-gradient(var(--white-ghost) 1px,transparent 1px),
-    linear-gradient(90deg,var(--white-ghost) 1px,transparent 1px);
-  background-size:60px 60px; opacity:0.15;
-}
-.intro-grid::after {
-  content:''; position:absolute; inset:0;
-  background:radial-gradient(ellipse 65% 65% at 50% 50%,transparent 20%,var(--bg-darker) 100%);
-}
-
-/* scanlines on intro */
-.intro-scan {
-  position:absolute; inset:0; pointer-events:none;
-  background:repeating-linear-gradient(0deg,transparent 0,transparent 2px,rgba(0,0,0,0.18) 2px,rgba(0,0,0,0.18) 3px);
-}
-
-/* corner brackets */
-.intro-corner { position:absolute; width:40px; height:40px; pointer-events:none; }
-.intro-corner.tl { top:30px; right:30px; border-top:1px solid var(--line-light); border-right:1px solid var(--line-light); }
-.intro-corner.tr { top:30px; left:30px;  border-top:1px solid var(--line-light); border-left:1px solid var(--line-light); }
-.intro-corner.bl { bottom:30px; right:30px; border-bottom:1px solid var(--line-light); border-right:1px solid var(--line-light); }
-.intro-corner.br { bottom:30px; left:30px;  border-bottom:1px solid var(--line-light); border-left:1px solid var(--line-light); }
-
-/* sweep line animation */
-.intro-sweep {
-  position:absolute; left:0; right:0; height:1px;
-  background:rgba(232,232,232,0.07);
-  animation:sweep 6s linear infinite;
-}
-
-.intro-content {
-  position:relative; z-index:1;
-  text-align:center; max-width:700px; padding:2rem;
-}
-
-.intro-sys {
-  font-family:var(--font-ui); font-size:0.5rem; letter-spacing:0.5em;
-  color:var(--white-faint); text-transform:uppercase; margin-bottom:2rem;
-  animation:fadeIn 1.2s ease both;
-}
-
-.intro-title {
-  font-family:var(--font-ui);
-  font-size:clamp(2.5rem,9vw,6.5rem);
-  font-weight:400; letter-spacing:0.35em; color:var(--white);
-  line-height:1; margin-bottom:1rem;
-  animation:fadeIn 1.2s 0.2s ease both;
-  position:relative;
-}
-/* subtle glitch on intro title */
-.intro-title::before {
-  content:attr(data-text); position:absolute; inset:0;
-  color:#777; animation:gA 5s infinite 3s;
-  clip-path:polygon(0 30%,100% 30%,100% 48%,0 48%);
-}
-
-.intro-divider {
-  display:flex; align-items:center; justify-content:center; gap:8px;
-  margin:1.2rem auto;
-  animation:fadeIn 1.2s 0.4s ease both;
-}
-.intro-div-line { width:60px; height:1px; background:var(--line-light); }
-.intro-div-d { width:5px; height:5px; background:var(--white-dim); transform:rotate(45deg); }
-.intro-div-dot { width:3px; height:3px; background:var(--white-faint); transform:rotate(45deg); }
-
-.intro-sub {
-  font-family:var(--font-ui); font-size:0.6rem; letter-spacing:0.45em;
-  color:var(--white-dim); text-transform:uppercase; margin-bottom:2.5rem;
-  animation:fadeIn 1.2s 0.5s ease both;
-}
-
-/* THE PLAY BUTTON */
-.intro-play-btn {
-  position:relative; display:inline-flex; align-items:center; justify-content:center;
-  gap:14px; padding:18px 52px;
-  font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.4em;
-  text-transform:uppercase; color:var(--bg-darker);
-  background:var(--white); border:none; cursor:pointer;
-  clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));
-  transition:background 0.15s, transform 0.1s;
-  animation:fadeIn 1.2s 0.8s ease both;
-}
-.intro-play-btn:hover { background:var(--white-dim); transform:scale(1.03); }
-.intro-play-btn:active { transform:scale(0.98); }
-.intro-play-icon { font-size:1rem; }
-
-/* pulsing ring around button */
-.intro-play-wrap { position:relative; display:inline-block; animation:fadeIn 1.2s 0.8s ease both; }
-.intro-play-wrap::before {
-  content:''; position:absolute;
-  top:-8px; left:-8px; right:-8px; bottom:-8px;
-  border:1px solid rgba(232,232,232,0.15);
-  animation:ringPulse 2.5s ease-in-out infinite;
-  clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px));
-}
-@keyframes ringPulse { 0%,100%{opacity:0.2;transform:scale(1)} 50%{opacity:0.8;transform:scale(1.02)} }
-
-.intro-hint {
-  font-family:var(--font-ui); font-size:0.45rem; letter-spacing:0.3em;
-  color:var(--white-faint); margin-top:1.8rem; text-transform:uppercase;
-  animation:fadeIn 1.5s 1.5s ease both;
-}
-
-/* bottom status bar */
-.intro-status {
-  position:absolute; bottom:0; left:0; right:0;
-  display:flex; align-items:center; justify-content:space-between;
-  padding:6px 24px; border-top:1px solid var(--line);
-  background:rgba(10,10,10,0.6); direction:ltr;
-}
-.intro-status-cell {
-  font-family:var(--font-ui); font-size:0.44rem; letter-spacing:0.18em;
-  color:var(--white-faint); text-transform:uppercase;
-  display:flex; align-items:center; gap:5px;
-}
-
-/* typing cursor blink on loading text */
-.intro-loading {
-  font-family:var(--font-ui); font-size:0.48rem; letter-spacing:0.25em;
-  color:var(--white-faint); margin-top:3rem;
-  animation:fadeIn 1s 1.2s ease both;
-  min-height:1.2em;
-}
-.intro-loading::after { content:'_'; animation:blink 1s infinite; }
 </style>
 </head>
 <body>
 
-<!-- ══════ INTRO SCREEN ══════ -->
+<!-- INTRO SCREEN -->
 <div id="intro-screen">
   <div class="intro-grid"></div>
   <div class="intro-scan"></div>
@@ -540,33 +404,23 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
   <div class="intro-corner tr"></div>
   <div class="intro-corner bl"></div>
   <div class="intro-corner br"></div>
-
   <div class="intro-content">
     <div class="intro-sys">// SYSTEM BOOT — TACTICAL NET ONLINE // NODE: REBOOT_PRIME</div>
-
     <h1 class="intro-title" data-text="PROJECT REBOOT">PROJECT REBOOT</h1>
-
     <div class="intro-divider">
-      <div class="intro-div-line"></div>
-      <div class="intro-div-dot"></div>
-      <div class="intro-div-d"></div>
-      <div class="intro-div-dot"></div>
+      <div class="intro-div-line"></div><div class="intro-div-dot"></div>
+      <div class="intro-div-d"></div><div class="intro-div-dot"></div>
       <div class="intro-div-line"></div>
     </div>
-
     <div class="intro-sub">Glory to Mankind</div>
-
     <div class="intro-play-wrap">
       <button class="intro-play-btn" id="introPlayBtn">
-        <span class="intro-play-icon">▶</span>
-        <span>ENTER</span>
+        <span>▶</span><span>ENTER</span>
       </button>
     </div>
-
     <div class="intro-hint">לחץ כדי להיכנס // PRESS TO ENTER</div>
     <div class="intro-loading" id="introLoading">INITIALIZING SYSTEM</div>
   </div>
-
   <div class="intro-status">
     <div class="intro-status-cell"><div class="dot"></div>ANDROIDS: ONLINE</div>
     <div class="intro-status-cell" id="intro-clock">00:00:00</div>
@@ -574,16 +428,8 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
   </div>
 </div>
 
-<!-- hidden audio element — replace src with your music URL -->
+<!-- AUDIO -->
 <audio id="bgMusic" loop preload="auto">
-  <!--
-    ═══════════════════════════════════════════════════════
-    כדי להוסיף מוזיקה:
-    1. העלי קובץ MP3 ל-Google Drive / Dropbox / כל שירות
-    2. קבלי קישור ציבורי ישיר לקובץ
-    3. החליפי את הטקסט YOUR_MUSIC_URL_HERE בקישור
-    ═══════════════════════════════════════════════════════
-  -->
   <source src="music.mp3" type="audio/mpeg">
 </audio>
 
@@ -604,9 +450,7 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
     </div>
   </div>
   <div class="hud-nav-row">
-    <div class="hud-logo-block">
-      <span class="hud-logo" id="nav-logo">PROJECT REBOOT</span>
-    </div>
+    <div class="hud-logo-block"><span class="hud-logo" id="nav-logo">PROJECT REBOOT</span></div>
     <ul class="hud-nav">
       <li><a href="#about">BRIEFING</a></li>
       <li><a href="#factions">FACTIONS</a></li>
@@ -682,7 +526,7 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 
 <div class="sep"></div>
 
-<!-- LORE TIMELINE -->
+<!-- LORE -->
 <section id="lore">
   <div class="container">
     <div class="sh reveal">
@@ -765,11 +609,11 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
     </div>
   </div>
   <div class="footer-links">
-    <a href="YOUR_DISCORD_LINK" target="_blank" class="footer-link-btn discord-btn" id="discordBtn">
+    <a href="#" target="_blank" class="footer-link-btn discord-btn" id="discordBtn">
       <span class="fl-icon">⚡</span>
       <span class="fl-texts"><span class="fl-label">JOIN US ON</span><span class="fl-name">DISCORD</span></span>
     </a>
-    <a href="YOUR_SPOTIFY_LINK" target="_blank" class="footer-link-btn spotify-btn" id="spotifyBtn">
+    <a href="#" target="_blank" class="footer-link-btn spotify-btn" id="spotifyBtn">
       <span class="fl-icon">♪</span>
       <span class="fl-texts"><span class="fl-label">LISTEN ON</span><span class="fl-name">SPOTIFY</span></span>
     </a>
@@ -777,7 +621,7 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
   <div class="footer-copy" id="footer-copy"></div>
 </footer>
 
-<!-- MODAL (factions + join only) -->
+<!-- MODAL -->
 <div class="modal-overlay" id="modal" role="dialog" aria-modal="true">
   <div class="modal-box">
     <div class="mb-inner">
@@ -798,19 +642,38 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
   </div>
 </div>
 
+<!-- AUDIO PLAYER -->
+<div id="audioPlayer">
+  <div class="ap-header">
+    <div class="ap-label"><div class="ap-dot" id="apDot"></div><span>MUSIC // ON</span></div>
+    <button class="ap-collapse" id="apCollapse">—</button>
+  </div>
+  <div class="ap-body">
+    <div class="ap-track-name">PROJECT REBOOT // OST</div>
+    <div class="ap-viz" id="apViz">
+      <div class="ap-bar"></div><div class="ap-bar"></div><div class="ap-bar"></div>
+      <div class="ap-bar"></div><div class="ap-bar"></div><div class="ap-bar"></div>
+      <div class="ap-bar"></div><div class="ap-bar"></div><div class="ap-bar"></div>
+      <div class="ap-bar"></div><div class="ap-bar"></div><div class="ap-bar"></div>
+    </div>
+    <div class="ap-controls">
+      <button class="ap-btn" id="apPlay">■</button>
+      <button class="ap-btn" id="apMute">🔊</button>
+      <input type="range" class="ap-vol" id="apVol" min="0" max="100" value="70">
+    </div>
+  </div>
+</div>
 
-<!-- ╔═══════════════════════════════════╗
-     ║   ★  ערוך תוכן כאן  ★           ║
-     ╚═══════════════════════════════════╝ -->
 <script>
+/* ════════════════════════════════════════
+   CONTENT — ערוך כאן
+════════════════════════════════════════ */
 const CONTENT = {
-
   hero: {
     title:   "PROJECT REBOOT",
     sub:     "Glory to Mankind",
     tagline: "בעולם שבו הכל נראה מוכתב מראש, המרד האמיתי הוא לבחור בעצמך."
   },
-
   about: {
     title: "About the Event",
     paragraphs: [
@@ -819,13 +682,12 @@ const CONTENT = {
       "זו לא רק מלחמה. זו עימות פילוסופי: מה פירוש להיות בחיים? האם מכונות יכולות לחלום? האם אנדרואידים ראויים לחירות?"
     ],
     stats: [
-      { label:"תאריך", value:"XX\XX\XXXX" },
-      { label:"מיקום",        value:"מקורות הירקון" },
-      { label:"מחיר",      value:"150 ש"ח" },
-      { label:"יצירת קשר",  value:"noy.wolster@gmail.com" }
+      { label:"תאריך",      value:"XX/XX/XXXX" },
+      { label:"מיקום",      value:"מקורות הירקון" },
+      { label:"מחיר",       value:'150 ש"ח' },
+      { label:"יצירת קשר", value:"noy.wolster@gmail.com" }
     ]
   },
-
   factions: [
     {
       type:"android", num:"01", name:"Android Units", id:"YoRHa Combat Designation",
@@ -858,45 +720,31 @@ const CONTENT = {
       ]
     }
   ],
-
-  /* ── כל ערך לורה מכיל: text (קצר, מוצג תמיד) + long (מורחב, נפתח בלחיצה) ── */
   lore: [
-    {
-      title:"The Abandonment", stamp:"HISTORICAL RECORD",
+    { title:"The Abandonment",    stamp:"HISTORICAL RECORD",
       text:"לפני אלפי שנים, מכונות חייזריות פלשו לכדור הארץ. האנושות ברחה לבסיס לוני ומינתה את יצירותיה האנדרואידיות לנהל מלחמה אינסופית בשמה. או כך סופר לאנדרואידים.",
-      long:"הנטישה היא האירוע המכונן של עולם NieR. האנושות לא נמחקה — היא בחרה לעזוב, ולהשאיר את יצירותיה להילחם בשם אידיאל שאולי כבר לא קיים. האנדרואידים נוצרו להאמין כי הם נלחמים למען האנושות, אך האמת — כמו כל דבר בעולם הזה — הרבה יותר מסובכת."
-    },
-    {
-      title:"The Machine Network", stamp:"INTELLIGENCE REPORT",
+      long:"הנטישה היא האירוע המכונן של עולם NieR. האנושות לא נמחקה — היא בחרה לעזוב, ולהשאיר את יצירותיה להילחם בשם אידיאל שאולי כבר לא קיים. האנדרואידים נוצרו להאמין כי הם נלחמים למען האנושות, אך האמת — כמו כל דבר בעולם הזה — הרבה יותר מסובכת." },
+    { title:"The Machine Network", stamp:"INTELLIGENCE REPORT",
       text:"כל יצורי המכונות מקושרים תיאורטית דרך רשת משותפת — נפש קולקטיבית שבאופן פרדוקסלי התפרקה לרצונות אינדיבידואליים. חלק מבקשים להשמיד כל אנדרואיד. אחרים רק רוצים להבין מה זה להיות אנושי.",
-      long:"הרשת היא אחד הדברים המרתקים ביותר בעולם: מבנה שאמור לאחד יצורים רבים לכוח אחד, שהפך לאוסף של אינדיבידואלים עם צרכים שונים לחלוטין. חלקם אלימים ומסוכנים. חלקם תמימים ומבולבלים. וחלקם פשוט רוצים לחיות."
-    },
-    {
-      title:"YoRHa Directive", stamp:"CLASSIFIED — DELTA",
+      long:"הרשת היא אחד הדברים המרתקים ביותר בעולם: מבנה שאמור לאחד יצורים רבים לכוח אחד, שהפך לאוסף של אינדיבידואלים עם צרכים שונים לחלוטין. חלקם אלימים ומסוכנים. חלקם תמימים ומבולבלים. וחלקם פשוט רוצים לחיות." },
+    { title:"YoRHa Directive",    stamp:"CLASSIFIED — DELTA",
       text:"יחידות אנדרואיד פועלות תחת היררכיה צבאית נוקשה. הן אסורות בשמות אישיים, קשרים, או הגנה עצמית שמנוגדת לפקודות. רבים מפרים כללים אלה בסתר.",
-      long:"הפרוטוקול של YoRHa בנוי על האמונה שאנדרואידים יעילים יותר כאשר הם נטולי רגשות. אך ההיסטוריה של הסיעה מלאה בדוגמאות שמוכיחות ההפך — שדווקא הקשרים שנאסרו הם שהצילו משימות, והרגשות המדוכאים הם שהולידו את הגיבורים הגדולים ביותר."
-    },
-    {
-      title:"The Ruined Cities", stamp:"FIELD OBSERVATION",
+      long:"הפרוטוקול של YoRHa בנוי על האמונה שאנדרואידים יעילים יותר כאשר הם נטולי רגשות. אך ההיסטוריה של הסיעה מלאה בדוגמאות שמוכיחות ההפך — שדווקא הקשרים שנאסרו הם שהצילו משימות, והרגשות המדוכאים הם שהולידו את הגיבורים הגדולים ביותר." },
+    { title:"The Ruined Cities",  stamp:"FIELD OBSERVATION",
       text:"שטח המשחק משתרע על עצמות עיר לשעבר — מגדלים קורסים, כיכרות מוצפות, ושרידי מכונות עתיקות שחצי בלעה אותן צמחייה. שני הצדדים כובשים, מאבדים, ומשיבים שטח במחזורים שחוזרים על עצמם אלפי שנים.",
-      long:"שדה המשחק מחולק לאזורים שונים, כל אחד עם אוירה ואפשרויות משחק ייחודיות. בחלק האנדרואידים מחזיקים עמדות ביצוריות. בחלק המכונות בנו קהילות מוזרות. ובאזורים אחרים — לא ברור למי שייכת הקרקע, ולכן הכל אפשרי."
-    },
-    {
-      title:"Outliers", stamp:"ANOMALY REPORT",
+      long:"שדה המשחק מחולק לאזורים שונים, כל אחד עם אוירה ואפשרויות משחק ייחודיות. בחלק האנדרואידים מחזיקים עמדות ביצוריות. בחלק המכונות בנו קהילות מוזרות. ובאזורים אחרים — לא ברור למי שייכת הקרקע, ולכן הכל אפשרי." },
+    { title:"Outliers",           stamp:"ANOMALY REPORT",
       text:"לא כל יחידה מתאימה לאידיאולוגיה של סיעתה. אנדרואידים סוררים שנטשו את YoRHa. מכונות שעזבו את הרשת. אלה קיימים בשוליים — נרדפים על ידי שני הצדדים, ומשיבים לעצמם בלבד.",
-      long:"חברי ה-Outliers הם הפרשנות החופשית ביותר בלארפ. אם לא מתחבר לאף אחד מהצדדים — אנדרואיד שנטש, מכונה שהתפכחה, או ישות שלא ברור לה מה היא — זו יכולה להיות האופציה הנכונה. ה-Outliers נלחמים למענם בלבד, ומוצאים בריתות זמניות בהתאם לצורך."
-    }
+      long:"חברי ה-Outliers הם הפרשנות החופשית ביותר בלארפ. אם לא מתחבר לאף אחד מהצדדים — אנדרואיד שנטש, מכונה שהתפכחה, או ישות שלא ברור לה מה היא — זו יכולה להיות האופציה הנכונה. ה-Outliers נלחמים למענם בלבד, ומוצאים בריתות זמניות בהתאם לצורך." }
   ],
-
   rules: [
     { warn:true,  icon:"🛡", title:"Safety Protocol",    short:"מילת בטיחות מוגדרת מפסיקה את כל הלחימה והמשחק מיד, ללא שאלות. פציעה אמיתית או מצוקה עולה על כל שיקול נרטיבי.", detail:"מילת הבטיחות חייבת להיות ידועה לכל המשתתפים. כאשר נאמרת, כולם עוצרים מיד — ללא יוצא מן הכלל. יש גם אות יד (T בידיים) שמשמעותו זהה. הבטיחות הפיזית והנפשית של כל משתתף חשובה יותר מכל סיפור." },
-    { warn:false, icon:"⚔", title:"Combat System",       short:"לחימה משתמשת רק בנשק קצף / בטוח ל-LARP. כל הנשקים חייבים לעבור בדיקת בטיחות. מכות לראש, גרון ומפשעה אסורות תמיד.", detail:"נשק LARP מאושר בלבד — לא נשק אמיתי, לא נשק חד, ולא מאולתר ביתי. בדיקת הנשק נעשית בתחילת האירוע ע\"י הצוות. לחימה הוגנת כוללת הצהרה על פגיעות ביושר: אם לקחת פגיעה — קח אותה." },
+    { warn:false, icon:"⚔", title:"Combat System",       short:"לחימה משתמשת רק בנשק קצף / בטוח ל-LARP. כל הנשקים חייבים לעבור בדיקת בטיחות. מכות לראש, גרון ומפשעה אסורות תמיד.", detail:'נשק LARP מאושר בלבד — לא נשק אמיתי, לא נשק חד, ולא מאולתר ביתי. בדיקת הנשק נעשית בתחילת האירוע ע"י הצוות. לחימה הוגנת כוללת הצהרה על פגיעות ביושר: אם לקחת פגיעה — קח אותה.' },
     { warn:true,  icon:"🤝", title:"Consent & Respect",  short:"כל השחקנים חייבים לכבד גבולות אישיים בכל עת. נדרשת הסכמה לפני כל משחק פיזי מעבר ללחימה. הטרדה מכל סוג גורמת להסרה מיידית.", detail:"גבולות הם גבולות — גם בתוך דמות. אם שחקן אחר אומר 'לא' או נותן אות עצירה, מפסיקים מיד. קונפליקטים בין דמויות מעודדים. קונפליקטים בין שחקנים — לא. כל בעיה: פנה מיד לחבר צוות." },
     { warn:false, icon:"🎭", title:"Character Integrity",  short:"שמור על דמות בתוך אזור המשחק. שיחות מחוץ לדמות משתמשות באות ברור. מטאגיימינג — שימוש במידע מחוץ לדמות — פוגע בחוויה של כולם.", detail:"גבול אזור המשחק יסומן בבירור. בתוך האזור — אתה הדמות שלך. מחוץ לאזור — אפשר לנוח ולאכול. אם צריך לצאת מדמות בתוך האזור, יש לתת אות ברור (יד מורמת על הראש)." },
     { warn:false, icon:"💀", title:"Death & Respawn",     short:"כשנפלת — כרע ברך ושים יד על הראש. מרפאים מיועדים יכולים לתחיות אותך. מוות מלא דורש אישור מהמארגנים ופותח השלכות נרטיביות.", detail:"מערכת ה-Respawn מאפשרת לחזור לפעולה לאחר מוות זמני. מוות קבוע הוא בחירה דרמטית שנעשית ביחד עם המארגנים ויכולה לפתוח פרק חדש בסיפור. אל תחשוש ממוות — לפעמים זה הרגע הכי טוב במשחק." },
     { warn:false, icon:"📋", title:"Organizer Authority", short:"למארגנים יש סמכות סופית בכל מחלוקת. ההחלטות בזמן המשחק סופיות; אפשר להביע משוב לאחר האירוע. התייחס לכל הצוות והשחקנים בכבוד.", detail:"הצוות נמצא כאן כדי לוודא שכולם נהנים. אם משהו לא נראה נכון — בטיחות, יחס, הוגנות — פנה מיד לאחד מחברי הצוות. משוב לאחר האירוע מתקבל בברכה." }
   ],
-
   gallery: [
     { type:"placeholder", label:"יחידת אנדרואיד — תמונה 01" },
     { type:"placeholder", label:"יצור מכונה — תמונה 02" },
@@ -905,26 +753,16 @@ const CONTENT = {
     { type:"placeholder", label:"סרטון לחימה — תמונה 05" },
     { type:"placeholder", label:"תמונה קבוצתית — תמונה 06" }
   ],
-
   team: [
-    {
-      id:"OPERATIVE_01", name:"שם מארגן ראשון", role:"Game Master",
-      titleHe:"מנהל משחק ראשי",
-      photo:"",   /* ← הכנס קישור לתמונה */
+    { id:"OPERATIVE_01", name:"שם מארגן ראשון", role:"Game Master", titleHe:"מנהל משחק ראשי", photo:"",
       desc:"תיאור קצר על המארגן הראשון — הרקע שלו ב-LARP, מה הוא אחראי עליו באירוע, ומה מניע אותו ליצור את פרויקט ריבוט.",
       long:"תיאור מורחב על המארגן הראשון. אפשר לכתוב כאן יותר על הניסיון שלו, הסיפור שמאחורי הפרויקט, ומה הוא מביא לאירוע.",
-      tags:["Game Master","עיצוב עולם","נרטיב"]
-    },
-    {
-      id:"OPERATIVE_02", name:"שם מארגן שני", role:"Combat Director",
-      titleHe:"מנהל לחימה וציוד",
-      photo:"",   /* ← הכנס קישור לתמונה */
+      tags:["Game Master","עיצוב עולם","נרטיב"] },
+    { id:"OPERATIVE_02", name:"שם מארגן שני", role:"Combat Director", titleHe:"מנהל לחימה וציוד", photo:"",
       desc:"תיאור קצר על המארגן השני — הרקע שלו ב-LARP, מה הוא אחראי עליו באירוע, ומה הוא מביא לצוות.",
       long:"תיאור מורחב על המארגן השני. ניסיון, תפקיד בפרויקט, ואיך השניים ביחד יוצרים את חוויית פרויקט ריבוט.",
-      tags:["Combat Director","בטיחות","ציוד"]
-    }
+      tags:["Combat Director","בטיחות","ציוד"] }
   ],
-
   join: {
     title:"הצטרף עכשיו",
     desc:"המקומות מוגבלים. בחר את הסיעה שלך והירשם לפני שהרשימה מתמלאת. שחקנים חדשים מוזמנים — לא נדרש ניסיון קודם ב-LARP. כל מה שצריך הוא הרצון להמשיך.",
@@ -934,102 +772,74 @@ const CONTENT = {
       { type:"machine",  name:"Machine Lifeforms", desc:"יצורי הרשת — ישויות מתפתחות" }
     ]
   },
-
   footer:{
     copy:"© פרויקט ריבוט LARP  ·  יוזמת מעריצים — אינה קשורה ל-Square Enix או Yoko Taro",
-    discord: "YOUR_DISCORD_LINK",   /* ← שנה לקישור הדיסקורד שלך */
-    spotify: "YOUR_SPOTIFY_LINK"    /* ← שנה לקישור הפלייליסט */
+    discord:"YOUR_DISCORD_LINK",
+    spotify:"YOUR_SPOTIFY_LINK"
   }
 };
 
-
-/* ═══════════════════════════════
-   INTRO SCREEN ENGINE
-═══════════════════════════════ */
+/* ════════════════════════════════════════
+   INTRO ENGINE
+════════════════════════════════════════ */
 (function(){
   const screen     = document.getElementById('intro-screen');
   const playBtn    = document.getElementById('introPlayBtn');
   const loadTxt    = document.getElementById('introLoading');
-  const bgMusic    = document.getElementById('bgMusic');
   const introClock = document.getElementById('intro-clock');
 
-  /* live clock on intro */
   const clockTick = setInterval(()=>{
     if(introClock) introClock.textContent = new Date().toTimeString().slice(0,8);
   },1000);
 
-  /* typing animation */
-  const lines = [
-    'INITIALIZING SYSTEM',
-    'LOADING TACTICAL NET',
-    'ESTABLISHING NODE CONNECTION',
-    'SYNCING ANDROID DATABASE',
-    'SYNCING MACHINE NETWORK',
-    'ALL SYSTEMS NOMINAL',
-    'AWAITING OPERATOR INPUT'
-  ];
-  let lineIdx=0, charIdx=0, typing=true;
-  const typeInterval = setInterval(()=>{
+  const lines = ['INITIALIZING SYSTEM','LOADING TACTICAL NET','ESTABLISHING NODE CONNECTION','SYNCING ANDROID DATABASE','SYNCING MACHINE NETWORK','ALL SYSTEMS NOMINAL','AWAITING OPERATOR INPUT'];
+  let li=0,ci=0,typing=true;
+  const typeInt = setInterval(()=>{
     if(!loadTxt) return;
-    const cur = lines[lineIdx];
     if(typing){
-      charIdx++;
-      loadTxt.textContent = cur.slice(0,charIdx);
-      if(charIdx >= cur.length){
-        typing = false;
-        setTimeout(()=>{
-          charIdx=0;
-          lineIdx=(lineIdx+1)%lines.length;
-          typing=true;
-        }, 1400);
-      }
+      ci++;
+      loadTxt.textContent = lines[li].slice(0,ci);
+      if(ci>=lines[li].length){ typing=false; setTimeout(()=>{ ci=0; li=(li+1)%lines.length; typing=true; },1400); }
     }
-  }, 55);
+  },55);
 
   function enterSite(){
-    clearInterval(typeInterval);
+    clearInterval(typeInt);
     clearInterval(clockTick);
-
-    /* flash then fade out, then start music */
-    screen.style.transition = 'opacity 0.05s';
-    screen.style.opacity    = '0.5';
+    screen.style.transition='opacity 0.05s';
+    screen.style.opacity='0.5';
     setTimeout(()=>{
-      screen.style.opacity = '1';
+      screen.style.opacity='1';
       setTimeout(()=>{
-        screen.style.transition = 'opacity 1s ease, visibility 1s ease';
+        screen.style.transition='opacity 1s ease, visibility 1s ease';
         screen.classList.add('hidden');
-        document.body.style.overflow = '';
-        /* start music immediately — user gesture already happened */
+        document.body.style.overflow='';
         if(window.startBgMusic) window.startBgMusic();
-      }, 80);
-    }, 60);
+      },80);
+    },60);
   }
 
-  document.body.style.overflow = 'hidden';
+  document.body.style.overflow='hidden';
   playBtn.addEventListener('click', enterSite);
-  document.addEventListener('keydown', e=>{
+  document.addEventListener('keydown',e=>{
     if((e.key==='Enter'||e.key===' ')&&!screen.classList.contains('hidden')) enterSite();
   });
 })();
 
-
-/* ═══════════════════════════════
-   MODAL (factions + join only)
-═══════════════════════════════ */
+/* ════════════════════════════════════════
+   MODAL
+════════════════════════════════════════ */
 const modalOverlay = document.getElementById('modal');
 const modalClose   = document.getElementById('modal-close');
 function openModal({id,type,title,titleClass,bodyHTML}){
-  document.getElementById('modal-id').textContent   = id    || '';
-  document.getElementById('modal-type').textContent = type  || '';
-  const mt = document.getElementById('modal-title');
-  mt.textContent = title || '';
-  mt.className   = 'modal-title '+(titleClass||'');
-  document.getElementById('modal-body').innerHTML   = bodyHTML||'';
-  const scan = modalOverlay.querySelector('.modal-scan');
-  scan.style.animation='none'; void scan.offsetWidth;
-  scan.style.animation='modalScan 0.6s ease both';
-  modalOverlay.classList.add('open');
-  document.body.style.overflow='hidden';
+  document.getElementById('modal-id').textContent   = id||'';
+  document.getElementById('modal-type').textContent = type||'';
+  const mt=document.getElementById('modal-title');
+  mt.textContent=title||''; mt.className='modal-title '+(titleClass||'');
+  document.getElementById('modal-body').innerHTML=bodyHTML||'';
+  const scan=modalOverlay.querySelector('.modal-scan');
+  scan.style.animation='none'; void scan.offsetWidth; scan.style.animation='modalScan 0.6s ease both';
+  modalOverlay.classList.add('open'); document.body.style.overflow='hidden';
 }
 function closeModal(){ modalOverlay.classList.remove('open'); document.body.style.overflow=''; }
 modalClose.addEventListener('click',closeModal);
@@ -1037,101 +847,55 @@ modalOverlay.addEventListener('click',e=>{if(e.target===modalOverlay)closeModal(
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 function paraHTML(arr){ return arr.map(p=>`<p>${p}</p>`).join(''); }
 function tableHTML(data,cls){
-  return `<table class="modal-table ${cls||''}">
-    ${data.map(d=>`<tr><td class="mtk">${d.k}</td><td class="mtv">${d.v}</td></tr>`).join('')}
-  </table>`;
+  return `<table class="modal-table ${cls||''}">${data.map(d=>`<tr><td class="mtk">${d.k}</td><td class="mtv">${d.v}</td></tr>`).join('')}</table>`;
 }
 
-/* ═══════════════════════════════
+/* ════════════════════════════════════════
    RENDER
-═══════════════════════════════ */
+════════════════════════════════════════ */
 function render(){
-  /* hero */
   const h=CONTENT.hero;
-  document.getElementById('hero-title').textContent  = h.title;
-  document.getElementById('hero-title').dataset.text = h.title;
-  document.getElementById('hero-sub').textContent    = h.sub;
-  document.getElementById('hero-tagline').textContent= h.tagline;
-  document.getElementById('nav-logo').textContent    = h.title;
-  document.getElementById('footer-logo').textContent = h.title;
+  document.getElementById('hero-title').textContent=h.title;
+  document.getElementById('hero-title').dataset.text=h.title;
+  document.getElementById('hero-sub').textContent=h.sub;
+  document.getElementById('hero-tagline').textContent=h.tagline;
+  document.getElementById('nav-logo').textContent=h.title;
+  document.getElementById('footer-logo').textContent=h.title;
 
-  /* about */
   const a=CONTENT.about;
-  document.getElementById('about-title').textContent = a.title;
-  document.getElementById('about-body').innerHTML    = a.paragraphs.map(p=>`<p>${p}</p>`).join('');
-  document.getElementById('data-rows').innerHTML     = a.stats.map(s=>`
-    <div class="data-row"><span class="drk">${s.label}</span><span class="drv">${s.value}</span></div>`).join('');
+  document.getElementById('about-title').textContent=a.title;
+  document.getElementById('about-body').innerHTML=a.paragraphs.map(p=>`<p>${p}</p>`).join('');
+  document.getElementById('data-rows').innerHTML=a.stats.map(s=>`<div class="data-row"><span class="drk">${s.label}</span><span class="drv">${s.value}</span></div>`).join('');
 
-  /* factions — with modal */
-  document.getElementById('faction-wrap').innerHTML = CONTENT.factions.map(f=>`
+  document.getElementById('faction-wrap').innerHTML=CONTENT.factions.map(f=>`
     <div class="faction-panel ${f.type}" data-faction="${f.type}">
-      <div class="fp-header">
-        <div class="fp-num">${f.num}</div>
-        <div class="fp-id">// ${f.id}</div>
-        <div class="fp-name">${f.name}</div>
-      </div>
-      <div class="fp-body">
-        <p class="fp-desc">${f.desc}</p>
-        <div class="fp-data">
-          ${f.data.map(d=>`<div class="fp-data-row"><span class="fpdk">${d.k}</span><span class="fpdv">${d.v}</span></div>`).join('')}
-        </div>
-      </div>
+      <div class="fp-header"><div class="fp-num">${f.num}</div><div class="fp-id">// ${f.id}</div><div class="fp-name">${f.name}</div></div>
+      <div class="fp-body"><p class="fp-desc">${f.desc}</p><div class="fp-data">${f.data.map(d=>`<div class="fp-data-row"><span class="fpdk">${d.k}</span><span class="fpdv">${d.v}</span></div>`).join('')}</div></div>
       <div class="fp-expand">[ לחץ לפרטים נוספים ]</div>
     </div>`).join('');
-
   document.querySelectorAll('.faction-panel').forEach(el=>{
     el.addEventListener('click',()=>{
       const f=CONTENT.factions.find(x=>x.type===el.dataset.faction);
-      openModal({
-        id:`FACTION_DB // ${f.num}`, type:`// ${f.id}`, title:f.name,
-        titleClass:f.type==='android'?'android-c':'machine-c',
-        bodyHTML:`
-          <div class="modal-faction-header">
-            <div class="modal-faction-stripe ${f.type}"></div>
-            <div class="modal-faction-info">${paraHTML(f.longDesc)}</div>
-          </div>${tableHTML(f.data,f.type+'-t')}`
-      });
+      openModal({ id:`FACTION_DB // ${f.num}`, type:`// ${f.id}`, title:f.name, titleClass:f.type==='android'?'android-c':'machine-c',
+        bodyHTML:`<div class="modal-faction-header"><div class="modal-faction-stripe ${f.type}"></div><div class="modal-faction-info">${paraHTML(f.longDesc)}</div></div>${tableHTML(f.data,f.type+'-t')}` });
     });
   });
 
-  /* ── LORE TIMELINE — accordion, no modal ── */
-  document.getElementById('lore-wrap').innerHTML = CONTENT.lore.map((l,i)=>`
+  document.getElementById('lore-wrap').innerHTML=CONTENT.lore.map((l,i)=>`
     <div class="tl-item" data-tl="${i}">
-      <div class="tl-trigger">
-        <div class="tl-left">
-          <span class="tl-num">${String(i+1).padStart(2,'0')}</span>
-          <span class="tl-title">${l.title}</span>
-          <span class="tl-stamp">${l.stamp}</span>
-        </div>
-        <span class="tl-arrow">▶</span>
-      </div>
-      <div class="tl-body">
-        <div class="tl-body-inner">
-          <p class="tl-summary">${l.text}</p>
-          <p class="tl-long">${l.long}</p>
-        </div>
-      </div>
+      <div class="tl-trigger"><div class="tl-left"><span class="tl-num">${String(i+1).padStart(2,'0')}</span><span class="tl-title">${l.title}</span><span class="tl-stamp">${l.stamp}</span></div><span class="tl-arrow">▶</span></div>
+      <div class="tl-body"><div class="tl-body-inner"><p class="tl-summary">${l.text}</p><p class="tl-long">${l.long}</p></div></div>
     </div>`).join('');
-
   document.querySelectorAll('.tl-item').forEach(item=>{
-    const trigger = item.querySelector('.tl-trigger');
-    const body    = item.querySelector('.tl-body');
+    const trigger=item.querySelector('.tl-trigger'), body=item.querySelector('.tl-body');
     trigger.addEventListener('click',()=>{
-      const isOpen = item.classList.contains('open');
-      /* close all */
-      document.querySelectorAll('.tl-item').forEach(i=>{
-        i.classList.remove('open');
-        i.querySelector('.tl-body').style.maxHeight='0';
-      });
-      if(!isOpen){
-        item.classList.add('open');
-        body.style.maxHeight = body.scrollHeight+'px';
-      }
+      const isOpen=item.classList.contains('open');
+      document.querySelectorAll('.tl-item').forEach(i=>{ i.classList.remove('open'); i.querySelector('.tl-body').style.maxHeight='0'; });
+      if(!isOpen){ item.classList.add('open'); body.style.maxHeight=body.scrollHeight+'px'; }
     });
   });
 
-  /* ── RULES — full inline, no modal ── */
-  document.getElementById('rules-wrap').innerHTML = CONTENT.rules.map((r,i)=>`
+  document.getElementById('rules-wrap').innerHTML=CONTENT.rules.map((r,i)=>`
     <div class="rule-card ${r.warn?'warn':''}">
       <div class="rule-num">DIR-${String(i+1).padStart(3,'0')}</div>
       <span class="rule-icon">${r.icon}</span>
@@ -1140,28 +904,15 @@ function render(){
       <p class="rule-detail">${r.detail}</p>
     </div>`).join('');
 
-  /* gallery */
-  document.getElementById('gallery-wrap').innerHTML = CONTENT.gallery.map((g,i)=>{
-    if(g.type==='image') return `
-      <div class="gallery-cell">
-        <img src="${g.src}" alt="${g.label}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
-        <div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div>
-      </div>`;
-    return `
-      <div class="gallery-cell">
-        <div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div>
-        <div class="g-ico">◈</div>
-        <div class="g-lbl">${g.label}</div>
-      </div>`;
+  document.getElementById('gallery-wrap').innerHTML=CONTENT.gallery.map((g,i)=>{
+    if(g.type==='image') return `<div class="gallery-cell"><img src="${g.src}" alt="${g.label}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div></div>`;
+    return `<div class="gallery-cell"><div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div><div class="g-ico">◈</div><div class="g-lbl">${g.label}</div></div>`;
   }).join('');
 
-  /* ── TEAM — fully inline, no modal ── */
-  document.getElementById('team-grid').innerHTML = CONTENT.team.map(m=>`
+  document.getElementById('team-grid').innerHTML=CONTENT.team.map(m=>`
     <div class="team-card">
       <div class="team-photo">
-        ${m.photo
-          ? `<img src="${m.photo}" alt="${m.name}">`
-          : `<div class="team-photo-ph"><div class="ph-icon">◈</div><div class="ph-txt">PHOTO PENDING</div></div>`}
+        ${m.photo?`<img src="${m.photo}" alt="${m.name}">`:`<div class="team-photo-ph"><div class="ph-icon">◈</div><div class="ph-txt">PHOTO PENDING</div></div>`}
         <div class="team-photo-tag">${m.id}</div>
       </div>
       <div class="team-info">
@@ -1175,40 +926,24 @@ function render(){
       </div>
     </div>`).join('');
 
-  /* join — with modal */
   const j=CONTENT.join;
-  document.getElementById('join-title').textContent = j.title;
-  document.getElementById('join-desc').textContent  = j.desc;
-  document.getElementById('join-factions').innerHTML= j.factions.map(f=>`
+  document.getElementById('join-title').textContent=j.title;
+  document.getElementById('join-desc').textContent=j.desc;
+  document.getElementById('join-factions').innerHTML=j.factions.map(f=>`
     <div class="join-fp ${f.type}" data-jf="${f.type}">
-      <div class="jf-type">// בחר סיעה</div>
-      <div class="jf-name">${f.name}</div>
-      <div class="jf-desc">${f.desc}</div>
-      <div class="jf-sel">[ בחר ]</div>
+      <div class="jf-type">// בחר סיעה</div><div class="jf-name">${f.name}</div><div class="jf-desc">${f.desc}</div><div class="jf-sel">[ בחר ]</div>
     </div>`).join('');
-
   document.querySelectorAll('.join-fp').forEach(el=>{
     el.addEventListener('click',()=>{
       const f=CONTENT.factions.find(x=>x.type===el.dataset.jf);
-      openModal({
-        id:`ENLIST // ${f.num}`, type:`// הצטרפות לסיעה`, title:f.name,
-        titleClass:f.type==='android'?'android-c':'machine-c',
-        bodyHTML:`
-          <div class="modal-faction-header">
-            <div class="modal-faction-stripe ${f.type}"></div>
-            <div class="modal-faction-info">${paraHTML(f.longDesc)}</div>
-          </div>
-          ${tableHTML(f.data,f.type+'-t')}
-          <div style="text-align:center;margin-top:24px;">
-            <a href="${j.link}" class="btn btn-primary" target="_blank">הירשם לסיעה זו</a>
-          </div>`
-      });
+      openModal({ id:`ENLIST // ${f.num}`, type:`// הצטרפות לסיעה`, title:f.name, titleClass:f.type==='android'?'android-c':'machine-c',
+        bodyHTML:`<div class="modal-faction-header"><div class="modal-faction-stripe ${f.type}"></div><div class="modal-faction-info">${paraHTML(f.longDesc)}</div></div>${tableHTML(f.data,f.type+'-t')}<div style="text-align:center;margin-top:24px;"><a href="${j.link}" class="btn btn-primary" target="_blank">הירשם לסיעה זו</a></div>` });
     });
   });
   document.getElementById('join-cta').innerHTML=`<a href="${j.link}" class="btn btn-primary" target="_blank">הירשם עכשיו</a>`;
   document.getElementById('footer-copy').textContent=CONTENT.footer.copy;
-  if(CONTENT.footer.discord) document.getElementById('discordBtn').href = CONTENT.footer.discord;
-  if(CONTENT.footer.spotify) document.getElementById('spotifyBtn').href = CONTENT.footer.spotify;
+  document.getElementById('discordBtn').href=CONTENT.footer.discord;
+  document.getElementById('spotifyBtn').href=CONTENT.footer.spotify;
 }
 
 /* clock */
@@ -1216,159 +951,80 @@ function tick(){ const el=document.getElementById('hud-clock'); if(el) el.textCo
 setInterval(tick,1000); tick();
 
 /* cursor */
-document.addEventListener('mousemove',e=>{
-  const d=document.getElementById('cursorDot');
-  if(d){d.style.left=e.clientX+'px';d.style.top=e.clientY+'px';}
-});
+document.addEventListener('mousemove',e=>{ const d=document.getElementById('cursorDot'); if(d){d.style.left=e.clientX+'px';d.style.top=e.clientY+'px';} });
 
 /* scroll reveal */
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.07});
 render();
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
-</script>
-<!-- AUDIO PLAYER -->
-<!-- AUDIO PLAYER — simple volume control only -->
-<div id="audioPlayer">
-  <div class="ap-header">
-    <div class="ap-label"><div class="ap-dot" id="apDot"></div><span>MUSIC // ON</span></div>
-    <button class="ap-collapse" id="apCollapse">—</button>
-  </div>
-  <div class="ap-body" id="apBody">
-    <div class="ap-track-name">PROJECT REBOOT // OST</div>
-    <div class="ap-viz" id="apViz">
-      <div class="ap-bar"></div><div class="ap-bar"></div><div class="ap-bar"></div>
-      <div class="ap-bar"></div><div class="ap-bar"></div><div class="ap-bar"></div>
-      <div class="ap-bar"></div><div class="ap-bar"></div><div class="ap-bar"></div>
-      <div class="ap-bar"></div><div class="ap-bar"></div><div class="ap-bar"></div>
-    </div>
-    <div class="ap-controls">
-      <button class="ap-btn" id="apPlay">■</button>
-      <button class="ap-btn" id="apMute">🔊</button>
-      <input type="range" class="ap-vol" id="apVol" min="0" max="100" value="70">
-    </div>
-  </div>
-</div>
 
-<style>
-#audioPlayer {
-  position:fixed; bottom:20px; left:20px; z-index:600;
-  background:var(--bg-darker); border:1px solid var(--line-light);
-  width:200px; direction:ltr;
-}
-#audioPlayer::before { content:''; position:absolute; top:-1px; right:-1px; width:10px; height:10px; border-top:1px solid var(--white-faint); border-right:1px solid var(--white-faint); }
-#audioPlayer::after  { content:''; position:absolute; bottom:-1px; left:-1px; width:10px; height:10px; border-bottom:1px solid var(--white-faint); border-left:1px solid var(--white-faint); }
-.ap-header { display:flex; align-items:center; justify-content:space-between; padding:5px 10px; border-bottom:1px solid var(--line); background:var(--bg-dark); }
-.ap-label  { font-family:var(--font-ui); font-size:0.44rem; letter-spacing:0.25em; color:var(--white-faint); text-transform:uppercase; display:flex; align-items:center; gap:5px; }
-.ap-dot    { width:4px; height:4px; border-radius:50%; background:var(--white-faint); flex-shrink:0; }
-.ap-dot.on { background:#88cc88; animation:blink 1.5s infinite; }
-.ap-collapse { font-family:var(--font-ui); font-size:0.55rem; color:var(--white-faint); background:none; border:none; cursor:pointer; padding:0 2px; line-height:1; transition:color 0.1s; }
-.ap-collapse:hover { color:var(--white); }
-.ap-body { padding:10px; }
-#audioPlayer.collapsed .ap-body { display:none; }
-.ap-track-name { font-family:var(--font-ui); font-size:0.46rem; letter-spacing:0.12em; color:var(--white-dim); margin-bottom:8px; overflow:hidden; white-space:nowrap; text-overflow:ellipsis; text-transform:uppercase; }
-.ap-viz { display:flex; align-items:flex-end; gap:2px; height:20px; margin-bottom:8px; }
-.ap-bar  { flex:1; background:var(--line-light); min-height:2px; transition:height 0.1s ease; }
-.ap-viz.on .ap-bar { background:var(--white-dim); }
-.ap-controls { display:flex; align-items:center; gap:6px; }
-.ap-btn { font-family:var(--font-ui); font-size:0.5rem; color:var(--white-faint); background:none; border:1px solid var(--line); cursor:pointer; padding:4px 8px; transition:all 0.1s; }
-.ap-btn:hover { color:var(--white); border-color:var(--white-faint); }
-.ap-btn.playing { color:var(--bg-darker); background:var(--white-dim); border-color:var(--white-dim); }
-.ap-vol { flex:1; -webkit-appearance:none; appearance:none; height:2px; background:var(--line); outline:none; cursor:pointer; }
-.ap-vol::-webkit-slider-thumb { -webkit-appearance:none; width:7px; height:7px; background:var(--white-faint); border-radius:0; transform:rotate(45deg); cursor:pointer; }
-.ap-vol::-moz-range-thumb { width:7px; height:7px; background:var(--white-faint); border:none; border-radius:0; cursor:pointer; }
-</style>
-
-<script>
-/* Audio player — controls bgMusic element */
+/* ════════════════════════════════════════
+   AUDIO PLAYER
+════════════════════════════════════════ */
 (function(){
-  const music    = document.getElementById('bgMusic');
-  const elPlay   = document.getElementById('apPlay');
-  const elMute   = document.getElementById('apMute');
-  const elVol    = document.getElementById('apVol');
-  const elDot    = document.getElementById('apDot');
-  const elViz    = document.getElementById('apViz');
-  const elBars   = document.querySelectorAll('.ap-bar');
-  const elCollapse = document.getElementById('apCollapse');
-  const elPlayer   = document.getElementById('audioPlayer');
-
-  let muted = false;
-  let vizRaf = null;
-  let audioCtx = null, analyser = null, srcNode = null;
+  const music=document.getElementById('bgMusic');
+  const elPlay=document.getElementById('apPlay');
+  const elMute=document.getElementById('apMute');
+  const elVol=document.getElementById('apVol');
+  const elDot=document.getElementById('apDot');
+  const elViz=document.getElementById('apViz');
+  const elBars=document.querySelectorAll('.ap-bar');
+  const elCollapse=document.getElementById('apCollapse');
+  const elPlayer=document.getElementById('audioPlayer');
+  let muted=false, vizRaf=null, audioCtx=null, analyser=null;
 
   function initAnalyser(){
     if(audioCtx) return;
     try {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 32;
-      srcNode  = audioCtx.createMediaElementSource(music);
-      srcNode.connect(analyser);
-      analyser.connect(audioCtx.destination);
+      audioCtx=new(window.AudioContext||window.webkitAudioContext)();
+      analyser=audioCtx.createAnalyser(); analyser.fftSize=32;
+      const src=audioCtx.createMediaElementSource(music);
+      src.connect(analyser); analyser.connect(audioCtx.destination);
     } catch(e){}
   }
 
   function startViz(){
     elViz.classList.add('on');
-    const data = analyser ? new Uint8Array(analyser.frequencyBinCount) : null;
-    const tick = () => {
-      if(music.paused){ stopViz(); return; }
-      if(analyser && data){
-        analyser.getByteFrequencyData(data);
-        elBars.forEach((b,i)=>{
-          const v = data[Math.floor(i*data.length/elBars.length)];
-          b.style.height = Math.max(3,(v/255)*100)+'%';
-        });
-      } else {
-        /* fallback random viz if no analyser */
-        elBars.forEach(b=>{ b.style.height = (Math.random()*80+5)+'%'; });
-      }
-      vizRaf = requestAnimationFrame(tick);
+    const data=analyser?new Uint8Array(analyser.frequencyBinCount):null;
+    const tick=()=>{
+      if(music.paused){stopViz();return;}
+      if(analyser&&data){ analyser.getByteFrequencyData(data); elBars.forEach((b,i)=>{ b.style.height=Math.max(3,(data[Math.floor(i*data.length/elBars.length)]/255)*100)+'%'; }); }
+      else { elBars.forEach(b=>{b.style.height=(Math.random()*80+5)+'%';}); }
+      vizRaf=requestAnimationFrame(tick);
     };
-    vizRaf = requestAnimationFrame(tick);
+    vizRaf=requestAnimationFrame(tick);
   }
   function stopViz(){
     elViz.classList.remove('on');
-    if(vizRaf){ cancelAnimationFrame(vizRaf); vizRaf=null; }
+    if(vizRaf){cancelAnimationFrame(vizRaf);vizRaf=null;}
     elBars.forEach(b=>b.style.height='2px');
   }
-
   function setUI(){
-    const playing = !music.paused;
-    elPlay.textContent = playing ? '■' : '►';
-    elPlay.classList.toggle('playing', playing);
-    elDot.classList.toggle('on', playing);
-    if(playing) startViz(); else stopViz();
+    const p=!music.paused;
+    elPlay.textContent=p?'■':'►';
+    elPlay.classList.toggle('playing',p);
+    elDot.classList.toggle('on',p);
+    if(p) startViz(); else stopViz();
   }
 
-  /* called by intro enterSite() immediately on ENTER click */
-  window.startBgMusic = function(){
+  window.startBgMusic=function(){
     initAnalyser();
-    if(audioCtx && audioCtx.state==='suspended') audioCtx.resume();
-    music.volume = elVol.value / 100;
+    if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume();
+    music.volume=elVol.value/100;
     music.play().then(setUI).catch(()=>{});
   };
 
-  elPlay.addEventListener('click', ()=>{
+  elPlay.addEventListener('click',()=>{
     initAnalyser();
-    if(audioCtx && audioCtx.state==='suspended') audioCtx.resume();
-    if(music.paused){ music.play().then(setUI).catch(()=>{}); }
+    if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume();
+    if(music.paused) music.play().then(setUI).catch(()=>{});
     else { music.pause(); setUI(); }
   });
-
-  elMute.addEventListener('click', ()=>{
-    muted = !muted; music.muted = muted;
-    elMute.textContent = muted ? '🔇' : '🔊';
-  });
-
-  elVol.addEventListener('input', ()=>{ music.volume = elVol.value/100; });
-
-  elCollapse.addEventListener('click', ()=>{
-    elPlayer.classList.toggle('collapsed');
-    elCollapse.textContent = elPlayer.classList.contains('collapsed') ? '◈' : '—';
-  });
-
-  music.addEventListener('play',  setUI);
-  music.addEventListener('pause', setUI);
+  elMute.addEventListener('click',()=>{ muted=!muted; music.muted=muted; elMute.textContent=muted?'🔇':'🔊'; });
+  elVol.addEventListener('input',()=>{ music.volume=elVol.value/100; });
+  elCollapse.addEventListener('click',()=>{ elPlayer.classList.toggle('collapsed'); elCollapse.textContent=elPlayer.classList.contains('collapsed')?'◈':'—'; });
+  music.addEventListener('play',setUI);
+  music.addEventListener('pause',setUI);
 })();
 </script>
 </body>
