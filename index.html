@@ -51,15 +51,8 @@ body::after {
 @keyframes modalScan { from{top:0;opacity:1} to{top:100%;opacity:0} }
 @keyframes ringPulse { 0%,100%{opacity:0.2;transform:scale(1)} 50%{opacity:0.8;transform:scale(1.02)} }
 
-/* ═══ INTRO SCREEN ═══ */
-#intro-screen {
-  position:fixed; inset:0; z-index:9000;
-  background:var(--bg-darker);
-  display:flex; flex-direction:column;
-  align-items:center; justify-content:center;
-  overflow:hidden;
-  transition:opacity 0.8s ease, visibility 0.8s ease;
-}
+/* ═══ INTRO ═══ */
+#intro-screen { position:fixed; inset:0; z-index:9000; background:var(--bg-darker); display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; transition:opacity 0.8s ease, visibility 0.8s ease; }
 #intro-screen.hidden { opacity:0; visibility:hidden; pointer-events:none; }
 .intro-grid { position:absolute; inset:0; pointer-events:none; background-image:linear-gradient(var(--white-ghost) 1px,transparent 1px),linear-gradient(90deg,var(--white-ghost) 1px,transparent 1px); background-size:60px 60px; opacity:0.15; }
 .intro-grid::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 65% 65% at 50% 50%,transparent 20%,var(--bg-darker) 100%); }
@@ -67,9 +60,9 @@ body::after {
 .intro-sweep { position:absolute; left:0; right:0; height:1px; background:rgba(232,232,232,0.07); animation:sweep 6s linear infinite; }
 .intro-corner { position:absolute; width:40px; height:40px; pointer-events:none; }
 .intro-corner.tl { top:30px; right:30px; border-top:1px solid var(--line-light); border-right:1px solid var(--line-light); }
-.intro-corner.tr { top:30px; left:30px;  border-top:1px solid var(--line-light); border-left:1px solid var(--line-light); }
+.intro-corner.tr { top:30px; left:30px; border-top:1px solid var(--line-light); border-left:1px solid var(--line-light); }
 .intro-corner.bl { bottom:30px; right:30px; border-bottom:1px solid var(--line-light); border-right:1px solid var(--line-light); }
-.intro-corner.br { bottom:30px; left:30px;  border-bottom:1px solid var(--line-light); border-left:1px solid var(--line-light); }
+.intro-corner.br { bottom:30px; left:30px; border-bottom:1px solid var(--line-light); border-left:1px solid var(--line-light); }
 .intro-content { position:relative; z-index:1; text-align:center; max-width:700px; padding:2rem; }
 .intro-sys { font-family:var(--font-ui); font-size:0.5rem; letter-spacing:0.5em; color:var(--white-faint); text-transform:uppercase; margin-bottom:2rem; animation:fadeIn 1.2s ease both; }
 .intro-title { font-family:var(--font-ui); font-size:clamp(2.5rem,9vw,6.5rem); font-weight:400; letter-spacing:0.35em; color:var(--white); line-height:1; margin-bottom:1rem; animation:fadeIn 1.2s 0.2s ease both; position:relative; }
@@ -102,7 +95,7 @@ body::after {
 .hud-logo-block { display:flex; align-items:center; height:100%; border-left:1px solid var(--line); padding:0 18px; }
 .hud-logo { font-family:var(--font-ui); font-size:0.72rem; letter-spacing:0.38em; color:var(--white); text-transform:uppercase; }
 .hud-nav { display:flex; list-style:none; height:100%; }
-.hud-nav a { display:flex; align-items:center; height:100%; padding:0 13px; font-family:var(--font-ui); font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--white-faint); text-decoration:none; border-left:1px solid var(--line); transition:all 0.1s; position:relative; }
+.hud-nav a { display:flex; align-items:center; height:100%; padding:0 11px; font-family:var(--font-ui); font-size:0.52rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--white-faint); text-decoration:none; border-left:1px solid var(--line); transition:all 0.1s; position:relative; }
 .hud-nav a:hover { color:var(--white); background:rgba(255,255,255,0.04); }
 .hud-nav a::after { content:''; position:absolute; bottom:0; left:0; right:0; height:1px; background:var(--white); transform:scaleX(0); transition:transform 0.15s; }
 .hud-nav a:hover::after { transform:scaleX(1); }
@@ -118,9 +111,9 @@ body::after {
 .hero-frame { position:absolute; top:72px; left:30px; right:30px; bottom:20px; pointer-events:none; }
 .hero-frame::before,.hero-frame::after,.hero-frame .fi::before,.hero-frame .fi::after { content:''; position:absolute; width:16px; height:16px; }
 .hero-frame::before  { top:0; right:0; border-top:1px solid var(--line-light); border-right:1px solid var(--line-light); }
-.hero-frame::after   { top:0; left:0;  border-top:1px solid var(--line-light); border-left:1px solid var(--line-light); }
+.hero-frame::after   { top:0; left:0; border-top:1px solid var(--line-light); border-left:1px solid var(--line-light); }
 .hero-frame .fi::before { bottom:0; right:0; border-bottom:1px solid var(--line-light); border-right:1px solid var(--line-light); }
-.hero-frame .fi::after  { bottom:0; left:0;  border-bottom:1px solid var(--line-light); border-left:1px solid var(--line-light); }
+.hero-frame .fi::after  { bottom:0; left:0; border-bottom:1px solid var(--line-light); border-left:1px solid var(--line-light); }
 .hero-content { position:relative; z-index:1; text-align:center; max-width:780px; padding:3rem 2rem; }
 .hero-sys { font-family:var(--font-ui); font-size:0.52rem; letter-spacing:0.45em; color:var(--white-faint); text-transform:uppercase; margin-bottom:1.8rem; display:flex; align-items:center; justify-content:center; gap:12px; animation:fadeIn 1s ease both; }
 .hero-sys-line { width:28px; height:1px; background:var(--line-light); flex-shrink:0; }
@@ -135,8 +128,8 @@ body::after {
 .hero-sub { font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.45em; color:var(--white-dim); text-transform:uppercase; margin-bottom:18px; animation:fadeIn 1s 0.35s ease both; }
 .hero-tagline { font-family:var(--font-he); font-size:1.1rem; color:var(--white-dim); max-width:580px; margin:0 auto 28px; line-height:2.1; animation:fadeIn 1s 0.55s ease both; }
 .hero-cta { display:flex; gap:1px; justify-content:center; flex-wrap:wrap; animation:fadeIn 1s 0.7s ease both; }
-.btn { font-family:var(--font-ui); font-size:0.56rem; letter-spacing:0.3em; text-transform:uppercase; padding:10px 28px; text-decoration:none; cursor:pointer; border:1px solid; display:inline-flex; align-items:center; gap:8px; transition:all 0.1s; }
-.btn::before { content:'►'; font-size:0.38rem; opacity:0.6; }
+.btn { font-family:var(--font-ui); font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; padding:14px 36px; text-decoration:none; cursor:pointer; border:1px solid; display:inline-flex; align-items:center; gap:10px; transition:all 0.1s; }
+.btn::before { content:'►'; font-size:0.5rem; opacity:0.6; }
 .btn-primary { background:var(--white); border-color:var(--white); color:var(--bg-darker); }
 .btn-primary:hover { background:var(--white-dim); }
 .btn-ghost { background:transparent; border-color:var(--line-light); color:var(--white-dim); }
@@ -162,6 +155,101 @@ section { padding:75px 32px; position:relative; }
 ::-webkit-scrollbar { width:4px; }
 ::-webkit-scrollbar-track { background:var(--bg-dark); }
 ::-webkit-scrollbar-thumb { background:var(--line-light); }
+
+/* ═══ HISTORY TIMELINE ═══ */
+#history { background:var(--bg-darker); position:relative; overflow:hidden; }
+.hist-bg-text {
+  position:absolute; font-family:var(--font-ui);
+  font-size:clamp(5rem,16vw,13rem); font-weight:400;
+  color:rgba(232,232,232,0.022); letter-spacing:0.15em;
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  white-space:nowrap; pointer-events:none; user-select:none;
+}
+.hist-wrap { position:relative; max-width:920px; margin:0 auto; }
+/* central vertical line */
+.hist-wrap::before {
+  content:''; position:absolute; top:0; bottom:0;
+  left:50%; transform:translateX(-50%);
+  width:1px;
+  background:linear-gradient(to bottom, transparent, var(--line-light) 8%, var(--line-light) 92%, transparent);
+}
+.hist-item {
+  display:grid; grid-template-columns:1fr 80px 1fr;
+  align-items:center; position:relative;
+  border-bottom:1px solid rgba(74,74,74,0.3);
+}
+.hist-item:last-child { border-bottom:none; }
+
+/* center column — year + diamond */
+.hist-center {
+  display:flex; flex-direction:column; align-items:center;
+  justify-content:center; gap:8px; z-index:2; padding:28px 0;
+}
+.hist-year {
+  background:var(--bg-darker); border:1px solid var(--line-light);
+  padding:6px 12px; text-align:center;
+  font-family:var(--font-ui); font-size:0.5rem; letter-spacing:0.18em;
+  color:var(--white-dim); white-space:nowrap;
+  transition:border-color 0.25s, color 0.25s;
+}
+.hist-item:hover .hist-year { border-color:var(--white-dim); color:var(--white); }
+.hist-diamond {
+  width:9px; height:9px; background:var(--bg-darker);
+  border:1px solid var(--line-light); transform:rotate(45deg);
+  transition:background 0.25s, border-color 0.25s;
+}
+.hist-item:hover .hist-diamond { background:var(--white-faint); border-color:var(--white); }
+
+/* content panels */
+.hist-panel {
+  padding:32px 36px; position:relative;
+}
+.hist-panel.left  { text-align:left;  border-left:1px solid transparent; }
+.hist-panel.right { text-align:right; border-right:1px solid transparent; }
+.hist-panel.left::after {
+  content:''; position:absolute; top:50%; right:-1px;
+  width:36px; height:1px; background:var(--line);
+}
+.hist-panel.right::before {
+  content:''; position:absolute; top:50%; left:-1px;
+  width:36px; height:1px; background:var(--line);
+}
+.hist-empty { padding:32px 36px; }
+
+/* layout is controlled directly in HTML per item */
+
+.hist-event-tag {
+  font-family:var(--font-ui); font-size:0.46rem; letter-spacing:0.32em;
+  color:var(--white-faint); text-transform:uppercase; margin-bottom:8px; display:block;
+}
+.hist-title {
+  font-family:var(--font-ui); font-size:0.88rem; letter-spacing:0.15em;
+  color:var(--white); text-transform:uppercase; margin-bottom:12px; line-height:1.4;
+}
+.hist-body {
+  font-family:var(--font-he); font-size:0.95rem;
+  color:var(--white-dim); line-height:1.95;
+}
+.hist-badge {
+  display:inline-block; margin-top:12px;
+  font-family:var(--font-ui); font-size:0.42rem; letter-spacing:0.2em;
+  border:1px solid var(--line); padding:3px 9px; text-transform:uppercase;
+  color:var(--white-faint);
+}
+.hist-badge.alert  { border-color:rgba(204,51,51,0.45); color:var(--red); }
+.hist-badge.active { border-color:rgba(200,200,180,0.45); color:var(--android); }
+
+@media(max-width:720px){
+  .hist-wrap::before { left:20px; transform:none; }
+  .hist-item { grid-template-columns:40px 1fr; }
+  .hist-item.flip .hist-panel.left  { order:unset; text-align:right; }
+  .hist-item.flip .hist-center       { order:unset; }
+  .hist-item.flip .hist-panel.right { order:unset; text-align:left; }
+  .hist-center { padding:20px 0; align-items:flex-start; }
+  .hist-empty { display:none; }
+  .hist-panel.left,.hist-panel.right { text-align:right; padding:22px 16px; }
+  .hist-panel.left::after,.hist-panel.right::before { display:none; }
+}
 
 /* ═══ ABOUT ═══ */
 #about { background:var(--bg); }
@@ -352,6 +440,44 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 .modal-faction-info { padding:16px 20px; flex:1; }
 .modal-scan { position:absolute; top:0; left:0; right:0; height:2px; background:rgba(232,232,232,0.1); animation:modalScan 0.6s ease both; pointer-events:none; }
 
+/* ═══ ENTRY ANIMATION ═══ */
+#entry-anim {
+  position:fixed; inset:0; z-index:8000;
+  pointer-events:none;
+  overflow:hidden;
+}
+/* horizontal glitch slices */
+.ea-slice {
+  position:absolute; left:0; right:0;
+  background:var(--white);
+  opacity:0;
+}
+/* vertical scan line sweeping across */
+.ea-vline {
+  position:absolute; top:0; bottom:0;
+  width:2px; background:var(--white);
+  opacity:0;
+}
+/* corner brackets that animate in */
+.ea-corner {
+  position:fixed; width:30px; height:30px; opacity:0;
+}
+.ea-corner.tl { top:57px; right:0; border-top:2px solid var(--white); border-right:2px solid var(--white); }
+.ea-corner.tr { top:57px; left:0;  border-top:2px solid var(--white); border-left:2px solid var(--white); }
+.ea-corner.bl { bottom:0; right:0; border-bottom:2px solid var(--white); border-right:2px solid var(--white); }
+.ea-corner.br { bottom:0; left:0;  border-bottom:2px solid var(--white); border-left:2px solid var(--white); }
+/* text overlay */
+.ea-text {
+  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+  font-family:var(--font-ui); font-size:clamp(0.6rem,2vw,0.9rem);
+  letter-spacing:0.6em; color:var(--white); text-transform:uppercase;
+  opacity:0; white-space:nowrap;
+}
+
+/* fp-expand and lore hints bigger */
+.fp-expand { position:absolute; bottom:14px; left:14px; font-family:var(--font-ui); font-size:0.58rem; color:var(--white-dim); opacity:0; transition:opacity 0.2s; letter-spacing:0.15em; }
+.fp-header { border-bottom:1px solid var(--line); padding:22px 24px; position:relative; background:var(--bg-dark); overflow:visible; }
+
 /* ═══ AUDIO PLAYER ═══ */
 #audioPlayer { position:fixed; bottom:20px; left:20px; z-index:600; background:var(--bg-darker); border:1px solid var(--line-light); width:200px; direction:ltr; }
 #audioPlayer::before { content:''; position:absolute; top:-1px; right:-1px; width:10px; height:10px; border-top:1px solid var(--white-faint); border-right:1px solid var(--white-faint); }
@@ -414,9 +540,7 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
     </div>
     <div class="intro-sub">Glory to Mankind</div>
     <div class="intro-play-wrap">
-      <button class="intro-play-btn" id="introPlayBtn">
-        <span>▶</span><span>ENTER</span>
-      </button>
+      <button class="intro-play-btn" id="introPlayBtn"><span>▶</span><span>ENTER</span></button>
     </div>
     <div class="intro-hint">לחץ כדי להיכנס // PRESS TO ENTER</div>
     <div class="intro-loading" id="introLoading">INITIALIZING SYSTEM</div>
@@ -428,10 +552,22 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
   </div>
 </div>
 
-<!-- AUDIO -->
 <audio id="bgMusic" loop preload="auto">
   <source src="music.mp3" type="audio/mpeg">
 </audio>
+
+<!-- ENTRY ANIMATION OVERLAY -->
+<div id="entry-anim">
+  <div class="ea-vline" id="ea-vline"></div>
+  <div class="ea-slice" id="ea-s1" style="height:2px;"></div>
+  <div class="ea-slice" id="ea-s2" style="height:1px;"></div>
+  <div class="ea-slice" id="ea-s3" style="height:3px;"></div>
+  <div class="ea-corner tl" id="ea-tl"></div>
+  <div class="ea-corner tr" id="ea-tr"></div>
+  <div class="ea-corner bl" id="ea-bl"></div>
+  <div class="ea-corner br" id="ea-br"></div>
+  <div class="ea-text" id="ea-text">SYSTEM ONLINE // WELCOME OPERATIVE</div>
+</div>
 
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="glitch-sweep"></div>
@@ -453,6 +589,7 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
     <div class="hud-logo-block"><span class="hud-logo" id="nav-logo">PROJECT REBOOT</span></div>
     <ul class="hud-nav">
       <li><a href="#about">BRIEFING</a></li>
+      <li><a href="#history">HISTORY</a></li>
       <li><a href="#factions">FACTIONS</a></li>
       <li><a href="#lore">ARCHIVES</a></li>
       <li><a href="#rules">DIRECTIVES</a></li>
@@ -506,6 +643,69 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
           <div id="data-rows"></div>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- HISTORY TIMELINE -->
+<section id="history">
+  <div class="hist-bg-text">HISTORY</div>
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-tag">Historical Record</div>
+      <h2 class="sh-title">World Timeline</h2>
+      <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">CLASSIFIED // DELTA CLEARANCE</span><div class="sh-line-bar"></div></div>
+    </div>
+
+    <div class="hist-wrap reveal">
+
+      <!-- EVENT 01 -->
+      <div class="hist-item">
+        <div class="hist-panel left">
+          <span class="hist-event-tag">// EVENT_01 // YEAR 5012</span>
+          <div class="hist-title">Alien Invasion</div>
+          <p class="hist-body">חייזרים פלשו לכדור הארץ ושחררו סוג חדש של נשק — צורת חיים מלאכותית. רובוטים. אלה גרמו להשמדת רוב האנושות. הניצולים נמלטו מכדור הארץ אל הירח.</p>
+          <span class="hist-badge alert">// CATASTROPHIC EVENT</span>
+        </div>
+        <div class="hist-center">
+          <div class="hist-year">5012</div>
+          <div class="hist-diamond"></div>
+        </div>
+        <div class="hist-empty"></div>
+      </div>
+
+      <!-- EVENT 02 -->
+      <div class="hist-item">
+        <div class="hist-empty"></div>
+        <div class="hist-center">
+          <div class="hist-year">5204</div>
+          <div class="hist-diamond"></div>
+        </div>
+        <div class="hist-panel right">
+          <span class="hist-event-tag">// EVENT_02 // YEAR 5204</span>
+          <div class="hist-title">YoRHa Counterattack</div>
+          <p class="hist-body">האנושות נלחמה חזרה — שלחו את צבא האנדרואידים שלהם לתקוף את החייזרים והרובוטים שלהם בכדור הארץ. מלחמת שחרור ארוכה ואכזרית החלה.</p>
+          <span class="hist-badge alert">// WAR INITIATED</span>
+        </div>
+      </div>
+
+      <!-- EVENT 03 -->
+      <div class="hist-item">
+        <div class="hist-panel left">
+          <span class="hist-event-tag">// EVENT_03 // PRESENT DAY</span>
+          <div class="hist-title">The Endless War</div>
+          <p class="hist-body">הקרב בין הרובוטים והאנדרואידים עדיין מתחולל. מלחמה שנמשכת אלפי שנים, שני הצדדים לכודים בלולאה אינסופית — כל אחד שוכח מדוע הוא נלחם מלכתחילה.</p>
+          <span class="hist-badge active">// ACTIVE — YEAR 11,945</span>
+        </div>
+        <div class="hist-center">
+          <div class="hist-year">11,945</div>
+          <div class="hist-diamond"></div>
+        </div>
+        <div class="hist-empty"></div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -665,9 +865,6 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 </div>
 
 <script>
-/* ════════════════════════════════════════
-   CONTENT — ערוך כאן
-════════════════════════════════════════ */
 const CONTENT = {
   hero: {
     title:   "PROJECT REBOOT",
@@ -677,9 +874,9 @@ const CONTENT = {
   about: {
     title: "About the Event",
     paragraphs: [
-      "פרויקט ריבוט הוא  משחק LARP מיליטנטי המתרחש בעולם פוסט-אפוקליפטי עתידני בהשארת המשחק NieR: Automata",
-      "מה זה LARP? ‏Live Action Role-Playing - משחק תפקידים חי — חוויה המשלבת בין תאטרון מאולתר, משחק חברתי, אתגרים, והרפתקה בעולם אחר. במהלך האירוע כל משתתף מקבל דמות, ונכנס לחוות את העולם דרך העיניים שלה: לדבר, לפעול, לקבל החלטות ולהשפיע על הסיפור המתפתח בזמן אמת.",
-      "בלארפ זה תכנסו לעולם העתידני של משחקי Neir .תצטרכו לבחור צד במלחמה ארוכת השנים ולהוביל את הקבוצה שלכם לניצחון"
+      "פרויקט ריבוט הוא משחק LARP מיליטנטי המתרחש בעולם פוסט-אפוקליפטי עתידני בהשראת המשחק NieR: Automata.",
+      "מה זה LARP? Live Action Role-Playing — משחק תפקידים חי, חוויה המשלבת בין תאטרון מאולתר, משחק חברתי, אתגרים, והרפתקה בעולם אחר. במהלך האירוע כל משתתף מקבל דמות, ונכנס לחוות את העולם דרך העיניים שלה: לדבר, לפעול, לקבל החלטות ולהשפיע על הסיפור המתפתח בזמן אמת.",
+      "בלארפ זה תכנסו לעולם העתידני של NieR. תצטרכו לבחור צד במלחמה ארוכת השנים ולהוביל את הקבוצה שלכם לניצחון."
     ],
     stats: [
       { label:"תאריך",      value:"XX/XX/XXXX" },
@@ -691,36 +888,36 @@ const CONTENT = {
   factions: [
     {
       type:"android", num:"01", name:"Android Units", id:"YoRHa Combat Designation",
-      desc:" האנדרואידים הם יצורים מלאכותיים דמויי־אדם שנוצרו על ידי האנושות כדי להילחם ביצורי המכונות שכבשו את כדור הארץ. בזמן שבני האדם חיים בגלות על הירח, האנדרואידים נשלחים לכדור הארץ כחיילים, סיירים ותומכי לחימה במטרה להשיב את העולם לבני האדם. למרות שהם מכאניים, האנדרואידים נראים ומתנהגים בצורה אנושית מאוד הם מסוגלים לחשוב, להרגיש, ליצור קשרים אישיים ולפתח זהות עצמית.",
-   
+      desc:"האנדרואידים הם יצורים מלאכותיים דמויי-אדם שנוצרו על ידי האנושות כדי להילחם ביצורי המכונות שכבשו את כדור הארץ. בזמן שבני האדם חיים בגלות על הירח, האנדרואידים נשלחים לכדור הארץ כחיילים, סיירים ותומכי לחימה.",
       longDesc:[
-         "במשחק זה תשחקו אנדרואידים תחת ארגון YoRHa ארגון צבאי של אנדרואידים מתקדמים, שנוצר במטרה להילחם ברובוטים ולהחזיר את השליטה בכדור הארץ לבני האדם.",
-         "קיימים סוגים שונים של אנדרואידים לתפקידים שונים בארגון",
-        "​מודל קרבי (B-Type): התמקדות בנשק פיזי לחימה וטקטיקה. מכאניקה עם היתרונות לקרב.",
-        "​מודל סקאוט (S-Type): התמקדות בחקר ואהבה למידע ולמידה.מכאניקה עם היתרונות לסיוע בלחימה.",
-        "מודל מרפא (H-Type): התמקדות בריפוי והתמחות בטיפול בנזקים פיזיים. ",
+        "במשחק זה תשחקו אנדרואידים תחת ארגון YoRHa — ארגון צבאי של אנדרואידים מתקדמים, שנוצר במטרה להילחם ברובוטים ולהחזיר את השליטה בכדור הארץ לבני האדם.",
+        "קיימים סוגים שונים של אנדרואידים לתפקידים שונים בארגון:",
+        "מודל קרבי (B-Type): התמקדות בנשק פיזי, לחימה וטקטיקה — מכאניקה עם יתרונות לקרב.",
+        "מודל סקאוט (S-Type): התמקדות בחקר ואהבה למידע — מכאניקה עם יתרונות לסיוע בלחימה.",
+        "מודל מרפא (H-Type): התמקדות בריפוי והתמחות בטיפול בנזקים פיזיים.",
         "הפרוטוקול האנדרואידי אוסר על קשרים אישיים, שמות עצמיים, ועצמאות שמנוגדת לפקודות. אך בשטח, רבים מפרים כללים אלה בסתר."
       ],
       data:[
-       { k:"Primary Directive", v:"השמדת הרובוטים על כדור הארץ" },
-       { k:"game style", v:" היררכי, מיליטנטי, צבאי" },
-       { k:"Combat Doctrine", v:"יעילות מעל הכל" },
-       { k:"Field Behavior", v:"קור רוח ויעילות קרבית" }
+        { k:"יעד ראשי",        v:"השמדת הרובוטים על כדור הארץ" },
+        { k:"סגנון משחק",      v:"היררכי, מיליטנטי, צבאי" },
+        { k:"עיקרון קרבי",     v:"יעילות מעל הכל" },
+        { k:"התנהגות שדה",     v:"קור רוח ויעילות קרבית" }
       ]
     },
     {
       type:"machine", num:"02", name:"Machine Lifeforms", id:"Network Intelligence Unit",
-      desc:"הרובוטים הם יצורי מכונה שנוצרו במקור לצורכי מלחמה, אך עם הזמן החלו לפתח קהילות, תרבות ודפוסי התנהגות המזכירים בני אדם. הם חיים בצורה שיתופית ומשפחתית, מעניקים משמעות גדולה לקשרים ביניהם ורואים בקהילה ערך עליון. המכונות מנסות להבין את מושג האנושיות דרך חיקוי של רגשות, התנהגות ומבנים חברתיים אנושיים  לעיתים באופן פשוט, תמים וכמעט ילדותי למראה.למרות אופיין השקט יחסית, כל רובוט נושא בתוכו יכולת מובנית ללחימה והשמדה. בנוסף, המכונות מחוברות לרשת מידע משותפת המאפשרת להן להעביר ידע וחוויות זו לזו גם ממרחקים גדולים, דבר שמחזק את תחושת האחדות והקשר ביניהן.",
+      desc:"הרובוטים הם יצורי מכונה שנוצרו במקור לצורכי מלחמה, אך עם הזמן החלו לפתח קהילות, תרבות ודפוסי התנהגות המזכירים בני אדם. הם חיים בצורה שיתופית ומשפחתית, ורואים בקהילה ערך עליון.",
       longDesc:[
-        "מכונות נחותות במורכבות שלהם מהאנדרואידים, אך נעלות בפן החברתי והקהילתי. הן חיות באופן הדומה מאוד לבני אדם, בצורה קומוניסטית ומשותפת, אך הפירוש שלהם להתנהגות בני האדם מאוד מילולית. כלומר ההתנהגות שלהם היא מעין חיקוי פשוט של בני אדם. לצופה מבחוץ נראית תמימה, חסרת מורכבת ועומק. דומה קצת למשחק ילדים או רובוט שמחקה בן אדם.",
-        " אך, האם זאת האמת?הרובוטים עצמם רואים את הקהילות שלהם כמשפחות. הם גדלים על סיפורים בהם הערכים המרכזיים הם הגנת המשפחה, יצירת קהילה ושמירה על חבריהם. אף על פי כן, ניכר כי הגוף שלהם נועד במקורו ללחימה. כלומר לכל אחד מהם יש יכולת מובנית מיסודה ללחימה והרג.",
-        "לרובוטים יש רשת משותפת בה הם מעבירים מידע מאחד לשני בנוסף ליכולת שלהם לדבר פנים אל פנים(משמעות הדבר שקיימת ביניהם האפשרות לחלוק מידע עם כל בני מינם, גם כאלה שלא קרובים אליהם פיזית). עד כה בכל התקלות בין רובוט לאנדרואיד נוצר קרב קטלני ביותר, מה שגרם לרובוטים להבין כי האנדרואידים כאן לחסלם."
+        "מכונות נחותות במורכבותן מהאנדרואידים, אך נעלות בפן החברתי והקהילתי. הן חיות באופן הדומה מאוד לבני אדם — בצורה קומוניסטית ומשותפת, אך הפרשנות שלהן להתנהגות בני האדם מאוד מילולית.",
+        "לצופה מבחוץ נראית תמימה, חסרת מורכבות ועומק — דומה קצת למשחק ילדים או רובוט שמחקה בן אדם. אך האם זאת האמת?",
+        "הרובוטים עצמם רואים את הקהילות שלהם כמשפחות. הם גדלים על סיפורים בהם הערכים המרכזיים הם הגנת המשפחה, יצירת קהילה ושמירה על חבריהם.",
+        "לרובוטים יש רשת משותפת בה הם מעבירים מידע מאחד לשני — יכולת לחלוק מידע עם כל בני מינם, גם כאלה שלא קרובים אליהם פיזית."
       ],
       data:[
-        { k:"Core Purpose", v:"הישרדות ולמידת האנושות" },
-        { k:"game style", v:"הקמת קהילה והתפתחות" },
-        { k:"Behavior Pattern", v:"אנושי" },
-        { k:"Combat Potential", v:"קטלני בעת איום" }
+        { k:"מטרה מרכזית",     v:"הישרדות ולמידת האנושות" },
+        { k:"סגנון משחק",      v:"הקמת קהילה והתפתחות" },
+        { k:"דפוס התנהגות",    v:"אנושי ותמים" },
+        { k:"פוטנציאל קרבי",   v:"קטלני בעת איום" }
       ]
     }
   ],
@@ -736,7 +933,7 @@ const CONTENT = {
       long:"הפרוטוקול של YoRHa בנוי על האמונה שאנדרואידים יעילים יותר כאשר הם נטולי רגשות. אך ההיסטוריה של הסיעה מלאה בדוגמאות שמוכיחות ההפך — שדווקא הקשרים שנאסרו הם שהצילו משימות, והרגשות המדוכאים הם שהולידו את הגיבורים הגדולים ביותר." },
     { title:"The Ruined Cities",  stamp:"FIELD OBSERVATION",
       text:"שטח המשחק משתרע על עצמות עיר לשעבר — מגדלים קורסים, כיכרות מוצפות, ושרידי מכונות עתיקות שחצי בלעה אותן צמחייה. שני הצדדים כובשים, מאבדים, ומשיבים שטח במחזורים שחוזרים על עצמם אלפי שנים.",
-      long:"שדה המשחק מחולק לאזורים שונים, כל אחד עם אוירה ואפשרויות משחק ייחודיות. בחלק האנדרואידים מחזיקים עמדות ביצוריות. בחלק המכונות בנו קהילות מוזרות. ובאזורים אחרים — לא ברור למי שייכת הקרקע, ולכן הכל אפשרי." },
+      long:"שדה המשחק מחולק לאזורים שונים, כל אחד עם אווירה ואפשרויות משחק ייחודיות. בחלק האנדרואידים מחזיקים עמדות ביצוריות. בחלק המכונות בנו קהילות מוזרות. ובאזורים אחרים — לא ברור למי שייכת הקרקע, ולכן הכל אפשרי." },
     { title:"Outliers",           stamp:"ANOMALY REPORT",
       text:"לא כל יחידה מתאימה לאידיאולוגיה של סיעתה. אנדרואידים סוררים שנטשו את YoRHa. מכונות שעזבו את הרשת. אלה קיימים בשוליים — נרדפים על ידי שני הצדדים, ומשיבים לעצמם בלבד.",
       long:"חברי ה-Outliers הם הפרשנות החופשית ביותר בלארפ. אם לא מתחבר לאף אחד מהצדדים — אנדרואיד שנטש, מכונה שהתפכחה, או ישות שלא ברור לה מה היא — זו יכולה להיות האופציה הנכונה. ה-Outliers נלחמים למענם בלבד, ומוצאים בריתות זמניות בהתאם לצורך." }
@@ -759,10 +956,10 @@ const CONTENT = {
   ],
   team: [
     { id:"OPERATIVE_01", name:"נוי וולסטר", role:"Game Master", titleHe:"מנהלת משחק ראשי", photo:"",
-      desc:"חלק מקהילת ה־LARP בשנתיים האחרונות, במהלכן לקחה חלק בהקמה, ניהול ופיתוח של מספר יוזמות ואירועים קהילתיים, ביניהם אולדהיים, מעשיות אוסטמיר וערבי פונדק שונים.",
-      long:"המטרה שלי היא לחלוק את הערצה שלי לסדרת המשחקים הנהדרת הזאת",
+      desc:"חלק מקהילת ה-LARP בשנתיים האחרונות, במהלכן לקחה חלק בהקמה, ניהול ופיתוח של מספר יוזמות ואירועים קהילתיים, ביניהם אולדהיים, מעשיות אוסטמיר וערבי פונדק שונים.",
+      long:"המטרה שלי היא לחלוק את הערצה שלי לסדרת המשחקים הנהדרת הזאת.",
       tags:["Game Master"] },
-    { id:"OPERATIVE_02", name:"עדי יעקובסון", role:"Combat Director", titleHe:"מנהל משחק ראשי", photo:"",
+    { id:"OPERATIVE_02", name:"עדי יעקובסון", role:"Game Master", titleHe:"מנהל משחק ראשי", photo:"",
       desc:"תיאור קצר על המארגן השני — הרקע שלו ב-LARP, מה הוא אחראי עליו באירוע, ומה הוא מביא לצוות.",
       long:"תיאור מורחב על המארגן השני. ניסיון, תפקיד בפרויקט, ואיך השניים ביחד יוצרים את חוויית פרויקט ריבוט.",
       tags:["Game Master"] }
@@ -783,61 +980,182 @@ const CONTENT = {
   }
 };
 
-/* ════════════════════════════════════════
-   INTRO ENGINE
-════════════════════════════════════════ */
-(function(){
-  const screen     = document.getElementById('intro-screen');
-  const playBtn    = document.getElementById('introPlayBtn');
-  const loadTxt    = document.getElementById('introLoading');
-  const introClock = document.getElementById('intro-clock');
-
-  const clockTick = setInterval(()=>{
-    if(introClock) introClock.textContent = new Date().toTimeString().slice(0,8);
-  },1000);
-
-  const lines = ['INITIALIZING SYSTEM','LOADING TACTICAL NET','ESTABLISHING NODE CONNECTION','SYNCING ANDROID DATABASE','SYNCING MACHINE NETWORK','ALL SYSTEMS NOMINAL','AWAITING OPERATOR INPUT'];
-  let li=0,ci=0,typing=true;
-  const typeInt = setInterval(()=>{
-    if(!loadTxt) return;
-    if(typing){
-      ci++;
-      loadTxt.textContent = lines[li].slice(0,ci);
-      if(ci>=lines[li].length){ typing=false; setTimeout(()=>{ ci=0; li=(li+1)%lines.length; typing=true; },1400); }
+/* ── SOUND ENGINE ── */
+let _sfxCtx = null;
+function getSfxCtx(){
+  if(!_sfxCtx) _sfxCtx = new (window.AudioContext||window.webkitAudioContext)();
+  if(_sfxCtx.state==='suspended') _sfxCtx.resume();
+  return _sfxCtx;
+}
+function playClick(type){
+  try {
+    const ctx = getSfxCtx();
+    const o = ctx.createOscillator();
+    const g = ctx.createGain();
+    o.connect(g); g.connect(ctx.destination);
+    if(type==='ui'){
+      // short high beep — UI click
+      o.frequency.setValueAtTime(1200, ctx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(800, ctx.currentTime+0.04);
+      g.gain.setValueAtTime(0.18, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.07);
+      o.start(); o.stop(ctx.currentTime+0.07);
+    } else if(type==='enter'){
+      // dramatic low thud + high ping — ENTER button
+      const o2 = ctx.createOscillator();
+      const g2 = ctx.createGain();
+      o2.connect(g2); g2.connect(ctx.destination);
+      o.frequency.setValueAtTime(80, ctx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(40, ctx.currentTime+0.3);
+      g.gain.setValueAtTime(0.4, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.3);
+      o2.frequency.setValueAtTime(2000, ctx.currentTime);
+      o2.frequency.exponentialRampToValueAtTime(1000, ctx.currentTime+0.15);
+      g2.gain.setValueAtTime(0.2, ctx.currentTime+0.05);
+      g2.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.2);
+      o.start(); o.stop(ctx.currentTime+0.3);
+      o2.start(ctx.currentTime+0.05); o2.stop(ctx.currentTime+0.2);
+    } else if(type==='modal'){
+      // smooth mid tone — modal open
+      o.type='sine';
+      o.frequency.setValueAtTime(440, ctx.currentTime);
+      o.frequency.exponentialRampToValueAtTime(600, ctx.currentTime+0.05);
+      g.gain.setValueAtTime(0.12, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.12);
+      o.start(); o.stop(ctx.currentTime+0.12);
+    } else if(type==='hover'){
+      // tiny tick
+      o.frequency.setValueAtTime(1800, ctx.currentTime);
+      g.gain.setValueAtTime(0.06, ctx.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.03);
+      o.start(); o.stop(ctx.currentTime+0.03);
     }
+  } catch(e){}
+}
+
+/* ── ENTRY ANIMATION ── */
+function runEntryAnimation(onDone){
+  const vline = document.getElementById('ea-vline');
+  const s1 = document.getElementById('ea-s1');
+  const s2 = document.getElementById('ea-s2');
+  const s3 = document.getElementById('ea-s3');
+  const corners = ['ea-tl','ea-tr','ea-bl','ea-br'].map(id=>document.getElementById(id));
+  const text = document.getElementById('ea-text');
+
+  // Phase 1: vertical scan line sweeps left to right (0–300ms)
+  vline.style.left = '-2px';
+  vline.style.opacity = '1';
+  vline.style.transition = 'left 0.3s linear, opacity 0.1s';
+  requestAnimationFrame(()=>{
+    vline.style.left = '100vw';
+  });
+
+  // Phase 2: glitch slices flash at random positions (100–400ms)
+  setTimeout(()=>{
+    [s1,s2,s3].forEach((s,i)=>{
+      const pct = 20 + i*22;
+      s.style.top = pct+'%';
+      s.style.opacity = '0.9';
+      s.style.transition = 'none';
+      setTimeout(()=>{ s.style.opacity='0'; s.style.transition='opacity 0.08s'; }, 60+i*40);
+    });
+    playClick('enter');
+  }, 120);
+
+  // Phase 3: second glitch burst (250ms)
+  setTimeout(()=>{
+    s1.style.top = '60%'; s1.style.opacity='0.7';
+    s2.style.top = '35%'; s2.style.opacity='0.5';
+    setTimeout(()=>{ s1.style.opacity='0'; s2.style.opacity='0'; }, 50);
+  }, 250);
+
+  // Phase 4: corners slam in (320ms)
+  setTimeout(()=>{
+    corners.forEach((c,i)=>{
+      c.style.transition = `opacity 0.05s, transform 0.12s ease-out`;
+      c.style.transform = 'scale(0.3)';
+      c.style.opacity = '0';
+      setTimeout(()=>{
+        c.style.transform = 'scale(1.4)';
+        c.style.opacity = '1';
+        setTimeout(()=>{ c.style.transform='scale(1)'; }, 80);
+      }, i*30);
+    });
+    playClick('modal');
+  }, 320);
+
+  // Phase 5: text flashes (450ms)
+  setTimeout(()=>{
+    text.style.opacity='1';
+    text.style.transition='opacity 0.05s';
+    setTimeout(()=>{ text.style.opacity='0'; text.style.transition='opacity 0.2s'; }, 200);
+  }, 450);
+
+  // Phase 6: second text flash (700ms)
+  setTimeout(()=>{
+    text.style.opacity='0.6';
+    setTimeout(()=>{ text.style.opacity='0'; }, 100);
+  }, 700);
+
+  // Phase 7: corners fade out (800ms)
+  setTimeout(()=>{
+    corners.forEach(c=>{ c.style.opacity='0'; c.style.transition='opacity 0.3s'; });
+    vline.style.opacity='0';
+  }, 800);
+
+  // Done (1000ms) — call callback
+  setTimeout(onDone, 950);
+}
+
+/* ── INTRO ENGINE ── */
+(function(){
+  const screen=document.getElementById('intro-screen');
+  const playBtn=document.getElementById('introPlayBtn');
+  const loadTxt=document.getElementById('introLoading');
+  const introClock=document.getElementById('intro-clock');
+  const clockTick=setInterval(()=>{ if(introClock) introClock.textContent=new Date().toTimeString().slice(0,8); },1000);
+  const lines=['INITIALIZING SYSTEM','LOADING TACTICAL NET','ESTABLISHING NODE CONNECTION','SYNCING ANDROID DATABASE','SYNCING MACHINE NETWORK','ALL SYSTEMS NOMINAL','AWAITING OPERATOR INPUT'];
+  let li=0,ci=0,typing=true;
+  const typeInt=setInterval(()=>{
+    if(!loadTxt) return;
+    if(typing){ ci++; loadTxt.textContent=lines[li].slice(0,ci); if(ci>=lines[li].length){ typing=false; setTimeout(()=>{ ci=0; li=(li+1)%lines.length; typing=true; },1400); } }
   },55);
 
   function enterSite(){
-    clearInterval(typeInt);
-    clearInterval(clockTick);
-    screen.style.transition='opacity 0.05s';
-    screen.style.opacity='0.5';
+    clearInterval(typeInt); clearInterval(clockTick);
+    // quick flash on intro screen first
+    screen.style.transition='opacity 0.04s';
+    screen.style.opacity='0.15';
     setTimeout(()=>{
-      screen.style.opacity='1';
+      screen.style.opacity='0.9';
       setTimeout(()=>{
-        screen.style.transition='opacity 1s ease, visibility 1s ease';
-        screen.classList.add('hidden');
-        document.body.style.overflow='';
-        if(window.startBgMusic) window.startBgMusic();
-      },80);
-    },60);
+        // fade out intro
+        screen.style.transition='opacity 0.35s ease';
+        screen.style.opacity='0';
+        setTimeout(()=>{
+          screen.style.visibility='hidden';
+          screen.classList.add('hidden');
+          document.body.style.overflow='';
+          // run entry animation over site
+          runEntryAnimation(()=>{
+            if(window.startBgMusic) window.startBgMusic();
+          });
+        }, 350);
+      }, 40);
+    }, 40);
   }
 
   document.body.style.overflow='hidden';
   playBtn.addEventListener('click', enterSite);
-  document.addEventListener('keydown',e=>{
-    if((e.key==='Enter'||e.key===' ')&&!screen.classList.contains('hidden')) enterSite();
-  });
+  document.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ')&&!screen.classList.contains('hidden')) enterSite(); });
 })();
 
-/* ════════════════════════════════════════
-   MODAL
-════════════════════════════════════════ */
-const modalOverlay = document.getElementById('modal');
-const modalClose   = document.getElementById('modal-close');
+/* ── MODAL ── */
+const modalOverlay=document.getElementById('modal');
+const modalClose=document.getElementById('modal-close');
 function openModal({id,type,title,titleClass,bodyHTML}){
-  document.getElementById('modal-id').textContent   = id||'';
-  document.getElementById('modal-type').textContent = type||'';
+  document.getElementById('modal-id').textContent=id||'';
+  document.getElementById('modal-type').textContent=type||'';
   const mt=document.getElementById('modal-title');
   mt.textContent=title||''; mt.className='modal-title '+(titleClass||'');
   document.getElementById('modal-body').innerHTML=bodyHTML||'';
@@ -847,16 +1165,12 @@ function openModal({id,type,title,titleClass,bodyHTML}){
 }
 function closeModal(){ modalOverlay.classList.remove('open'); document.body.style.overflow=''; }
 modalClose.addEventListener('click',closeModal);
-modalOverlay.addEventListener('click',e=>{if(e.target===modalOverlay)closeModal();});
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+modalOverlay.addEventListener('click',e=>{ if(e.target===modalOverlay) closeModal(); });
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') closeModal(); });
 function paraHTML(arr){ return arr.map(p=>`<p>${p}</p>`).join(''); }
-function tableHTML(data,cls){
-  return `<table class="modal-table ${cls||''}">${data.map(d=>`<tr><td class="mtk">${d.k}</td><td class="mtv">${d.v}</td></tr>`).join('')}</table>`;
-}
+function tableHTML(data,cls){ return `<table class="modal-table ${cls||''}">${data.map(d=>`<tr><td class="mtk">${d.k}</td><td class="mtv">${d.v}</td></tr>`).join('')}</table>`; }
 
-/* ════════════════════════════════════════
-   RENDER
-════════════════════════════════════════ */
+/* ── RENDER ── */
 function render(){
   const h=CONTENT.hero;
   document.getElementById('hero-title').textContent=h.title;
@@ -891,7 +1205,7 @@ function render(){
       <div class="tl-body"><div class="tl-body-inner"><p class="tl-summary">${l.text}</p><p class="tl-long">${l.long}</p></div></div>
     </div>`).join('');
   document.querySelectorAll('.tl-item').forEach(item=>{
-    const trigger=item.querySelector('.tl-trigger'), body=item.querySelector('.tl-body');
+    const trigger=item.querySelector('.tl-trigger'),body=item.querySelector('.tl-body');
     trigger.addEventListener('click',()=>{
       const isOpen=item.classList.contains('open');
       document.querySelectorAll('.tl-item').forEach(i=>{ i.classList.remove('open'); i.querySelector('.tl-body').style.maxHeight='0'; });
@@ -950,80 +1264,66 @@ function render(){
   document.getElementById('spotifyBtn').href=CONTENT.footer.spotify;
 }
 
-/* clock */
+/* ── clock ── */
 function tick(){ const el=document.getElementById('hud-clock'); if(el) el.textContent=new Date().toTimeString().slice(0,8); }
 setInterval(tick,1000); tick();
 
-/* cursor */
+/* ── cursor ── */
 document.addEventListener('mousemove',e=>{ const d=document.getElementById('cursorDot'); if(d){d.style.left=e.clientX+'px';d.style.top=e.clientY+'px';} });
 
-/* scroll reveal */
+/* ── scroll reveal ── */
 const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.07});
 render();
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-/* ════════════════════════════════════════
-   AUDIO PLAYER
-════════════════════════════════════════ */
+/* ── CLICK SOUNDS on interactive elements ── */
+(function(){
+  // buttons and links
+  document.querySelectorAll('.btn,.intro-play-btn,.modal-close-btn,.ap-btn,.ap-collapse,.footer-link-btn,.hud-nav a').forEach(el=>{
+    el.addEventListener('click',()=>playClick('ui'));
+  });
+  // faction panels and lore triggers — modal sound
+  document.querySelectorAll('.faction-panel,.join-fp').forEach(el=>{
+    el.addEventListener('click',()=>playClick('modal'));
+  });
+  // lore accordion
+  document.querySelectorAll('.tl-trigger').forEach(el=>{
+    el.addEventListener('click',()=>playClick('ui'));
+  });
+  // hover sound on nav links
+  document.querySelectorAll('.hud-nav a').forEach(el=>{
+    el.addEventListener('mouseenter',()=>playClick('hover'));
+  });
+  // hover on faction panels
+  document.querySelectorAll('.faction-panel').forEach(el=>{
+    el.addEventListener('mouseenter',()=>playClick('hover'));
+  });
+})();
+
+/* ── AUDIO PLAYER ── */
 (function(){
   const music=document.getElementById('bgMusic');
-  const elPlay=document.getElementById('apPlay');
-  const elMute=document.getElementById('apMute');
-  const elVol=document.getElementById('apVol');
-  const elDot=document.getElementById('apDot');
-  const elViz=document.getElementById('apViz');
-  const elBars=document.querySelectorAll('.ap-bar');
-  const elCollapse=document.getElementById('apCollapse');
-  const elPlayer=document.getElementById('audioPlayer');
-  let muted=false, vizRaf=null, audioCtx=null, analyser=null;
+  const elPlay=document.getElementById('apPlay'),elMute=document.getElementById('apMute'),elVol=document.getElementById('apVol');
+  const elDot=document.getElementById('apDot'),elViz=document.getElementById('apViz'),elBars=document.querySelectorAll('.ap-bar');
+  const elCollapse=document.getElementById('apCollapse'),elPlayer=document.getElementById('audioPlayer');
+  let muted=false,vizRaf=null,audioCtx=null,analyser=null;
 
   function initAnalyser(){
     if(audioCtx) return;
-    try {
-      audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-      analyser=audioCtx.createAnalyser(); analyser.fftSize=32;
-      const src=audioCtx.createMediaElementSource(music);
-      src.connect(analyser); analyser.connect(audioCtx.destination);
-    } catch(e){}
+    try { audioCtx=new(window.AudioContext||window.webkitAudioContext)(); analyser=audioCtx.createAnalyser(); analyser.fftSize=32; const src=audioCtx.createMediaElementSource(music); src.connect(analyser); analyser.connect(audioCtx.destination); } catch(e){}
   }
-
   function startViz(){
     elViz.classList.add('on');
     const data=analyser?new Uint8Array(analyser.frequencyBinCount):null;
-    const tick=()=>{
-      if(music.paused){stopViz();return;}
-      if(analyser&&data){ analyser.getByteFrequencyData(data); elBars.forEach((b,i)=>{ b.style.height=Math.max(3,(data[Math.floor(i*data.length/elBars.length)]/255)*100)+'%'; }); }
-      else { elBars.forEach(b=>{b.style.height=(Math.random()*80+5)+'%';}); }
-      vizRaf=requestAnimationFrame(tick);
-    };
+    const tick=()=>{ if(music.paused){stopViz();return;} if(analyser&&data){analyser.getByteFrequencyData(data);elBars.forEach((b,i)=>{b.style.height=Math.max(3,(data[Math.floor(i*data.length/elBars.length)]/255)*100)+'%';});}else{elBars.forEach(b=>{b.style.height=(Math.random()*80+5)+'%';});} vizRaf=requestAnimationFrame(tick); };
     vizRaf=requestAnimationFrame(tick);
   }
-  function stopViz(){
-    elViz.classList.remove('on');
-    if(vizRaf){cancelAnimationFrame(vizRaf);vizRaf=null;}
-    elBars.forEach(b=>b.style.height='2px');
-  }
-  function setUI(){
-    const p=!music.paused;
-    elPlay.textContent=p?'■':'►';
-    elPlay.classList.toggle('playing',p);
-    elDot.classList.toggle('on',p);
-    if(p) startViz(); else stopViz();
-  }
+  function stopViz(){ elViz.classList.remove('on'); if(vizRaf){cancelAnimationFrame(vizRaf);vizRaf=null;} elBars.forEach(b=>b.style.height='2px'); }
+  function setUI(){ const p=!music.paused; elPlay.textContent=p?'■':'►'; elPlay.classList.toggle('playing',p); elDot.classList.toggle('on',p); if(p) startViz(); else stopViz(); }
 
-  window.startBgMusic=function(){
-    initAnalyser();
-    if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume();
-    music.volume=elVol.value/100;
-    music.play().then(setUI).catch(()=>{});
-  };
+  window.startBgMusic=function(){ initAnalyser(); if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume(); music.volume=elVol.value/100; music.play().then(setUI).catch(()=>{}); };
 
-  elPlay.addEventListener('click',()=>{
-    initAnalyser();
-    if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume();
-    if(music.paused) music.play().then(setUI).catch(()=>{});
-    else { music.pause(); setUI(); }
-  });
+  elPlay.addEventListener('click',()=>{ initAnalyser(); if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume(); if(music.paused) music.play().then(setUI).catch(()=>{}); else{music.pause();setUI();} });
   elMute.addEventListener('click',()=>{ muted=!muted; music.muted=muted; elMute.textContent=muted?'🔇':'🔊'; });
   elVol.addEventListener('input',()=>{ music.volume=elVol.value/100; });
   elCollapse.addEventListener('click',()=>{ elPlayer.classList.toggle('collapsed'); elCollapse.textContent=elPlayer.classList.contains('collapsed')?'◈':'—'; });
