@@ -126,17 +126,18 @@ body::after {
 .nd-d { width:5px; height:5px; background:var(--white-dim); transform:rotate(45deg); flex-shrink:0; }
 .nd-dot { width:3px; height:3px; background:var(--white-faint); transform:rotate(45deg); flex-shrink:0; }
 .hero-sub { font-family:var(--font-ui); font-size:0.7rem; letter-spacing:0.45em; color:var(--white-dim); text-transform:uppercase; margin-bottom:18px; animation:fadeIn 1s 0.35s ease both; }
-.hero-tagline { font-family:var(--font-he); font-size:1.1rem; color:var(--white-dim); max-width:580px; margin:0 auto 28px; line-height:2.1; animation:fadeIn 1s 0.55s ease both; }
-.hero-cta { display:flex; gap:1px; justify-content:center; flex-wrap:wrap; animation:fadeIn 1s 0.7s ease both; }
+.hero-tagline { font-family:var(--font-he); font-size:1.1rem; color:var(--white-dim); max-width:580px; margin:0 auto; line-height:2.1; animation:fadeIn 1s 0.55s ease both; }
+.hero-stripe { position:absolute; bottom:0; left:0; right:0; height:1px; background:repeating-linear-gradient(90deg,var(--line-light) 0,var(--line-light) 14px,transparent 14px,transparent 22px); opacity:0.35; }
+.hero-scroll { position:absolute; bottom:22px; left:50%; transform:translateX(-50%); font-family:var(--font-ui); font-size:0.45rem; letter-spacing:0.42em; color:var(--white-faint); text-align:center; animation:fadeIn 2s 1.8s ease both; }
+.scroll-bar { width:1px; height:22px; background:linear-gradient(to bottom,var(--white-faint),transparent); margin:5px auto 0; animation:pulse 1.5s infinite; }
+
+/* ═══ BTN ═══ */
 .btn { font-family:var(--font-ui); font-size:0.72rem; letter-spacing:0.3em; text-transform:uppercase; padding:14px 36px; text-decoration:none; cursor:pointer; border:1px solid; display:inline-flex; align-items:center; gap:10px; transition:all 0.1s; }
 .btn::before { content:'►'; font-size:0.5rem; opacity:0.6; }
 .btn-primary { background:var(--white); border-color:var(--white); color:var(--bg-darker); }
 .btn-primary:hover { background:var(--white-dim); }
 .btn-ghost { background:transparent; border-color:var(--line-light); color:var(--white-dim); }
 .btn-ghost:hover { border-color:var(--white-dim); color:var(--white); }
-.hero-stripe { position:absolute; bottom:0; left:0; right:0; height:1px; background:repeating-linear-gradient(90deg,var(--line-light) 0,var(--line-light) 14px,transparent 14px,transparent 22px); opacity:0.35; }
-.hero-scroll { position:absolute; bottom:22px; left:50%; transform:translateX(-50%); font-family:var(--font-ui); font-size:0.45rem; letter-spacing:0.42em; color:var(--white-faint); text-align:center; animation:fadeIn 2s 1.8s ease both; }
-.scroll-bar { width:1px; height:22px; background:linear-gradient(to bottom,var(--white-faint),transparent); margin:5px auto 0; animation:pulse 1.5s infinite; }
 
 /* ═══ SHARED ═══ */
 section { padding:75px 32px; position:relative; }
@@ -158,93 +159,31 @@ section { padding:75px 32px; position:relative; }
 
 /* ═══ HISTORY TIMELINE ═══ */
 #history { background:var(--bg-darker); position:relative; overflow:hidden; }
-.hist-bg-text {
-  position:absolute; font-family:var(--font-ui);
-  font-size:clamp(5rem,16vw,13rem); font-weight:400;
-  color:rgba(232,232,232,0.022); letter-spacing:0.15em;
-  top:50%; left:50%; transform:translate(-50%,-50%);
-  white-space:nowrap; pointer-events:none; user-select:none;
-}
+.hist-bg-text { position:absolute; font-family:var(--font-ui); font-size:clamp(5rem,16vw,13rem); font-weight:400; color:rgba(232,232,232,0.022); letter-spacing:0.15em; top:50%; left:50%; transform:translate(-50%,-50%); white-space:nowrap; pointer-events:none; user-select:none; }
 .hist-wrap { position:relative; max-width:920px; margin:0 auto; }
-/* central vertical line */
-.hist-wrap::before {
-  content:''; position:absolute; top:0; bottom:0;
-  left:50%; transform:translateX(-50%);
-  width:1px;
-  background:linear-gradient(to bottom, transparent, var(--line-light) 8%, var(--line-light) 92%, transparent);
-}
-.hist-item {
-  display:grid; grid-template-columns:1fr 80px 1fr;
-  align-items:center; position:relative;
-  border-bottom:1px solid rgba(74,74,74,0.3);
-}
+.hist-wrap::before { content:''; position:absolute; top:0; bottom:0; left:50%; transform:translateX(-50%); width:1px; background:linear-gradient(to bottom, transparent, var(--line-light) 8%, var(--line-light) 92%, transparent); }
+.hist-item { display:grid; grid-template-columns:1fr 80px 1fr; align-items:center; position:relative; border-bottom:1px solid rgba(74,74,74,0.3); }
 .hist-item:last-child { border-bottom:none; }
-
-/* center column — year + diamond */
-.hist-center {
-  display:flex; flex-direction:column; align-items:center;
-  justify-content:center; gap:8px; z-index:2; padding:28px 0;
-}
-.hist-year {
-  background:var(--bg-darker); border:1px solid var(--line-light);
-  padding:6px 12px; text-align:center;
-  font-family:var(--font-ui); font-size:0.5rem; letter-spacing:0.18em;
-  color:var(--white-dim); white-space:nowrap;
-  transition:border-color 0.25s, color 0.25s;
-}
+.hist-center { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:8px; z-index:2; padding:28px 0; }
+.hist-year { background:var(--bg-darker); border:1px solid var(--line-light); padding:6px 12px; text-align:center; font-family:var(--font-ui); font-size:0.5rem; letter-spacing:0.18em; color:var(--white-dim); white-space:nowrap; transition:border-color 0.25s, color 0.25s; }
 .hist-item:hover .hist-year { border-color:var(--white-dim); color:var(--white); }
-.hist-diamond {
-  width:9px; height:9px; background:var(--bg-darker);
-  border:1px solid var(--line-light); transform:rotate(45deg);
-  transition:background 0.25s, border-color 0.25s;
-}
+.hist-diamond { width:9px; height:9px; background:var(--bg-darker); border:1px solid var(--line-light); transform:rotate(45deg); transition:background 0.25s, border-color 0.25s; }
 .hist-item:hover .hist-diamond { background:var(--white-faint); border-color:var(--white); }
-
-/* content panels */
-.hist-panel {
-  padding:32px 36px; position:relative;
-}
-.hist-panel.left  { text-align:left;  border-left:1px solid transparent; }
-.hist-panel.right { text-align:right; border-right:1px solid transparent; }
-.hist-panel.left::after {
-  content:''; position:absolute; top:50%; right:-1px;
-  width:36px; height:1px; background:var(--line);
-}
-.hist-panel.right::before {
-  content:''; position:absolute; top:50%; left:-1px;
-  width:36px; height:1px; background:var(--line);
-}
+.hist-panel { padding:32px 36px; position:relative; }
+.hist-panel.left  { text-align:left; }
+.hist-panel.right { text-align:right; }
+.hist-panel.left::after  { content:''; position:absolute; top:50%; right:-1px; width:36px; height:1px; background:var(--line); }
+.hist-panel.right::before { content:''; position:absolute; top:50%; left:-1px; width:36px; height:1px; background:var(--line); }
 .hist-empty { padding:32px 36px; }
-
-/* layout is controlled directly in HTML per item */
-
-.hist-event-tag {
-  font-family:var(--font-ui); font-size:0.46rem; letter-spacing:0.32em;
-  color:var(--white-faint); text-transform:uppercase; margin-bottom:8px; display:block;
-}
-.hist-title {
-  font-family:var(--font-ui); font-size:0.88rem; letter-spacing:0.15em;
-  color:var(--white); text-transform:uppercase; margin-bottom:12px; line-height:1.4;
-}
-.hist-body {
-  font-family:var(--font-he); font-size:0.95rem;
-  color:var(--white-dim); line-height:1.95;
-}
-.hist-badge {
-  display:inline-block; margin-top:12px;
-  font-family:var(--font-ui); font-size:0.42rem; letter-spacing:0.2em;
-  border:1px solid var(--line); padding:3px 9px; text-transform:uppercase;
-  color:var(--white-faint);
-}
+.hist-event-tag { font-family:var(--font-ui); font-size:0.46rem; letter-spacing:0.32em; color:var(--white-faint); text-transform:uppercase; margin-bottom:8px; display:block; }
+.hist-title { font-family:var(--font-ui); font-size:0.88rem; letter-spacing:0.15em; color:var(--white); text-transform:uppercase; margin-bottom:12px; line-height:1.4; }
+.hist-body { font-family:var(--font-he); font-size:0.95rem; color:var(--white-dim); line-height:1.95; }
+.hist-badge { display:inline-block; margin-top:12px; font-family:var(--font-ui); font-size:0.42rem; letter-spacing:0.2em; border:1px solid var(--line); padding:3px 9px; text-transform:uppercase; color:var(--white-faint); }
 .hist-badge.alert  { border-color:rgba(204,51,51,0.45); color:var(--red); }
 .hist-badge.active { border-color:rgba(200,200,180,0.45); color:var(--android); }
-
 @media(max-width:720px){
   .hist-wrap::before { left:20px; transform:none; }
   .hist-item { grid-template-columns:40px 1fr; }
-  .hist-item.flip .hist-panel.left  { order:unset; text-align:right; }
-  .hist-item.flip .hist-center       { order:unset; }
-  .hist-item.flip .hist-panel.right { order:unset; text-align:left; }
   .hist-center { padding:20px 0; align-items:flex-start; }
   .hist-empty { display:none; }
   .hist-panel.left,.hist-panel.right { text-align:right; padding:22px 16px; }
@@ -288,9 +227,9 @@ section { padding:75px 32px; position:relative; }
 .fpdk { font-family:var(--font-ui); font-size:0.54rem; letter-spacing:0.1em; color:var(--white-faint); text-transform:uppercase; }
 .faction-panel.android .fpdv { color:var(--android); font-family:var(--font-he); font-size:0.95rem; }
 .faction-panel.machine  .fpdv { color:var(--machine); font-family:var(--font-he); font-size:0.95rem; }
-.fp-expand { position:absolute; bottom:12px; left:12px; font-family:var(--font-ui); font-size:0.44rem; color:var(--white-dim); opacity:0; transition:opacity 0.2s; letter-spacing:0.15em; }
+.fp-expand { position:absolute; bottom:14px; left:14px; font-family:var(--font-ui); font-size:0.58rem; color:var(--white-dim); opacity:0; transition:opacity 0.2s; letter-spacing:0.15em; }
 
-/* ═══ LORE TIMELINE ═══ */
+/* ═══ LORE ═══ */
 #lore { background:var(--bg); }
 .timeline { position:relative; max-width:780px; margin:0 auto; padding-right:36px; }
 .timeline::before { content:''; position:absolute; top:0; bottom:0; right:17px; width:1px; background:var(--line); }
@@ -441,42 +380,15 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 .modal-scan { position:absolute; top:0; left:0; right:0; height:2px; background:rgba(232,232,232,0.1); animation:modalScan 0.6s ease both; pointer-events:none; }
 
 /* ═══ ENTRY ANIMATION ═══ */
-#entry-anim {
-  position:fixed; inset:0; z-index:8000;
-  pointer-events:none;
-  overflow:hidden;
-}
-/* horizontal glitch slices */
-.ea-slice {
-  position:absolute; left:0; right:0;
-  background:var(--white);
-  opacity:0;
-}
-/* vertical scan line sweeping across */
-.ea-vline {
-  position:absolute; top:0; bottom:0;
-  width:2px; background:var(--white);
-  opacity:0;
-}
-/* corner brackets that animate in */
-.ea-corner {
-  position:fixed; width:30px; height:30px; opacity:0;
-}
+#entry-anim { position:fixed; inset:0; z-index:8000; pointer-events:none; overflow:hidden; }
+.ea-slice { position:absolute; left:0; right:0; background:var(--white); opacity:0; }
+.ea-vline { position:absolute; top:0; bottom:0; width:2px; background:var(--white); opacity:0; }
+.ea-corner { position:fixed; width:30px; height:30px; opacity:0; }
 .ea-corner.tl { top:57px; right:0; border-top:2px solid var(--white); border-right:2px solid var(--white); }
 .ea-corner.tr { top:57px; left:0;  border-top:2px solid var(--white); border-left:2px solid var(--white); }
 .ea-corner.bl { bottom:0; right:0; border-bottom:2px solid var(--white); border-right:2px solid var(--white); }
 .ea-corner.br { bottom:0; left:0;  border-bottom:2px solid var(--white); border-left:2px solid var(--white); }
-/* text overlay */
-.ea-text {
-  position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
-  font-family:var(--font-ui); font-size:clamp(0.6rem,2vw,0.9rem);
-  letter-spacing:0.6em; color:var(--white); text-transform:uppercase;
-  opacity:0; white-space:nowrap;
-}
-
-/* fp-expand and lore hints bigger */
-.fp-expand { position:absolute; bottom:14px; left:14px; font-family:var(--font-ui); font-size:0.58rem; color:var(--white-dim); opacity:0; transition:opacity 0.2s; letter-spacing:0.15em; }
-.fp-header { border-bottom:1px solid var(--line); padding:22px 24px; position:relative; background:var(--bg-dark); overflow:visible; }
+.ea-text { position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); font-family:var(--font-ui); font-size:clamp(0.6rem,2vw,0.9rem); letter-spacing:0.6em; color:var(--white); text-transform:uppercase; opacity:0; white-space:nowrap; }
 
 /* ═══ AUDIO PLAYER ═══ */
 #audioPlayer { position:fixed; bottom:20px; left:20px; z-index:600; background:var(--bg-darker); border:1px solid var(--line-light); width:200px; direction:ltr; }
@@ -654,10 +566,7 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
       <h2 class="sh-title">World Timeline</h2>
       <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">CLASSIFIED // DELTA CLEARANCE</span><div class="sh-line-bar"></div></div>
     </div>
-
     <div class="hist-wrap reveal">
-
-      <!-- EVENT 01 -->
       <div class="hist-item">
         <div class="hist-panel left">
           <span class="hist-event-tag">// EVENT_01 // YEAR 5012</span>
@@ -665,20 +574,12 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
           <p class="hist-body">חייזרים פלשו לכדור הארץ ושחררו סוג חדש של נשק — צורת חיים מלאכותית. רובוטים. אלה גרמו להשמדת רוב האנושות. הניצולים נמלטו מכדור הארץ אל הירח.</p>
           <span class="hist-badge alert">// CATASTROPHIC EVENT</span>
         </div>
-        <div class="hist-center">
-          <div class="hist-year">5012</div>
-          <div class="hist-diamond"></div>
-        </div>
+        <div class="hist-center"><div class="hist-year">5012</div><div class="hist-diamond"></div></div>
         <div class="hist-empty"></div>
       </div>
-
-      <!-- EVENT 02 -->
       <div class="hist-item">
         <div class="hist-empty"></div>
-        <div class="hist-center">
-          <div class="hist-year">5204</div>
-          <div class="hist-diamond"></div>
-        </div>
+        <div class="hist-center"><div class="hist-year">5204</div><div class="hist-diamond"></div></div>
         <div class="hist-panel right">
           <span class="hist-event-tag">// EVENT_02 // YEAR 5204</span>
           <div class="hist-title">YoRHa Counterattack</div>
@@ -686,8 +587,6 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
           <span class="hist-badge alert">// WAR INITIATED</span>
         </div>
       </div>
-
-      <!-- EVENT 03 -->
       <div class="hist-item">
         <div class="hist-panel left">
           <span class="hist-event-tag">// EVENT_03 // PRESENT DAY</span>
@@ -695,13 +594,9 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
           <p class="hist-body">הקרב בין הרובוטים והאנדרואידים עדיין מתחולל. מלחמה שנמשכת אלפי שנים, שני הצדדים לכודים בלולאה אינסופית — כל אחד שוכח מדוע הוא נלחם מלכתחילה.</p>
           <span class="hist-badge active">// ACTIVE — YEAR 11,945</span>
         </div>
-        <div class="hist-center">
-          <div class="hist-year">11,945</div>
-          <div class="hist-diamond"></div>
-        </div>
+        <div class="hist-center"><div class="hist-year">11,945</div><div class="hist-diamond"></div></div>
         <div class="hist-empty"></div>
       </div>
-
     </div>
   </div>
 </section>
@@ -862,26 +757,22 @@ footer { background:var(--bg-darker); border-top:1px solid var(--line); }
 
 <script>
 const CONTENT = {
-  hero: {
-    title:   "PROJECT REBOOT",
-    sub:     "Glory to Mankind",
-    tagline: "בעולם שבו הכל נראה מוכתב מראש, המרד האמיתי הוא לבחור בעצמך."
-  },
+  hero: { title:"PROJECT REBOOT", sub:"Glory to Mankind", tagline:"בעולם שבו הכל נראה מוכתב מראש, המרד האמיתי הוא לבחור בעצמך." },
   about: {
-    title: "About the Event",
-    paragraphs: [
+    title:"About the Event",
+    paragraphs:[
       "פרויקט ריבוט הוא משחק LARP מיליטנטי המתרחש בעולם פוסט-אפוקליפטי עתידני בהשראת המשחק NieR: Automata.",
-      "מה זה LARP? ראשי התיבות LARP הן קיצור של Live Action Role-Playing — או בעברית: משחק תפקידים חי.מדובר בחוויה אינטראקטיבית המשלבת בין תיאטרון מאולתר, משחק חברתי, אתגרים והרפתקה בעולם אחר. במהלך האירוע כל משתתף נכנס לדמות משלו, וחווה את העולם דרך העיניים שלה — מדבר, פועל, מקבל החלטות ומשפיע על הסיפור המתפתח בזמן אמת.בניגוד למשחק מחשב או סרט, ב־LARP הסיפור לא קבוע מראש. העולם מגיב לשחקנים, והבחירות, הבריתות, העימותים והקשרים שנוצרים בין המשתתפים הם אלו שמעצבים את החוויה.",
+      "מה זה LARP? ראשי התיבות LARP הן קיצור של Live Action Role-Playing — או בעברית: משחק תפקידים חי. מדובר בחוויה אינטראקטיבית המשלבת בין תיאטרון מאולתר, משחק חברתי, אתגרים והרפתקה בעולם אחר. במהלך האירוע כל משתתף נכנס לדמות משלו, וחווה את העולם דרך העיניים שלה — מדבר, פועל, מקבל החלטות ומשפיע על הסיפור המתפתח בזמן אמת. בניגוד למשחק מחשב או סרט, ב-LARP הסיפור לא קבוע מראש. העולם מגיב לשחקנים, והבחירות, הבריתות, העימותים והקשרים שנוצרים בין המשתתפים הם אלו שמעצבים את החוויה.",
       "בלארפ זה תכנסו לעולם העתידני של NieR. תצטרכו לבחור צד במלחמה ארוכת השנים ולהוביל את הקבוצה שלכם לניצחון."
     ],
-    stats: [
+    stats:[
       { label:"תאריך",      value:"XX/XX/XXXX" },
       { label:"מיקום",      value:"מקורות הירקון" },
       { label:"מחיר",       value:'150 ש"ח' },
       { label:"יצירת קשר", value:"noy.wolster@gmail.com" }
     ]
   },
-  factions: [
+  factions:[
     {
       type:"android", num:"01", name:"Android Units", id:"YoRHa Combat Designation",
       desc:"האנדרואידים הם יצורים מלאכותיים דמויי-אדם שנוצרו על ידי האנושות כדי להילחם ביצורי המכונות שכבשו את כדור הארץ. בזמן שבני האדם חיים בגלות על הירח, האנדרואידים נשלחים לכדור הארץ כחיילים, סיירים ותומכי לחימה.",
@@ -894,10 +785,10 @@ const CONTENT = {
         "הפרוטוקול האנדרואידי אוסר על קשרים אישיים, שמות עצמיים, ועצמאות שמנוגדת לפקודות. אך בשטח, רבים מפרים כללים אלה בסתר."
       ],
       data:[
-        { k:"יעד ראשי",        v:"השמדת הרובוטים על כדור הארץ" },
-        { k:"סגנון משחק",      v:"היררכי, מיליטנטי, צבאי" },
-        { k:"עיקרון קרבי",     v:"יעילות מעל הכל" },
-        { k:"התנהגות שדה",     v:"קור רוח ויעילות קרבית" }
+        { k:"יעד ראשי",    v:"השמדת הרובוטים על כדור הארץ" },
+        { k:"סגנון משחק",  v:"היררכי, מיליטנטי, צבאי" },
+        { k:"עיקרון קרבי", v:"יעילות מעל הכל" },
+        { k:"התנהגות שדה", v:"קור רוח ויעילות קרבית" }
       ]
     },
     {
@@ -910,19 +801,19 @@ const CONTENT = {
         "לרובוטים יש רשת משותפת בה הם מעבירים מידע מאחד לשני — יכולת לחלוק מידע עם כל בני מינם, גם כאלה שלא קרובים אליהם פיזית."
       ],
       data:[
-        { k:"מטרה מרכזית",     v:"הישרדות ולמידת האנושות" },
-        { k:"סגנון משחק",      v:"הקמת קהילה והתפתחות" },
-        { k:"דפוס התנהגות",    v:"אנושי ותמים" },
-        { k:"פוטנציאל קרבי",   v:"קטלני בעת איום" }
+        { k:"מטרה מרכזית",  v:"הישרדות ולמידת האנושות" },
+        { k:"סגנון משחק",   v:"הקמת קהילה והתפתחות" },
+        { k:"דפוס התנהגות", v:"אנושי ותמים" },
+        { k:"פוטנציאל קרבי",v:"קטלני בעת איום" }
       ]
     }
   ],
-  lore: [
+  lore:[
     { title:"The Abandonment",    stamp:"HISTORICAL RECORD",
-      text:" לפני אלפי שנים, מכונות חייזריות פלשו לכדור הארץ. האנושות ברחה לבסיסי הירח ועל ידי החלטה של המועצה האנושית מינתה את עוזריה האנדרואידים בחסות ארגון YoRHa לנהל את המלחמה לחיסול החייזרים. ",
-      long:"עד היום המלחמה מתנהלת , האנושות עדיין חיה ונושמת על בסיסי הירח , בתקופה האחרונה לא נראה זכר לחייזרים אך, המכונות שיצרו עדיין מסתובבות ומהוות איום לבני אדם עד שהאנדרואידים לא יצליחו לחסל את אחרון המכונות האנושות צפויה להישאר בבסיסה על הירח " },
+      text:"לפני אלפי שנים, מכונות חייזריות פלשו לכדור הארץ. האנושות ברחה לבסיסי הירח ועל ידי החלטה של המועצה האנושית מינתה את עוזריה האנדרואידים בחסות ארגון YoRHa לנהל את המלחמה לחיסול החייזרים.",
+      long:"עד היום המלחמה מתנהלת. האנושות עדיין חיה ונושמת על בסיסי הירח. בתקופה האחרונה לא נראה זכר לחייזרים אך המכונות שיצרו עדיין מסתובבות ומהוות איום לבני אדם — עד שהאנדרואידים לא יצליחו לחסל את אחרון המכונות, האנושות צפויה להישאר בבסיסה על הירח." },
     { title:"The Machine Network", stamp:"INTELLIGENCE REPORT",
-      text:"כל יצורי המכונות מקושרים דרך רשת משותפת — רשת המכונות היא תודעה קולקטיבית המחברת בין כלל המכונות ומשתפת ביניהן מידע, זיכרונות ופקודות בזמן אמת. דרך הרשת המכונות מסוגלות ללמוד, להתפתח ולהסתגל במהירות, כאשר כל יחידה היא חלק ממערכת גדולה בהרבה ממנה. עם הזמן הרשת החלה לפתח לא רק אינטליגנציה, אלא גם סקרנות, רגשות ודפוסי התנהגות אנושיים.",
+      text:"כל יצורי המכונות מקושרים דרך רשת משותפת — רשת המכונות היא תודעה קולקטיבית המחברת בין כלל המכונות ומשתפת ביניהן מידע, זיכרונות ופקודות בזמן אמת. דרך הרשת המכונות מסוגלות ללמוד, להתפתח ולהסתגל במהירות.",
       long:"הרשת היא אחד הדברים המרתקים ביותר בעולם: מבנה שאמור לאחד יצורים רבים לכוח אחד, שהפך לאוסף של אינדיבידואלים עם צרכים שונים לחלוטין. חלקם אלימים ומסוכנים. חלקם תמימים ומבולבלים. וחלקם פשוט רוצים לחיות." },
     { title:"YoRHa Directive",    stamp:"CLASSIFIED — DELTA",
       text:"יחידות אנדרואיד פועלות תחת היררכיה צבאית נוקשה. הן אסורות בשמות אישיים, קשרים, או הגנה עצמית שמנוגדת לפקודות. רבים מפרים כללים אלה בסתר.",
@@ -934,15 +825,15 @@ const CONTENT = {
       text:"לא כל יחידה מתאימה לאידיאולוגיה של סיעתה. אנדרואידים סוררים שנטשו את YoRHa. מכונות שעזבו את הרשת. אלה קיימים בשוליים — נרדפים על ידי שני הצדדים, ומשיבים לעצמם בלבד.",
       long:"חברי ה-Outliers הם הפרשנות החופשית ביותר בלארפ. אם לא מתחבר לאף אחד מהצדדים — אנדרואיד שנטש, מכונה שהתפכחה, או ישות שלא ברור לה מה היא — זו יכולה להיות האופציה הנכונה. ה-Outliers נלחמים למענם בלבד, ומוצאים בריתות זמניות בהתאם לצורך." }
   ],
-  rules: [
-    { warn:true,  icon:"🛡", title:"Safety Protocol",    short:"מילת בטיחות מוגדרת חד"ל מפסיקה את כל הלחימה והמשחק מיד, ללא שאלות. פציעה אמיתית או מצוקה עולה על כל שיקול נרטיבי.", detail:"מילת הבטיחות חייבת להיות ידועה לכל המשתתפים. כאשר נאמרת, כולם עוצרים מיד — ללא יוצא מן הכלל. יש גם אות יד (T בידיים) שמשמעותו זהה. הבטיחות הפיזית והנפשית של כל משתתף חשובה יותר מכל סיפור." },
+  rules:[
+    { warn:true,  icon:"🛡", title:"Safety Protocol",    short:'מילת בטיחות מוגדרת "חד"ל" מפסיקה את כל הלחימה והמשחק מיד, ללא שאלות. פציעה אמיתית או מצוקה עולה על כל שיקול נרטיבי.', detail:"מילת הבטיחות חייבת להיות ידועה לכל המשתתפים. כאשר נאמרת, כולם עוצרים מיד — ללא יוצא מן הכלל. יש גם אות יד (T בידיים) שמשמעותו זהה. הבטיחות הפיזית והנפשית של כל משתתף חשובה יותר מכל סיפור." },
     { warn:false, icon:"⚔", title:"Combat System",       short:"לחימה משתמשת רק בנשק ספוג / בטוח ל-LARP. כל הנשקים חייבים לעבור בדיקת בטיחות. מכות לראש, גרון ומפשעה אסורות תמיד.", detail:'נשק LARP מאושר בלבד — לא נשק אמיתי, לא נשק חד, ולא מאולתר ביתי. בדיקת הנשק נעשית בתחילת האירוע ע"י הצוות. לחימה הוגנת כוללת הצהרה על פגיעות ביושר: אם לקחת פגיעה — קח אותה.' },
     { warn:true,  icon:"🤝", title:"Consent & Respect",  short:"כל השחקנים חייבים לכבד גבולות אישיים בכל עת. נדרשת הסכמה לפני כל משחק פיזי מעבר ללחימה. הטרדה מכל סוג גורמת להסרה מיידית.", detail:"גבולות הם גבולות — גם בתוך דמות. אם שחקן אחר אומר 'לא' או נותן אות עצירה, מפסיקים מיד. קונפליקטים בין דמויות מעודדים. קונפליקטים בין שחקנים — לא. כל בעיה: פנה מיד לחבר צוות." },
     { warn:false, icon:"🎭", title:"Character Integrity",  short:"שמור על דמות בתוך אזור המשחק. שיחות מחוץ לדמות משתמשות באות ברור. מטאגיימינג — שימוש במידע מחוץ לדמות — פוגע בחוויה של כולם.", detail:"גבול אזור המשחק יסומן בבירור. בתוך האזור — אתה הדמות שלך. מחוץ לאזור — אפשר לנוח ולאכול. אם צריך לצאת מדמות בתוך האזור, יש לתת אות ברור (יד מורמת על הראש)." },
-    { warn:false, icon:"💀", title:"Death & Respawn",     short:"כשנפלת — כרע ברך ושים יד על הראש. מרפאים מיועדים יכולים לתחיות אותך. אל תפחדו מהמוות הוא חלק מהמשחק הזה .", detail:"מערכת ה-Respawn מאפשרת לחזור לפעולה לאחר מוות זמני. מוות קבוע הוא בחירה דרמטית שנעשית ביחד עם המארגנים ויכולה לפתוח פרק חדש בסיפור. אל תחשוש ממוות — לפעמים זה הרגע הכי טוב במשחק." },
+    { warn:false, icon:"💀", title:"Death & Respawn",     short:"כשנפלת — כרע ברך ושים יד על הראש. מרפאים מיועדים יכולים לתחיות אותך. אל תפחדו מהמוות — הוא חלק מהמשחק הזה.", detail:"מערכת ה-Respawn מאפשרת לחזור לפעולה לאחר מוות זמני. מוות קבוע הוא בחירה דרמטית שנעשית ביחד עם המארגנים ויכולה לפתוח פרק חדש בסיפור. אל תחשוש ממוות — לפעמים זה הרגע הכי טוב במשחק." },
     { warn:false, icon:"📋", title:"Organizer Authority", short:"למארגנים יש סמכות סופית בכל מחלוקת. ההחלטות בזמן המשחק סופיות; אפשר להביע משוב לאחר האירוע. התייחס לכל הצוות והשחקנים בכבוד.", detail:"הצוות נמצא כאן כדי לוודא שכולם נהנים. אם משהו לא נראה נכון — בטיחות, יחס, הוגנות — פנה מיד לאחד מחברי הצוות. משוב לאחר האירוע מתקבל בברכה." }
   ],
-  gallery: [
+  gallery:[
     { type:"placeholder", label:"יחידת אנדרואיד — תמונה 01" },
     { type:"placeholder", label:"יצור מכונה — תמונה 02" },
     { type:"placeholder", label:"שדה קרב — תמונה 03" },
@@ -950,17 +841,15 @@ const CONTENT = {
     { type:"placeholder", label:"סרטון לחימה — תמונה 05" },
     { type:"placeholder", label:"תמונה קבוצתית — תמונה 06" }
   ],
-  team: [
+  team:[
     { id:"OPERATIVE_01", name:"נוי וולסטר", role:"Game Master", titleHe:"מנהלת משחק ראשי", photo:"",
       desc:"חלק מקהילת ה-LARP בשנתיים האחרונות, במהלכן לקחה חלק בהקמה, ניהול ופיתוח של מספר יוזמות ואירועים קהילתיים, ביניהם אולדהיים, מעשיות אוסטמיר וערבי פונדק שונים.",
-      long:"המטרה שלי היא לחלוק את הערצה שלי לסדרת המשחקים הנהדרת הזאת.",
-      tags:["Game Master"] },
+      long:"המטרה שלי היא לחלוק את הערצה שלי לסדרת המשחקים הנהדרת הזאת.", tags:["Game Master"] },
     { id:"OPERATIVE_02", name:"עדי יעקובסון", role:"Game Master", titleHe:"מנהל משחק ראשי", photo:"",
       desc:"תיאור קצר על המארגן השני — הרקע שלו ב-LARP, מה הוא אחראי עליו באירוע, ומה הוא מביא לצוות.",
-      long:"תיאור מורחב על המארגן השני. ניסיון, תפקיד בפרויקט, ואיך השניים ביחד יוצרים את חוויית פרויקט ריבוט.",
-      tags:["Game Master"] }
+      long:"תיאור מורחב על המארגן השני. ניסיון, תפקיד בפרויקט, ואיך השניים ביחד יוצרים את חוויית פרויקט ריבוט.", tags:["Game Master"] }
   ],
-  join: {
+  join:{
     title:"הצטרף עכשיו",
     desc:"המקומות מוגבלים. בחר את הצד שלך והירשם לפני שהרשימה מתמלאת. שחקנים חדשים מוזמנים — לא נדרש ניסיון קודם ב-LARP. כל מה שצריך הוא הרצון להמשיך.",
     link:"https://your-signup-link-here.com",
@@ -977,130 +866,34 @@ const CONTENT = {
 };
 
 /* ── SOUND ENGINE ── */
-let _sfxCtx = null;
-function getSfxCtx(){
-  if(!_sfxCtx) _sfxCtx = new (window.AudioContext||window.webkitAudioContext)();
-  if(_sfxCtx.state==='suspended') _sfxCtx.resume();
-  return _sfxCtx;
-}
+let _sfxCtx=null;
+function getSfxCtx(){ if(!_sfxCtx) _sfxCtx=new(window.AudioContext||window.webkitAudioContext)(); if(_sfxCtx.state==='suspended') _sfxCtx.resume(); return _sfxCtx; }
 function playClick(type){
-  try {
-    const ctx = getSfxCtx();
-    const o = ctx.createOscillator();
-    const g = ctx.createGain();
+  try{
+    const ctx=getSfxCtx(), o=ctx.createOscillator(), g=ctx.createGain();
     o.connect(g); g.connect(ctx.destination);
-    if(type==='ui'){
-      // short high beep — UI click
-      o.frequency.setValueAtTime(1200, ctx.currentTime);
-      o.frequency.exponentialRampToValueAtTime(800, ctx.currentTime+0.04);
-      g.gain.setValueAtTime(0.18, ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.07);
-      o.start(); o.stop(ctx.currentTime+0.07);
-    } else if(type==='enter'){
-      // dramatic low thud + high ping — ENTER button
-      const o2 = ctx.createOscillator();
-      const g2 = ctx.createGain();
-      o2.connect(g2); g2.connect(ctx.destination);
-      o.frequency.setValueAtTime(80, ctx.currentTime);
-      o.frequency.exponentialRampToValueAtTime(40, ctx.currentTime+0.3);
-      g.gain.setValueAtTime(0.4, ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.3);
-      o2.frequency.setValueAtTime(2000, ctx.currentTime);
-      o2.frequency.exponentialRampToValueAtTime(1000, ctx.currentTime+0.15);
-      g2.gain.setValueAtTime(0.2, ctx.currentTime+0.05);
-      g2.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.2);
-      o.start(); o.stop(ctx.currentTime+0.3);
-      o2.start(ctx.currentTime+0.05); o2.stop(ctx.currentTime+0.2);
-    } else if(type==='modal'){
-      // smooth mid tone — modal open
-      o.type='sine';
-      o.frequency.setValueAtTime(440, ctx.currentTime);
-      o.frequency.exponentialRampToValueAtTime(600, ctx.currentTime+0.05);
-      g.gain.setValueAtTime(0.12, ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.12);
-      o.start(); o.stop(ctx.currentTime+0.12);
-    } else if(type==='hover'){
-      // tiny tick
-      o.frequency.setValueAtTime(1800, ctx.currentTime);
-      g.gain.setValueAtTime(0.06, ctx.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime+0.03);
-      o.start(); o.stop(ctx.currentTime+0.03);
-    }
-  } catch(e){}
+    if(type==='ui'){ o.frequency.setValueAtTime(1200,ctx.currentTime); o.frequency.exponentialRampToValueAtTime(800,ctx.currentTime+0.04); g.gain.setValueAtTime(0.18,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.07); o.start(); o.stop(ctx.currentTime+0.07); }
+    else if(type==='enter'){ const o2=ctx.createOscillator(),g2=ctx.createGain(); o2.connect(g2); g2.connect(ctx.destination); o.frequency.setValueAtTime(80,ctx.currentTime); o.frequency.exponentialRampToValueAtTime(40,ctx.currentTime+0.3); g.gain.setValueAtTime(0.4,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.3); o2.frequency.setValueAtTime(2000,ctx.currentTime); o2.frequency.exponentialRampToValueAtTime(1000,ctx.currentTime+0.15); g2.gain.setValueAtTime(0.2,ctx.currentTime+0.05); g2.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.2); o.start(); o.stop(ctx.currentTime+0.3); o2.start(ctx.currentTime+0.05); o2.stop(ctx.currentTime+0.2); }
+    else if(type==='modal'){ o.type='sine'; o.frequency.setValueAtTime(440,ctx.currentTime); o.frequency.exponentialRampToValueAtTime(600,ctx.currentTime+0.05); g.gain.setValueAtTime(0.12,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.12); o.start(); o.stop(ctx.currentTime+0.12); }
+    else if(type==='hover'){ o.frequency.setValueAtTime(1800,ctx.currentTime); g.gain.setValueAtTime(0.06,ctx.currentTime); g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.03); o.start(); o.stop(ctx.currentTime+0.03); }
+  }catch(e){}
 }
 
 /* ── ENTRY ANIMATION ── */
 function runEntryAnimation(onDone){
-  const vline = document.getElementById('ea-vline');
-  const s1 = document.getElementById('ea-s1');
-  const s2 = document.getElementById('ea-s2');
-  const s3 = document.getElementById('ea-s3');
-  const corners = ['ea-tl','ea-tr','ea-bl','ea-br'].map(id=>document.getElementById(id));
-  const text = document.getElementById('ea-text');
-
-  // Phase 1: vertical scan line sweeps left to right (0–300ms)
-  vline.style.left = '-2px';
-  vline.style.opacity = '1';
-  vline.style.transition = 'left 0.3s linear, opacity 0.1s';
-  requestAnimationFrame(()=>{
-    vline.style.left = '100vw';
-  });
-
-  // Phase 2: glitch slices flash at random positions (100–400ms)
-  setTimeout(()=>{
-    [s1,s2,s3].forEach((s,i)=>{
-      const pct = 20 + i*22;
-      s.style.top = pct+'%';
-      s.style.opacity = '0.9';
-      s.style.transition = 'none';
-      setTimeout(()=>{ s.style.opacity='0'; s.style.transition='opacity 0.08s'; }, 60+i*40);
-    });
-    playClick('enter');
-  }, 120);
-
-  // Phase 3: second glitch burst (250ms)
-  setTimeout(()=>{
-    s1.style.top = '60%'; s1.style.opacity='0.7';
-    s2.style.top = '35%'; s2.style.opacity='0.5';
-    setTimeout(()=>{ s1.style.opacity='0'; s2.style.opacity='0'; }, 50);
-  }, 250);
-
-  // Phase 4: corners slam in (320ms)
-  setTimeout(()=>{
-    corners.forEach((c,i)=>{
-      c.style.transition = `opacity 0.05s, transform 0.12s ease-out`;
-      c.style.transform = 'scale(0.3)';
-      c.style.opacity = '0';
-      setTimeout(()=>{
-        c.style.transform = 'scale(1.4)';
-        c.style.opacity = '1';
-        setTimeout(()=>{ c.style.transform='scale(1)'; }, 80);
-      }, i*30);
-    });
-    playClick('modal');
-  }, 320);
-
-  // Phase 5: text flashes (450ms)
-  setTimeout(()=>{
-    text.style.opacity='1';
-    text.style.transition='opacity 0.05s';
-    setTimeout(()=>{ text.style.opacity='0'; text.style.transition='opacity 0.2s'; }, 200);
-  }, 450);
-
-  // Phase 6: second text flash (700ms)
-  setTimeout(()=>{
-    text.style.opacity='0.6';
-    setTimeout(()=>{ text.style.opacity='0'; }, 100);
-  }, 700);
-
-  // Phase 7: corners fade out (800ms)
-  setTimeout(()=>{
-    corners.forEach(c=>{ c.style.opacity='0'; c.style.transition='opacity 0.3s'; });
-    vline.style.opacity='0';
-  }, 800);
-
-  // Done (1000ms) — call callback
-  setTimeout(onDone, 950);
+  const vline=document.getElementById('ea-vline');
+  const s1=document.getElementById('ea-s1'),s2=document.getElementById('ea-s2'),s3=document.getElementById('ea-s3');
+  const corners=['ea-tl','ea-tr','ea-bl','ea-br'].map(id=>document.getElementById(id));
+  const text=document.getElementById('ea-text');
+  vline.style.left='-2px'; vline.style.opacity='1'; vline.style.transition='left 0.3s linear, opacity 0.1s';
+  requestAnimationFrame(()=>{ vline.style.left='100vw'; });
+  setTimeout(()=>{ [s1,s2,s3].forEach((s,i)=>{ const pct=20+i*22; s.style.top=pct+'%'; s.style.opacity='0.9'; s.style.transition='none'; setTimeout(()=>{ s.style.opacity='0'; s.style.transition='opacity 0.08s'; },60+i*40); }); playClick('enter'); },120);
+  setTimeout(()=>{ s1.style.top='60%'; s1.style.opacity='0.7'; s2.style.top='35%'; s2.style.opacity='0.5'; setTimeout(()=>{ s1.style.opacity='0'; s2.style.opacity='0'; },50); },250);
+  setTimeout(()=>{ corners.forEach((c,i)=>{ c.style.transition='opacity 0.05s, transform 0.12s ease-out'; c.style.transform='scale(0.3)'; c.style.opacity='0'; setTimeout(()=>{ c.style.transform='scale(1.4)'; c.style.opacity='1'; setTimeout(()=>{ c.style.transform='scale(1)'; },80); },i*30); }); playClick('modal'); },320);
+  setTimeout(()=>{ text.style.opacity='1'; text.style.transition='opacity 0.05s'; setTimeout(()=>{ text.style.opacity='0'; text.style.transition='opacity 0.2s'; },200); },450);
+  setTimeout(()=>{ text.style.opacity='0.6'; setTimeout(()=>{ text.style.opacity='0'; },100); },700);
+  setTimeout(()=>{ corners.forEach(c=>{ c.style.opacity='0'; c.style.transition='opacity 0.3s'; }); vline.style.opacity='0'; },800);
+  setTimeout(onDone,950);
 }
 
 /* ── INTRO ENGINE ── */
@@ -1112,37 +905,14 @@ function runEntryAnimation(onDone){
   const clockTick=setInterval(()=>{ if(introClock) introClock.textContent=new Date().toTimeString().slice(0,8); },1000);
   const lines=['INITIALIZING SYSTEM','LOADING TACTICAL NET','ESTABLISHING NODE CONNECTION','SYNCING ANDROID DATABASE','SYNCING MACHINE NETWORK','ALL SYSTEMS NOMINAL','AWAITING OPERATOR INPUT'];
   let li=0,ci=0,typing=true;
-  const typeInt=setInterval(()=>{
-    if(!loadTxt) return;
-    if(typing){ ci++; loadTxt.textContent=lines[li].slice(0,ci); if(ci>=lines[li].length){ typing=false; setTimeout(()=>{ ci=0; li=(li+1)%lines.length; typing=true; },1400); } }
-  },55);
-
+  const typeInt=setInterval(()=>{ if(!loadTxt) return; if(typing){ ci++; loadTxt.textContent=lines[li].slice(0,ci); if(ci>=lines[li].length){ typing=false; setTimeout(()=>{ ci=0; li=(li+1)%lines.length; typing=true; },1400); } } },55);
   function enterSite(){
     clearInterval(typeInt); clearInterval(clockTick);
-    // quick flash on intro screen first
-    screen.style.transition='opacity 0.04s';
-    screen.style.opacity='0.15';
-    setTimeout(()=>{
-      screen.style.opacity='0.9';
-      setTimeout(()=>{
-        // fade out intro
-        screen.style.transition='opacity 0.35s ease';
-        screen.style.opacity='0';
-        setTimeout(()=>{
-          screen.style.visibility='hidden';
-          screen.classList.add('hidden');
-          document.body.style.overflow='';
-          // run entry animation over site
-          runEntryAnimation(()=>{
-            if(window.startBgMusic) window.startBgMusic();
-          });
-        }, 350);
-      }, 40);
-    }, 40);
+    screen.style.transition='opacity 0.04s'; screen.style.opacity='0.15';
+    setTimeout(()=>{ screen.style.opacity='0.9'; setTimeout(()=>{ screen.style.transition='opacity 0.35s ease'; screen.style.opacity='0'; setTimeout(()=>{ screen.style.visibility='hidden'; screen.classList.add('hidden'); document.body.style.overflow=''; runEntryAnimation(()=>{ if(window.startBgMusic) window.startBgMusic(); }); },350); },40); },40);
   }
-
   document.body.style.overflow='hidden';
-  playBtn.addEventListener('click', enterSite);
+  playBtn.addEventListener('click',enterSite);
   document.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ')&&!screen.classList.contains('hidden')) enterSite(); });
 })();
 
@@ -1150,13 +920,10 @@ function runEntryAnimation(onDone){
 const modalOverlay=document.getElementById('modal');
 const modalClose=document.getElementById('modal-close');
 function openModal({id,type,title,titleClass,bodyHTML}){
-  document.getElementById('modal-id').textContent=id||'';
-  document.getElementById('modal-type').textContent=type||'';
-  const mt=document.getElementById('modal-title');
-  mt.textContent=title||''; mt.className='modal-title '+(titleClass||'');
+  document.getElementById('modal-id').textContent=id||''; document.getElementById('modal-type').textContent=type||'';
+  const mt=document.getElementById('modal-title'); mt.textContent=title||''; mt.className='modal-title '+(titleClass||'');
   document.getElementById('modal-body').innerHTML=bodyHTML||'';
-  const scan=modalOverlay.querySelector('.modal-scan');
-  scan.style.animation='none'; void scan.offsetWidth; scan.style.animation='modalScan 0.6s ease both';
+  const scan=modalOverlay.querySelector('.modal-scan'); scan.style.animation='none'; void scan.offsetWidth; scan.style.animation='modalScan 0.6s ease both';
   modalOverlay.classList.add('open'); document.body.style.overflow='hidden';
 }
 function closeModal(){ modalOverlay.classList.remove('open'); document.body.style.overflow=''; }
@@ -1169,18 +936,13 @@ function tableHTML(data,cls){ return `<table class="modal-table ${cls||''}">${da
 /* ── RENDER ── */
 function render(){
   const h=CONTENT.hero;
-  document.getElementById('hero-title').textContent=h.title;
-  document.getElementById('hero-title').dataset.text=h.title;
-  document.getElementById('hero-sub').textContent=h.sub;
-  document.getElementById('hero-tagline').textContent=h.tagline;
-  document.getElementById('nav-logo').textContent=h.title;
-  document.getElementById('footer-logo').textContent=h.title;
-
+  document.getElementById('hero-title').textContent=h.title; document.getElementById('hero-title').dataset.text=h.title;
+  document.getElementById('hero-sub').textContent=h.sub; document.getElementById('hero-tagline').textContent=h.tagline;
+  document.getElementById('nav-logo').textContent=h.title; document.getElementById('footer-logo').textContent=h.title;
   const a=CONTENT.about;
   document.getElementById('about-title').textContent=a.title;
   document.getElementById('about-body').innerHTML=a.paragraphs.map(p=>`<p>${p}</p>`).join('');
   document.getElementById('data-rows').innerHTML=a.stats.map(s=>`<div class="data-row"><span class="drk">${s.label}</span><span class="drv">${s.value}</span></div>`).join('');
-
   document.getElementById('faction-wrap').innerHTML=CONTENT.factions.map(f=>`
     <div class="faction-panel ${f.type}" data-faction="${f.type}">
       <div class="fp-header"><div class="fp-num">${f.num}</div><div class="fp-id">// ${f.id}</div><div class="fp-name">${f.name}</div></div>
@@ -1188,13 +950,8 @@ function render(){
       <div class="fp-expand">[ לחץ לפרטים נוספים ]</div>
     </div>`).join('');
   document.querySelectorAll('.faction-panel').forEach(el=>{
-    el.addEventListener('click',()=>{
-      const f=CONTENT.factions.find(x=>x.type===el.dataset.faction);
-      openModal({ id:`FACTION_DB // ${f.num}`, type:`// ${f.id}`, title:f.name, titleClass:f.type==='android'?'android-c':'machine-c',
-        bodyHTML:`<div class="modal-faction-header"><div class="modal-faction-stripe ${f.type}"></div><div class="modal-faction-info">${paraHTML(f.longDesc)}</div></div>${tableHTML(f.data,f.type+'-t')}` });
-    });
+    el.addEventListener('click',()=>{ const f=CONTENT.factions.find(x=>x.type===el.dataset.faction); openModal({ id:`FACTION_DB // ${f.num}`, type:`// ${f.id}`, title:f.name, titleClass:f.type==='android'?'android-c':'machine-c', bodyHTML:`<div class="modal-faction-header"><div class="modal-faction-stripe ${f.type}"></div><div class="modal-faction-info">${paraHTML(f.longDesc)}</div></div>${tableHTML(f.data,f.type+'-t')}` }); });
   });
-
   document.getElementById('lore-wrap').innerHTML=CONTENT.lore.map((l,i)=>`
     <div class="tl-item" data-tl="${i}">
       <div class="tl-trigger"><div class="tl-left"><span class="tl-num">${String(i+1).padStart(2,'0')}</span><span class="tl-title">${l.title}</span><span class="tl-stamp">${l.stamp}</span></div><span class="tl-arrow">▶</span></div>
@@ -1202,58 +959,23 @@ function render(){
     </div>`).join('');
   document.querySelectorAll('.tl-item').forEach(item=>{
     const trigger=item.querySelector('.tl-trigger'),body=item.querySelector('.tl-body');
-    trigger.addEventListener('click',()=>{
-      const isOpen=item.classList.contains('open');
-      document.querySelectorAll('.tl-item').forEach(i=>{ i.classList.remove('open'); i.querySelector('.tl-body').style.maxHeight='0'; });
-      if(!isOpen){ item.classList.add('open'); body.style.maxHeight=body.scrollHeight+'px'; }
-    });
+    trigger.addEventListener('click',()=>{ const isOpen=item.classList.contains('open'); document.querySelectorAll('.tl-item').forEach(i=>{ i.classList.remove('open'); i.querySelector('.tl-body').style.maxHeight='0'; }); if(!isOpen){ item.classList.add('open'); body.style.maxHeight=body.scrollHeight+'px'; } });
   });
-
   document.getElementById('rules-wrap').innerHTML=CONTENT.rules.map((r,i)=>`
     <div class="rule-card ${r.warn?'warn':''}">
-      <div class="rule-num">DIR-${String(i+1).padStart(3,'0')}</div>
-      <span class="rule-icon">${r.icon}</span>
-      <div class="rule-title">${r.title}</div>
-      <p class="rule-short">${r.short}</p>
-      <p class="rule-detail">${r.detail}</p>
+      <div class="rule-num">DIR-${String(i+1).padStart(3,'0')}</div><span class="rule-icon">${r.icon}</span>
+      <div class="rule-title">${r.title}</div><p class="rule-short">${r.short}</p><p class="rule-detail">${r.detail}</p>
     </div>`).join('');
-
-  document.getElementById('gallery-wrap').innerHTML=CONTENT.gallery.map((g,i)=>{
-    if(g.type==='image') return `<div class="gallery-cell"><img src="${g.src}" alt="${g.label}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div></div>`;
-    return `<div class="gallery-cell"><div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div><div class="g-ico">◈</div><div class="g-lbl">${g.label}</div></div>`;
-  }).join('');
-
+  document.getElementById('gallery-wrap').innerHTML=CONTENT.gallery.map((g,i)=>{ if(g.type==='image') return `<div class="gallery-cell"><img src="${g.src}" alt="${g.label}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div></div>`; return `<div class="gallery-cell"><div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div><div class="g-ico">◈</div><div class="g-lbl">${g.label}</div></div>`; }).join('');
   document.getElementById('team-grid').innerHTML=CONTENT.team.map(m=>`
     <div class="team-card">
-      <div class="team-photo">
-        ${m.photo?`<img src="${m.photo}" alt="${m.name}">`:`<div class="team-photo-ph"><div class="ph-icon">◈</div><div class="ph-txt">PHOTO PENDING</div></div>`}
-        <div class="team-photo-tag">${m.id}</div>
-      </div>
-      <div class="team-info">
-        <div class="team-role">// ${m.role}</div>
-        <div class="team-name">${m.name}</div>
-        <div class="team-title-he">${m.titleHe}</div>
-        <div class="team-divider"><div class="team-divider-line"></div><div class="team-divider-d"></div><div class="team-divider-line"></div></div>
-        <p class="team-desc">${m.desc}</p>
-        <p class="team-long">${m.long}</p>
-        <div class="team-tags">${m.tags.map(t=>`<span class="team-tag">${t}</span>`).join('')}</div>
-      </div>
+      <div class="team-photo">${m.photo?`<img src="${m.photo}" alt="${m.name}">`:`<div class="team-photo-ph"><div class="ph-icon">◈</div><div class="ph-txt">PHOTO PENDING</div></div>`}<div class="team-photo-tag">${m.id}</div></div>
+      <div class="team-info"><div class="team-role">// ${m.role}</div><div class="team-name">${m.name}</div><div class="team-title-he">${m.titleHe}</div><div class="team-divider"><div class="team-divider-line"></div><div class="team-divider-d"></div><div class="team-divider-line"></div></div><p class="team-desc">${m.desc}</p><p class="team-long">${m.long}</p><div class="team-tags">${m.tags.map(t=>`<span class="team-tag">${t}</span>`).join('')}</div></div>
     </div>`).join('');
-
   const j=CONTENT.join;
-  document.getElementById('join-title').textContent=j.title;
-  document.getElementById('join-desc').textContent=j.desc;
-  document.getElementById('join-factions').innerHTML=j.factions.map(f=>`
-    <div class="join-fp ${f.type}" data-jf="${f.type}">
-      <div class="jf-type">// בחר סיעה</div><div class="jf-name">${f.name}</div><div class="jf-desc">${f.desc}</div><div class="jf-sel">[ בחר ]</div>
-    </div>`).join('');
-  document.querySelectorAll('.join-fp').forEach(el=>{
-    el.addEventListener('click',()=>{
-      const f=CONTENT.factions.find(x=>x.type===el.dataset.jf);
-      openModal({ id:`ENLIST // ${f.num}`, type:`// הצטרפות לסיעה`, title:f.name, titleClass:f.type==='android'?'android-c':'machine-c',
-        bodyHTML:`<div class="modal-faction-header"><div class="modal-faction-stripe ${f.type}"></div><div class="modal-faction-info">${paraHTML(f.longDesc)}</div></div>${tableHTML(f.data,f.type+'-t')}<div style="text-align:center;margin-top:24px;"><a href="${j.link}" class="btn btn-primary" target="_blank">הירשם לסיעה זו</a></div>` });
-    });
-  });
+  document.getElementById('join-title').textContent=j.title; document.getElementById('join-desc').textContent=j.desc;
+  document.getElementById('join-factions').innerHTML=j.factions.map(f=>`<div class="join-fp ${f.type}" data-jf="${f.type}"><div class="jf-type">// בחר סיעה</div><div class="jf-name">${f.name}</div><div class="jf-desc">${f.desc}</div><div class="jf-sel">[ בחר ]</div></div>`).join('');
+  document.querySelectorAll('.join-fp').forEach(el=>{ el.addEventListener('click',()=>{ const f=CONTENT.factions.find(x=>x.type===el.dataset.jf); openModal({ id:`ENLIST // ${f.num}`, type:`// הצטרפות לסיעה`, title:f.name, titleClass:f.type==='android'?'android-c':'machine-c', bodyHTML:`<div class="modal-faction-header"><div class="modal-faction-stripe ${f.type}"></div><div class="modal-faction-info">${paraHTML(f.longDesc)}</div></div>${tableHTML(f.data,f.type+'-t')}<div style="text-align:center;margin-top:24px;"><a href="${j.link}" class="btn btn-primary" target="_blank">הירשם לסיעה זו</a></div>` }); }); });
   document.getElementById('join-cta').innerHTML=`<a href="${j.link}" class="btn btn-primary" target="_blank">הירשם עכשיו</a>`;
   document.getElementById('footer-copy').textContent=CONTENT.footer.copy;
   document.getElementById('discordBtn').href=CONTENT.footer.discord;
@@ -1272,28 +994,13 @@ const obs=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.tar
 render();
 document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 
-/* ── CLICK SOUNDS on interactive elements ── */
+/* ── CLICK SOUNDS ── */
 (function(){
-  // buttons and links
-  document.querySelectorAll('.btn,.intro-play-btn,.modal-close-btn,.ap-btn,.ap-collapse,.footer-link-btn,.hud-nav a').forEach(el=>{
-    el.addEventListener('click',()=>playClick('ui'));
-  });
-  // faction panels and lore triggers — modal sound
-  document.querySelectorAll('.faction-panel,.join-fp').forEach(el=>{
-    el.addEventListener('click',()=>playClick('modal'));
-  });
-  // lore accordion
-  document.querySelectorAll('.tl-trigger').forEach(el=>{
-    el.addEventListener('click',()=>playClick('ui'));
-  });
-  // hover sound on nav links
-  document.querySelectorAll('.hud-nav a').forEach(el=>{
-    el.addEventListener('mouseenter',()=>playClick('hover'));
-  });
-  // hover on faction panels
-  document.querySelectorAll('.faction-panel').forEach(el=>{
-    el.addEventListener('mouseenter',()=>playClick('hover'));
-  });
+  document.querySelectorAll('.btn,.intro-play-btn,.modal-close-btn,.ap-btn,.ap-collapse,.footer-link-btn,.hud-nav a').forEach(el=>{ el.addEventListener('click',()=>playClick('ui')); });
+  document.querySelectorAll('.faction-panel,.join-fp').forEach(el=>{ el.addEventListener('click',()=>playClick('modal')); });
+  document.querySelectorAll('.tl-trigger').forEach(el=>{ el.addEventListener('click',()=>playClick('ui')); });
+  document.querySelectorAll('.hud-nav a').forEach(el=>{ el.addEventListener('mouseenter',()=>playClick('hover')); });
+  document.querySelectorAll('.faction-panel').forEach(el=>{ el.addEventListener('mouseenter',()=>playClick('hover')); });
 })();
 
 /* ── AUDIO PLAYER ── */
@@ -1303,28 +1010,16 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   const elDot=document.getElementById('apDot'),elViz=document.getElementById('apViz'),elBars=document.querySelectorAll('.ap-bar');
   const elCollapse=document.getElementById('apCollapse'),elPlayer=document.getElementById('audioPlayer');
   let muted=false,vizRaf=null,audioCtx=null,analyser=null;
-
-  function initAnalyser(){
-    if(audioCtx) return;
-    try { audioCtx=new(window.AudioContext||window.webkitAudioContext)(); analyser=audioCtx.createAnalyser(); analyser.fftSize=32; const src=audioCtx.createMediaElementSource(music); src.connect(analyser); analyser.connect(audioCtx.destination); } catch(e){}
-  }
-  function startViz(){
-    elViz.classList.add('on');
-    const data=analyser?new Uint8Array(analyser.frequencyBinCount):null;
-    const tick=()=>{ if(music.paused){stopViz();return;} if(analyser&&data){analyser.getByteFrequencyData(data);elBars.forEach((b,i)=>{b.style.height=Math.max(3,(data[Math.floor(i*data.length/elBars.length)]/255)*100)+'%';});}else{elBars.forEach(b=>{b.style.height=(Math.random()*80+5)+'%';});} vizRaf=requestAnimationFrame(tick); };
-    vizRaf=requestAnimationFrame(tick);
-  }
+  function initAnalyser(){ if(audioCtx) return; try{ audioCtx=new(window.AudioContext||window.webkitAudioContext)(); analyser=audioCtx.createAnalyser(); analyser.fftSize=32; const src=audioCtx.createMediaElementSource(music); src.connect(analyser); analyser.connect(audioCtx.destination); }catch(e){} }
+  function startViz(){ elViz.classList.add('on'); const data=analyser?new Uint8Array(analyser.frequencyBinCount):null; const tick=()=>{ if(music.paused){stopViz();return;} if(analyser&&data){analyser.getByteFrequencyData(data);elBars.forEach((b,i)=>{b.style.height=Math.max(3,(data[Math.floor(i*data.length/elBars.length)]/255)*100)+'%';});}else{elBars.forEach(b=>{b.style.height=(Math.random()*80+5)+'%';});} vizRaf=requestAnimationFrame(tick); }; vizRaf=requestAnimationFrame(tick); }
   function stopViz(){ elViz.classList.remove('on'); if(vizRaf){cancelAnimationFrame(vizRaf);vizRaf=null;} elBars.forEach(b=>b.style.height='2px'); }
   function setUI(){ const p=!music.paused; elPlay.textContent=p?'■':'►'; elPlay.classList.toggle('playing',p); elDot.classList.toggle('on',p); if(p) startViz(); else stopViz(); }
-
   window.startBgMusic=function(){ initAnalyser(); if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume(); music.volume=elVol.value/100; music.play().then(setUI).catch(()=>{}); };
-
   elPlay.addEventListener('click',()=>{ initAnalyser(); if(audioCtx&&audioCtx.state==='suspended') audioCtx.resume(); if(music.paused) music.play().then(setUI).catch(()=>{}); else{music.pause();setUI();} });
   elMute.addEventListener('click',()=>{ muted=!muted; music.muted=muted; elMute.textContent=muted?'🔇':'🔊'; });
   elVol.addEventListener('input',()=>{ music.volume=elVol.value/100; });
   elCollapse.addEventListener('click',()=>{ elPlayer.classList.toggle('collapsed'); elCollapse.textContent=elPlayer.classList.contains('collapsed')?'◈':'—'; });
-  music.addEventListener('play',setUI);
-  music.addEventListener('pause',setUI);
+  music.addEventListener('play',setUI); music.addEventListener('pause',setUI);
 })();
 </script>
 </body>
