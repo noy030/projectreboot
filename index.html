@@ -259,8 +259,8 @@ section{padding:75px 32px;position:relative;}
 .team-card{background:var(--bg);position:relative;overflow:hidden;transition:background 0.2s;display:grid;grid-template-columns:180px 1fr;}
 .team-card:hover{background:var(--bg-light);}
 .team-photo{position:relative;overflow:hidden;background:var(--bg-darker);border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center;min-height:260px;}
-.team-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%) contrast(1.05);transition:filter 0.3s;}
-.team-card:hover .team-photo img{filter:grayscale(80%) contrast(1.1);}
+.team-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%) contrast(1.05);transition:filter 0.5s ease;}
+.team-card:hover .team-photo img{filter:grayscale(0%) contrast(1.05) saturate(1.3) brightness(1.05);}
 .team-photo-ph{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;width:100%;height:100%;min-height:260px;color:var(--white-faint);}
 .team-photo-ph .ph-icon{font-size:2.5rem;opacity:0.2;}
 .team-photo-ph .ph-txt{font-family:var(--font-ui);font-size:0.42rem;letter-spacing:0.2em;opacity:0.4;text-transform:uppercase;}
@@ -444,6 +444,8 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
 <div class="cursor-dot" id="cursorDot"></div>
 <div class="glitch-sweep"></div>
 
+<!-- NieR ruined buildings background -->
+
 <!-- HUD -->
 <div class="hud">
   <div class="hud-strip">
@@ -579,7 +581,7 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
 
 <!-- LORE -->
 <section id="lore">
-  <div class="container">
+    <div class="container">
     <div class="sh reveal">
       <div class="sh-tag">Classified Archives</div>
       <h2 class="sh-title">World Records</h2>
@@ -791,12 +793,12 @@ const CONTENT = {
     { warn:false, icon:"📋", title:"Organizer Authority", short:"למארגנים יש סמכות סופית בכל מחלוקת. ההחלטות בזמן המשחק סופיות; אפשר להביע משוב לאחר האירוע. התייחס לכל הצוות והשחקנים בכבוד.", detail:"הצוות נמצא כאן כדי לוודא שכולם נהנים. אם משהו לא נראה נכון — בטיחות, יחס, הוגנות — פנה מיד לאחד מחברי הצוות. משוב לאחר האירוע מתקבל בברכה." }
   ],
   gallery:[
-    { type:"image", src:"robot2.jpg",    label:"מכונה חיה — תמונה 01" },
-    { type:"image", src:"yorah.png",     label:"יצור מכונה — תמונה 02" },
-    { type:"image", src:"android1.jpeg", label:"שדה קרב — תמונה 03" },
-    { type:"image", src:"android 2.jpg", label:"תחרות תלבושות — תמונה 04" },
-    { type:"image", src:"city.jpg",      label:"סרטון לחימה — תמונה 05" },
-    { type:"image", src:"pascal.webp",   label:"תמונה קבוצתית — תמונה 06" }
+    { type:"image", src:"robot2.jpg",       label:"מכונה חיה — תמונה 01" },
+    { type:"image", src:"yorah.png",        label:"יצור מכונה — תמונה 02" },
+    { type:"image", src:"android1.jpeg",    label:"שדה קרב — תמונה 03" },
+    { type:"image", src:"android 2.jpg",    label:"תחרות תלבושות — תמונה 04" },
+    { type:"image", src:"city.jpg",         label:"סרטון לחימה — תמונה 05" },
+    { type:"image", src:"pascal.webp",      label:"תמונה קבוצתית — תמונה 06" }
   ],
   team:[
     { id:"OPERATIVE_01", name:"נוי וולסטר", role:"Game Master", titleHe:"מנהלת משחק ראשי", photo:"image_noy.jpg",
