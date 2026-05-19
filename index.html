@@ -85,6 +85,10 @@ body::after{content:'';position:fixed;inset:0;z-index:9996;pointer-events:none;b
 .hud-nav a:hover{color:var(--white);background:rgba(255,255,255,0.04);}
 .hud-nav a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--white);transform:scaleX(0);transition:transform 0.15s;}
 .hud-nav a:hover::after{transform:scaleX(1);}
+  /* מוסיף את הקו החסר בסוף התפריט אחרי TEAM */
+.hud-nav li:last-child a {
+  border-right: 1px solid var(--line);
+}
 
 /* HUD ENLIST BUTTON */
 .hud-enlist-btn { background: var(--white); color: var(--bg-darker); font-family: var(--font-ui); font-size: 0.55rem; font-weight: bold; padding: 0 16px; height: 100%; display: flex; align-items: center; text-decoration: none; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.2s; animation: btnPulse 2s infinite; border-left: 1px solid var(--line); }
