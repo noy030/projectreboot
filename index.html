@@ -7,10 +7,9 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Heebo:wght@300;400;500;700&display=swap');
 
-/* --- כאן אתה מכניס את הלינקים לתמונות הרקע של ה-FACTIONS --- */
 :root {
-  --faction-bg-android: url('https://images.steamusercontent.com/ugc/854973983184936618/8F31994ACE8A08E1C057536EF833419F3F29C8E5/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true'); /* תמונת אנדרואידים */
-  --faction-bg-machine: url('https://nierautomata.wiki.fextralife.com/file/Nier-Automata/machine-mask-accessories-nier-automata-wiki-guide.png'); /* תמונת מכונות */
+  --faction-bg-android: url('https://images.steamusercontent.com/ugc/854973983184936618/8F31994ACE8A08E1C057536EF833419F3F29C8E5/?imw=637&imh=358&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=true');
+  --faction-bg-machine: url('https://nierautomata.wiki.fextralife.com/file/Nier-Automata/machine-mask-accessories-nier-automata-wiki-guide.png');
   
   --bg:#2a2a2a; --bg-dark:#1e1e1e; --bg-darker:#161616; --bg-light:#333333;
   --line:#4a4a4a; --line-light:#5a5a5a; --white:#e8e8e8; --white-dim:#b0b0b0;
@@ -85,15 +84,9 @@ body::after{content:'';position:fixed;inset:0;z-index:9996;pointer-events:none;b
 .hud-nav a:hover{color:var(--white);background:rgba(255,255,255,0.04);}
 .hud-nav a::after{content:'';position:absolute;bottom:0;left:0;right:0;height:1px;background:var(--white);transform:scaleX(0);transition:transform 0.15s;}
 .hud-nav a:hover::after{transform:scaleX(1);}
-  /* מוסיף את הקו החסר בסוף התפריט אחרי TEAM */
-.hud-nav li:last-child a {
-  border-right: 1px solid var(--line);
-}
-
-/* HUD ENLIST BUTTON */
-.hud-enlist-btn { background: var(--white); color: var(--bg-darker); font-family: var(--font-ui); font-size: 0.55rem; font-weight: bold; padding: 0 16px; height: 100%; display: flex; align-items: center; text-decoration: none; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.2s; animation: btnPulse 2s infinite; border-left: 1px solid var(--line); }
-.hud-enlist-btn:hover { background: var(--white-dim); animation: none; transform: scale(1.02); }
-
+.hud-nav li:last-child a{border-right:1px solid var(--line);}
+.hud-enlist-btn{background:var(--white);color:var(--bg-darker);font-family:var(--font-ui);font-size:0.55rem;font-weight:bold;padding:0 16px;height:100%;display:flex;align-items:center;text-decoration:none;letter-spacing:0.2em;text-transform:uppercase;transition:all 0.2s;animation:btnPulse 2s infinite;border-left:1px solid var(--line);}
+.hud-enlist-btn:hover{background:var(--white-dim);animation:none;transform:scale(1.02);}
 .hud-right{display:flex;align-items:center;height:100%;border-right:1px solid var(--line);}
 .hud-right-cell{display:flex;align-items:center;height:100%;padding:0 12px;border-left:1px solid var(--line);gap:5px;}
 .hud-right-cell span{font-family:var(--font-ui);font-size:0.52rem;letter-spacing:0.12em;color:var(--white-faint);}
@@ -155,36 +148,10 @@ section{padding:75px 32px;position:relative;}
 /* HISTORY */
 #history{background:var(--bg-darker);position:relative;overflow:hidden;}
 .hist-bg-text{position:absolute;font-family:var(--font-ui);font-size:clamp(5rem,16vw,13rem);font-weight:400;color:rgba(232,232,232,0.08);letter-spacing:0.15em;top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none;}
-.hist-ruins-img {
-  position:absolute;
-  top:-10%; left:0; right:0;
-  width:100%;
-  height:120%;
-  object-fit:cover;
-  object-position:center;
-  opacity:0.18;
-  pointer-events:none;
-  user-select:none;
-  mix-blend-mode:lighten;
-  filter:grayscale(60%) brightness(0.7) contrast(1.1);
-  z-index:0;
-  will-change: transform;
-}
-.lore-bg-img {
-  position:absolute;
-  top:50%; right:-2%;
-  transform:translateY(-50%);
-  height:85%;
-  width:auto;
-  opacity:0.35;
-  pointer-events:none;
-  user-select:none;
-  mix-blend-mode:lighten;
-  filter:brightness(1.4) contrast(1.4) grayscale(0.2);
-  z-index:0;
-}
-#lore { position:relative; overflow:hidden; }
-#lore .container { position:relative; z-index:1; }
+.hist-ruins-img{position:absolute;top:-10%;left:0;right:0;width:100%;height:120%;object-fit:cover;object-position:center;opacity:0.18;pointer-events:none;user-select:none;mix-blend-mode:lighten;filter:grayscale(60%) brightness(0.7) contrast(1.1);z-index:0;will-change:transform;}
+.lore-bg-img{position:absolute;top:50%;right:-2%;transform:translateY(-50%);height:85%;width:auto;opacity:0.35;pointer-events:none;user-select:none;mix-blend-mode:lighten;filter:brightness(1.4) contrast(1.4) grayscale(0.2);z-index:0;}
+#lore{position:relative;overflow:hidden;}
+#lore .container{position:relative;z-index:1;}
 .hist-wrap{position:relative;max-width:920px;margin:0 auto;}
 .hist-wrap::before{content:'';position:absolute;top:0;bottom:0;left:50%;transform:translateX(-50%);width:1px;background:linear-gradient(to bottom,transparent,var(--line-light) 8%,var(--line-light) 92%,transparent);}
 .hist-item{display:grid;grid-template-columns:1fr 80px 1fr;align-items:center;position:relative;border-bottom:1px solid rgba(74,74,74,0.3);}
@@ -215,8 +182,39 @@ section{padding:75px 32px;position:relative;}
   .hist-panel.left::after,.hist-panel.right::before{display:none;}
 }
 
-/* ABOUT */
-#about{background:var(--bg);}
+/* ABOUT — updated with flower background */
+#about {
+  background: var(--bg);
+  position: relative;
+  overflow: hidden;
+}
+#about .about-flowers-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  opacity: 0.11;
+  pointer-events: none;
+  user-select: none;
+  filter: grayscale(60%) brightness(0.55) contrast(1.3);
+  mix-blend-mode: lighten;
+  -webkit-mask-image:
+    radial-gradient(ellipse 85% 75% at 50% 55%, black 0%, transparent 100%);
+  mask-image:
+    radial-gradient(ellipse 85% 75% at 50% 55%, black 0%, transparent 100%);
+  z-index: 0;
+  transition: opacity 1.5s ease;
+}
+#about:hover .about-flowers-bg {
+  opacity: 0.16;
+}
+#about .container {
+  position: relative;
+  z-index: 1;
+}
+
 .about-grid{display:grid;grid-template-columns:3fr 2fr;gap:40px;align-items:start;}
 .about-body p{color:var(--white-dim);margin-bottom:16px;font-size:1.05rem;line-height:2;}
 .data-panel{border:1px solid var(--line);background:var(--bg-dark);overflow:hidden;}
@@ -233,14 +231,11 @@ section{padding:75px 32px;position:relative;}
 #factions{background:var(--bg-dark);}
 .faction-wrap{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
 .faction-panel{background:var(--bg);overflow:hidden;position:relative;cursor:pointer;transition:background 0.3s;}
-
-/* -- FACTION HOVER BACKGROUNDS -- */
-.faction-panel.android:hover { background: linear-gradient(rgba(30,30,30,0.85), rgba(30,30,30,0.85)), var(--faction-bg-android) center/cover; }
-.faction-panel.machine:hover { background: linear-gradient(rgba(30,30,30,0.85), rgba(30,30,30,0.85)), var(--faction-bg-machine) center/cover; }
-
+.faction-panel.android:hover{background:linear-gradient(rgba(30,30,30,0.85),rgba(30,30,30,0.85)),var(--faction-bg-android) center/cover;}
+.faction-panel.machine:hover{background:linear-gradient(rgba(30,30,30,0.85),rgba(30,30,30,0.85)),var(--faction-bg-machine) center/cover;}
 .faction-panel:hover .fp-expand{opacity:1;}
-.fp-header{border-bottom:1px solid var(--line);padding:22px 24px;position:relative;background:var(--bg-dark); transition: background 0.3s;}
-.faction-panel:hover .fp-header { background: transparent; border-bottom: 1px solid rgba(255,255,255,0.1); }
+.fp-header{border-bottom:1px solid var(--line);padding:22px 24px;position:relative;background:var(--bg-dark);transition:background 0.3s;}
+.faction-panel:hover .fp-header{background:transparent;border-bottom:1px solid rgba(255,255,255,0.1);}
 .fp-header::before{content:'';position:absolute;top:0;right:0;bottom:0;width:2px;}
 .faction-panel.android .fp-header::before{background:var(--android);}
 .faction-panel.machine .fp-header::before{background:var(--machine);}
@@ -251,10 +246,10 @@ section{padding:75px 32px;position:relative;}
 .faction-panel.machine .fp-name{color:var(--machine);}
 .fp-body{padding:22px 24px;}
 .fp-desc{font-family:var(--font-he);font-size:1rem;color:var(--white-dim);line-height:2;margin-bottom:20px;}
-.fp-data{border-top:1px solid var(--line);padding-top:16px; transition: border-color 0.3s;}
-.faction-panel:hover .fp-data { border-color: rgba(255,255,255,0.1); }
-.fp-data-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line); transition: border-color 0.3s;}
-.faction-panel:hover .fp-data-row { border-color: rgba(255,255,255,0.1); }
+.fp-data{border-top:1px solid var(--line);padding-top:16px;transition:border-color 0.3s;}
+.faction-panel:hover .fp-data{border-color:rgba(255,255,255,0.1);}
+.fp-data-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line);transition:border-color 0.3s;}
+.faction-panel:hover .fp-data-row{border-color:rgba(255,255,255,0.1);}
 .fp-data-row:last-child{border-bottom:none;}
 .fpdk{font-family:var(--font-ui);font-size:0.54rem;letter-spacing:0.1em;color:var(--white-faint);text-transform:uppercase;}
 .faction-panel.android .fpdv{color:var(--android);font-family:var(--font-he);font-size:0.95rem;}
@@ -287,19 +282,16 @@ section{padding:75px 32px;position:relative;}
 /* RULES */
 #rules{background:var(--bg-dark);}
 .rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
-.rule-card{background:var(--bg);padding:28px 24px;position:relative;overflow:hidden;transition:background 0.15s; cursor: default;}
+.rule-card{background:var(--bg);padding:28px 24px;position:relative;overflow:hidden;transition:background 0.15s;cursor:default;}
 .rule-card:hover{background:var(--bg-light);}
 .rule-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:var(--line-light);}
 .rule-card.warn::before{background:var(--red);}
 .rule-card.warn::after{content:'WARNING';position:absolute;top:0;left:0;font-family:var(--font-ui);font-size:0.44rem;letter-spacing:0.18em;color:var(--bg);background:var(--red);padding:2px 8px;}
 .rule-num{font-family:var(--font-ui);font-size:0.5rem;letter-spacing:0.28em;color:var(--white-faint);margin-bottom:12px;}
-
-/* -- SVG RULES ICONS -- */
-.rule-icon { width: 32px; height: 32px; margin-bottom: 12px; display: block; fill: var(--white-faint); filter: drop-shadow(0 0 4px rgba(255,255,255,0.1)); transition: all 0.3s; }
-.rule-card.warn .rule-icon { fill: var(--red); filter: drop-shadow(0 0 6px rgba(204,51,51,0.4)); opacity: 0.8;}
-.rule-card:hover .rule-icon { fill: var(--white); filter: drop-shadow(0 0 8px rgba(255,255,255,0.5)); transform: scale(1.1); }
-.rule-card.warn:hover .rule-icon { fill: #ff4d4d; filter: drop-shadow(0 0 10px rgba(255,77,77,0.7)); }
-
+.rule-icon{width:32px;height:32px;margin-bottom:12px;display:block;fill:var(--white-faint);filter:drop-shadow(0 0 4px rgba(255,255,255,0.1));transition:all 0.3s;}
+.rule-card.warn .rule-icon{fill:var(--red);filter:drop-shadow(0 0 6px rgba(204,51,51,0.4));opacity:0.8;}
+.rule-card:hover .rule-icon{fill:var(--white);filter:drop-shadow(0 0 8px rgba(255,255,255,0.5));transform:scale(1.1);}
+.rule-card.warn:hover .rule-icon{fill:#ff4d4d;filter:drop-shadow(0 0 10px rgba(255,77,77,0.7));}
 .rule-title{font-family:var(--font-ui);font-size:0.72rem;letter-spacing:0.16em;color:var(--white);text-transform:uppercase;margin-bottom:10px;}
 .rule-short{font-family:var(--font-he);font-size:0.95rem;color:var(--white-dim);line-height:1.9;margin-bottom:12px;}
 .rule-detail{font-family:var(--font-he);font-size:0.9rem;color:var(--white-faint);line-height:1.9;border-top:1px dashed var(--line);padding-top:12px;}
@@ -307,26 +299,26 @@ section{padding:75px 32px;position:relative;}
 /* GALLERY */
 #gallery{background:var(--bg);}
 .gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
-.gallery-cell{background:var(--bg-dark);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:background 0.15s;position:relative;overflow:hidden; cursor:pointer;}
+.gallery-cell{background:var(--bg-dark);aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;transition:background 0.15s;position:relative;overflow:hidden;cursor:pointer;}
 .gallery-cell:hover{background:var(--bg-light);}
-.gallery-cell img { transition: transform 0.4s ease, filter 0.4s ease; }
-.gallery-cell:hover img { transform: scale(1.05); filter: brightness(1.1); }
-.g-id{position:absolute;top:8px;right:10px;font-family:var(--font-ui);font-size:0.42rem;color:var(--white-faint);letter-spacing:0.14em; background: rgba(0,0,0,0.6); padding: 2px 6px; z-index: 2;}
+.gallery-cell img{transition:transform 0.4s ease,filter 0.4s ease;}
+.gallery-cell:hover img{transform:scale(1.05);filter:brightness(1.1);}
+.g-id{position:absolute;top:8px;right:10px;font-family:var(--font-ui);font-size:0.42rem;color:var(--white-faint);letter-spacing:0.14em;background:rgba(0,0,0,0.6);padding:2px 6px;z-index:2;}
 .g-ico{font-size:1rem;opacity:0.2;}
 .g-lbl{font-family:var(--font-he);font-size:0.9rem;color:var(--white-faint);text-align:center;padding:0 12px;}
 
 /* LIGHTBOX */
-.lightbox { position: fixed; inset: 0; z-index: 9999; background: rgba(22,22,22,0.95); display: none; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; backdrop-filter: blur(5px); }
-.lightbox.show { display: flex; opacity: 1; }
-.lightbox-content { position: relative; max-width: 90%; max-height: 90vh; animation: fadeIn 0.3s ease; }
-.lightbox img { max-width: 100%; max-height: 90vh; border: 1px solid var(--line-light); box-shadow: 0 0 30px rgba(0,0,0,0.8); }
-.lightbox-close { position: absolute; top: -40px; right: 0; background: none; color: var(--white); border: 1px solid var(--line); padding: 5px 15px; cursor: pointer; font-family: var(--font-ui); font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; transition: all 0.2s; }
-.lightbox-close:hover { background: var(--white); color: var(--bg-darker); }
+.lightbox{position:fixed;inset:0;z-index:9999;background:rgba(22,22,22,0.95);display:none;align-items:center;justify-content:center;opacity:0;transition:opacity 0.3s ease;backdrop-filter:blur(5px);}
+.lightbox.show{display:flex;opacity:1;}
+.lightbox-content{position:relative;max-width:90%;max-height:90vh;animation:fadeIn 0.3s ease;}
+.lightbox img{max-width:100%;max-height:90vh;border:1px solid var(--line-light);box-shadow:0 0 30px rgba(0,0,0,0.8);}
+.lightbox-close{position:absolute;top:-40px;right:0;background:none;color:var(--white);border:1px solid var(--line);padding:5px 15px;cursor:pointer;font-family:var(--font-ui);font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;transition:all 0.2s;}
+.lightbox-close:hover{background:var(--white);color:var(--bg-darker);}
 
 /* TEAM */
 #team{background:var(--bg-dark);}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);}
-.team-card{background:var(--bg);position:relative;overflow:hidden;transition:background 0.2s;display:grid;grid-template-columns:180px 1fr; cursor: default;}
+.team-card{background:var(--bg);position:relative;overflow:hidden;transition:background 0.2s;display:grid;grid-template-columns:180px 1fr;cursor:default;}
 .team-card:hover{background:var(--bg-light);}
 .team-photo{position:relative;overflow:hidden;background:var(--bg-darker);border-left:1px solid var(--line);display:flex;align-items:center;justify-content:center;min-height:260px;}
 .team-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(100%) contrast(1.05);transition:filter 0.5s ease;}
@@ -460,7 +452,7 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
   .gallery-grid{grid-template-columns:1fr 1fr;}
   .team-card{grid-template-columns:130px 1fr;}
   .timeline{padding-right:28px;}
-  .hud-enlist-btn { padding: 0 10px; font-size: 0.5rem; }
+  .hud-enlist-btn{padding:0 10px;font-size:0.5rem;}
 }
 @media(max-width:500px){
   .rules-grid,.gallery-grid{grid-template-columns:1fr;}
@@ -540,7 +532,6 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
       <li><a href="#team">TEAM</a></li>
     </ul>
     <div class="hud-right">
-      <!-- כפתור הרשמה חדש ובולט ב-HUD -->
       <a href="#join" class="hud-enlist-btn">ENLIST</a>
       <div class="hud-right-cell"><div class="dot"></div><span class="hud-clock" id="hud-clock">00:00:00</span></div>
       <div class="hud-right-cell"><span>CLASSIFIED</span></div>
@@ -565,8 +556,9 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
 
 <div class="sep"></div>
 
-<!-- ABOUT -->
+<!-- ABOUT — with flower background -->
 <section id="about">
+  <img class="about-flowers-bg" src="1779268648819_image.png" alt="" aria-hidden="true">
   <div class="container">
     <div class="about-grid">
       <div>
@@ -651,8 +643,7 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
 
 <!-- LORE -->
 <section id="lore">
-<!-- שנה את זה לזה: -->
-<img class="lore-bg-img" src="lore_image.jpg" alt="" aria-hidden="true">
+  <img class="lore-bg-img" src="lore_image.jpg" alt="" aria-hidden="true">
   <div class="container">
     <div class="sh reveal">
       <div class="sh-tag">Classified Archives</div>
@@ -865,31 +856,30 @@ const CONTENT = {
       long:"חברי ה-Outliers הם הפרשנות החופשית ביותר בלארפ. אם לא מתחבר לאף אחד מהצדדים — אנדרואיד שנטש, מכונה שהתפכחה, או ישות שלא ברור לה מה היא — זו יכולה להיות האופציה הנכונה. ה-Outliers נלחמים למענם בלבד, ומוצאים בריתות זמניות בהתאם לצורך." }
   ],
   rules:[
-    // החלפנו את טקסט האימוג'ים ב-SVGs מעוצבים בסגנון ממשק
-    { warn:true,  
-      icon:`<svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>`, 
-      title:"Safety Protocol",   short:'מילת בטיחות מוגדרת "חד"ל" מפסיקה את כל הלחימה והמשחק מיד, ללא שאלות. פציעה אמיתית או מצוקה עולה על כל שיקול נרטיבי.', detail:"מילת הבטיחות חייבת להיות ידועה לכל המשתתפים. כאשר נאמרת, כולם עוצרים מיד — ללא יוצא מן הכלל. הבטיחות הפיזית והנפשית של כל משתתף חשובה יותר מכל סיפור." },
-    { warn:false, 
-      icon:`<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>`, 
-      title:"Combat System",       short:"לחימה משתמשת רק בנשק ספוג / בטוח ל-LARP. כל הנשקים חייבים לעבור בדיקת בטיחות. מכות לראש, גרון ומפשעה אסורות תמיד.", detail:'נשק LARP מאושר בלבד — לא נשק אמיתי, לא נשק חד, ולא מאולתר ביתי. בדיקת הנשק נעשית בתחילת האירוע ע"י הצוות. לחימה הוגנת כוללת הצהרה על פגיעות ביושר: אם לקחת פגיעה — קח אותה.' },
-    { warn:true,  
-      icon:`<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`, 
-      title:"Consent & Respect",  short:"כל השחקנים חייבים לכבד גבולות אישיים בכל עת. נדרשת הסכמה לפני כל משחק פיזי מעבר ללחימה. הטרדה מכל סוג גורמת להסרה מיידית.", detail:"גבולות הם גבולות — גם בתוך דמות. אם שחקן אחר אומר 'לא' או נותן אות עצירה, מפסיקים מיד. קונפליקטים בין דמויות מעודדים. קונפליקטים בין שחקנים — לא. כל בעיה: פנה מיד לחבר צוות." },
-    { warn:false, 
-      icon:`<svg viewBox="0 0 24 24"><path d="M12 2c-5.52 0-10 4.48-10 10 0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm-3 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM12 18c-2.5 0-4.67-1.4-5.5-3.5h11c-.83 2.1-3 3.5-5.5 3.5z"/></svg>`, 
-      title:"Character Integrity",  short:"שמור על דמות בתוך אזור המשחק. שיחות מחוץ לדמות משתמשות באות ברור. מטאגיימינג — שימוש במידע מחוץ לדמות — פוגע בחוויה של כולם.", detail:"גבול אזור המשחק יסומן בבירור. בתוך האזור — אתה הדמות שלך. מחוץ לאזור — אפשר לנוח ולאכול. אם צריך לצאת מדמות בתוך האזור, יש לתת אות ברור (יד מורמת על הראש)." },
-    { warn:false, 
-      icon:`<svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm1 16h-2v-2h2v2zm0-4h-2V9h2v5z"/></svg>`, 
-      title:"Death & Respawn",      short:"כשנפלת — כרע ברך ושים יד על הראש. מרפאים מיועדים יכולים לתחיות אותך. אל תפחדו מהמוות — הוא חלק מהמשחק הזה.", detail:"מערכת ה-Respawn מאפשרת לחזור לפעולה לאחר מוות זמני. מוות קבוע הוא בחירה דרמטית שנעשית ביחד עם המארגנים ויכולה לפתוח פרק חדש בסיפור. אל תחשוש ממוות — לפעמים זה הרגע הכי טוב במשחק." },
-    { warn:false, 
-      icon:`<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`, 
+    { warn:true,
+      icon:`<svg viewBox="0 0 24 24"><path d="M12 2L4 5v6.09c0 5.05 3.41 9.76 8 10.91 4.59-1.15 8-5.86 8-10.91V5l-8-3z"/></svg>`,
+      title:"Safety Protocol", short:'מילת בטיחות מוגדרת "חד"ל" מפסיקה את כל הלחימה והמשחק מיד, ללא שאלות. פציעה אמיתית או מצוקה עולה על כל שיקול נרטיבי.', detail:"מילת הבטיחות חייבת להיות ידועה לכל המשתתפים. כאשר נאמרת, כולם עוצרים מיד — ללא יוצא מן הכלל. הבטיחות הפיזית והנפשית של כל משתתף חשובה יותר מכל סיפור." },
+    { warn:false,
+      icon:`<svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z"/></svg>`,
+      title:"Combat System", short:"לחימה משתמשת רק בנשק ספוג / בטוח ל-LARP. כל הנשקים חייבים לעבור בדיקת בטיחות. מכות לראש, גרון ומפשעה אסורות תמיד.", detail:'נשק LARP מאושר בלבד — לא נשק אמיתי, לא נשק חד, ולא מאולתר ביתי. בדיקת הנשק נעשית בתחילת האירוע ע"י הצוות. לחימה הוגנת כוללת הצהרה על פגיעות ביושר: אם לקחת פגיעה — קח אותה.' },
+    { warn:true,
+      icon:`<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>`,
+      title:"Consent & Respect", short:"כל השחקנים חייבים לכבד גבולות אישיים בכל עת. נדרשת הסכמה לפני כל משחק פיזי מעבר ללחימה. הטרדה מכל סוג גורמת להסרה מיידית.", detail:"גבולות הם גבולות — גם בתוך דמות. אם שחקן אחר אומר 'לא' או נותן אות עצירה, מפסיקים מיד. קונפליקטים בין דמויות מעודדים. קונפליקטים בין שחקנים — לא. כל בעיה: פנה מיד לחבר צוות." },
+    { warn:false,
+      icon:`<svg viewBox="0 0 24 24"><path d="M12 2c-5.52 0-10 4.48-10 10 0 5.52 4.48 10 10 10s10-4.48 10-10c0-5.52-4.48-10-10-10zm-3 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm6 0c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM12 18c-2.5 0-4.67-1.4-5.5-3.5h11c-.83 2.1-3 3.5-5.5 3.5z"/></svg>`,
+      title:"Character Integrity", short:"שמור על דמות בתוך אזור המשחק. שיחות מחוץ לדמות משתמשות באות ברור. מטאגיימינג — שימוש במידע מחוץ לדמות — פוגע בחוויה של כולם.", detail:"גבול אזור המשחק יסומן בבירור. בתוך האזור — אתה הדמות שלך. מחוץ לאזור — אפשר לנוח ולאכול. אם צריך לצאת מדמות בתוך האזור, יש לתת אות ברור (יד מורמת על הראש)." },
+    { warn:false,
+      icon:`<svg viewBox="0 0 24 24"><path d="M12 2L1 21h22L12 2zm1 16h-2v-2h2v2zm0-4h-2V9h2v5z"/></svg>`,
+      title:"Death & Respawn", short:"כשנפלת — כרע ברך ושים יד על הראש. מרפאים מיועדים יכולים לתחיות אותך. אל תפחדו מהמוות — הוא חלק מהמשחק הזה.", detail:"מערכת ה-Respawn מאפשרת לחזור לפעולה לאחר מוות זמני. מוות קבוע הוא בחירה דרמטית שנעשית ביחד עם המארגנים ויכולה לפתוח פרק חדש בסיפור. אל תחשוש ממוות — לפעמים זה הרגע הכי טוב במשחק." },
+    { warn:false,
+      icon:`<svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>`,
       title:"Organizer Authority", short:"למארגנים יש סמכות סופית בכל מחלוקת. ההחלטות בזמן המשחק סופיות; אפשר להביע משוב לאחר האירוע. התייחס לכל הצוות והשחקנים בכבוד.", detail:"הצוות נמצא כאן כדי לוודא שכולם נהנים. אם משהו לא נראה נכון — בטיחות, יחס, הוגנות — פנה מיד לאחד מחברי הצוות. משוב לאחר האירוע מתקבל בברכה." }
   ],
-   gallery:[
+  gallery:[
     { type:"image", src:"robot2.jpg",        label:"מכונה חיה — תמונה 01" },
     { type:"image", src:"yorah.png",         label:"יצור מכונה — תמונה 02" },
     { type:"image", src:"android1.jpeg",     label:"שדה קרב — תמונה 03" },
-    { type:"image", src:"android 2.jpg",    label:"תחרות תלבושות — תמונה 04" },
+    { type:"image", src:"android 2.jpg",     label:"תחרות תלבושות — תמונה 04" },
     { type:"image", src:"city.jpg",          label:"סרטון לחימה — תמונה 05" },
     { type:"image", src:"pascal.webp",       label:"תמונה קבוצתית — תמונה 06" }
   ],
@@ -969,7 +959,7 @@ window.addEventListener('scroll', () => {
   const parallaxBg = document.getElementById('parallax-bg');
   if (parallaxBg) {
     const scrolled = window.scrollY;
-    parallaxBg.style.transform = `translateY(${scrolled * 0.15}px)`; // שולט במהירות ההזזה
+    parallaxBg.style.transform = `translateY(${scrolled * 0.15}px)`;
   }
 });
 
@@ -990,26 +980,15 @@ document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 function paraHTML(arr){return arr.map(p=>`<p>${p}</p>`).join('');}
 function tableHTML(data,cls){return `<table class="modal-table ${cls||''}">${data.map(d=>`<tr><td class="mtk">${d.k}</td><td class="mtv">${d.v}</td></tr>`).join('')}</table>`;}
 
-/* LIGHTBOX (Gallery) */
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const lightboxClose = document.getElementById('lightbox-close');
-
-function openLightbox(src) {
-  lightboxImg.src = src;
-  lightbox.classList.add('show');
-  document.body.style.overflow='hidden';
-  playClick('modal');
-}
-function closeLightbox() {
-  lightbox.classList.remove('show');
-  document.body.style.overflow='';
-  setTimeout(() => { lightboxImg.src = ''; }, 300); // ניקוי תמונה אחרי האנימציה
-}
-lightboxClose.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', (e) => { if(e.target === lightbox) closeLightbox(); });
-document.addEventListener('keydown',e=>{if(e.key==='Escape' && lightbox.classList.contains('show'))closeLightbox();});
-
+/* LIGHTBOX */
+const lightbox=document.getElementById('lightbox');
+const lightboxImg=document.getElementById('lightbox-img');
+const lightboxClose=document.getElementById('lightbox-close');
+function openLightbox(src){lightboxImg.src=src;lightbox.classList.add('show');document.body.style.overflow='hidden';playClick('modal');}
+function closeLightbox(){lightbox.classList.remove('show');document.body.style.overflow='';setTimeout(()=>{lightboxImg.src='';},300);}
+lightboxClose.addEventListener('click',closeLightbox);
+lightbox.addEventListener('click',(e)=>{if(e.target===lightbox)closeLightbox();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&lightbox.classList.contains('show'))closeLightbox();});
 
 /* RENDER */
 function render(){
@@ -1061,10 +1040,8 @@ function render(){
     if(g.type==='image') return `<div class="gallery-cell" data-src="${g.src}"><img src="${g.src}" alt="${g.label}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;"><div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div></div>`;
     return `<div class="gallery-cell"><div class="g-id">IMG_${String(i+1).padStart(3,'0')}</div><div class="g-ico">◈</div><div class="g-lbl">${g.label}</div></div>`;
   }).join('');
-
-  // אירועי לחיצה לפתיחת תמונה (Lightbox)
-  document.querySelectorAll('.gallery-cell[data-src]').forEach(cell => {
-    cell.addEventListener('click', () => openLightbox(cell.getAttribute('data-src')));
+  document.querySelectorAll('.gallery-cell[data-src]').forEach(cell=>{
+    cell.addEventListener('click',()=>openLightbox(cell.getAttribute('data-src')));
   });
 
   document.getElementById('team-grid').innerHTML=CONTENT.team.map(m=>`
@@ -1104,8 +1081,6 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   document.querySelectorAll('.btn,.intro-play-btn,.modal-close-btn,.ap-btn,.ap-collapse,.footer-link-btn,.hud-nav a').forEach(el=>{el.addEventListener('click',()=>playClick('ui'));});
   document.querySelectorAll('.faction-panel').forEach(el=>{el.addEventListener('click',()=>playClick('modal'));});
   document.querySelectorAll('.tl-trigger').forEach(el=>{el.addEventListener('click',()=>playClick('ui'));});
-  
-  // הוספת צליל מעבר עכבר לשאר האלמנטים המבוקשים
   document.querySelectorAll('.hud-nav a, .faction-panel, .rule-card, .team-card, .gallery-cell').forEach(el=>{el.addEventListener('mouseenter',()=>playClick('hover'));});
 })();
 
