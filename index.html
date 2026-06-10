@@ -3,7 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PROJECT REBOOT</title>
+<title>PROJECT REBOOT — NieR LARP</title>
+
+<!-- Open Graph -->
+<meta property="og:type"        content="website">
+<meta property="og:title"       content="PROJECT REBOOT — NieR:Automata LARP">
+<meta property="og:description" content="בחרו צד במלחמה. אנדרואידים נגד מכונות. LARP מיליטנטי בהשראת NieR:Automata — Glory to Mankind.">
+<meta property="og:image"       content="android1.jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale"      content="he_IL">
+
+<!-- Twitter Card -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="PROJECT REBOOT — NieR:Automata LARP">
+<meta name="twitter:description" content="בחרו צד במלחמה. אנדרואידים נגד מכונות. LARP מיליטנטי בהשראת NieR:Automata.">
+<meta name="twitter:image"       content="android1.jpeg">
+
+<meta name="description" content="PROJECT REBOOT — LARP מיליטנטי בהשראת NieR:Automata. בחרו סיעה, קבלו פקודות, פרצו תיבות. Glory to Mankind.">
+<meta name="theme-color" content="#161616">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Heebo:wght@300;400;500;700&display=swap');
 
@@ -211,7 +229,7 @@ section{padding:75px 32px;position:relative;}
   .hist-panel.left::after,.hist-panel.right::before{display:none;}
 }
 
-/* ─── ABOUT with flower bg ─── */
+/* ─── ABOUT ─── */
 #about{background:var(--bg);position:relative;overflow:hidden;}
 #about .about-flowers-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 25%;opacity:0.28;pointer-events:none;user-select:none;filter:grayscale(30%) brightness(0.75) contrast(1.2);mix-blend-mode:lighten;-webkit-mask-image:radial-gradient(ellipse 85% 75% at 50% 55%,black 0%,transparent 100%);mask-image:radial-gradient(ellipse 85% 75% at 50% 55%,black 0%,transparent 100%);z-index:0;transition:opacity 1.5s ease;}
 #about:hover .about-flowers-bg{opacity:0.38;}
@@ -471,6 +489,196 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
 .ap-vol::-webkit-slider-thumb{-webkit-appearance:none;width:7px;height:7px;background:var(--white-faint);border-radius:0;transform:rotate(45deg);cursor:pointer;}
 .ap-vol::-moz-range-thumb{width:7px;height:7px;background:var(--white-faint);border:none;border-radius:0;cursor:pointer;}
 
+/* ─── TABBED NETWORK CARD ─── */
+.tc-tabbed{position:relative;overflow:hidden;transition:background .15s;}
+.tc-tabbed:hover{background:var(--bg-light);}
+.tc-tab-bar{display:flex;border-bottom:1px solid var(--line);margin-bottom:0;}
+.tc-tab{flex:1;padding:9px 14px;font-family:var(--font-ui);font-size:0.46rem;letter-spacing:0.22em;
+  text-transform:uppercase;cursor:pointer;transition:background .12s,color .12s;
+  color:var(--white-faint);background:var(--bg-darker);border-bottom:2px solid transparent;
+  display:flex;align-items:center;justify-content:center;gap:6px;user-select:none;}
+.tc-tab:hover{color:var(--white-dim);background:var(--bg);}
+.tc-tab.active.android{color:var(--android);border-bottom-color:var(--android);background:var(--bg);}
+.tc-tab.active.machine{color:var(--machine);border-bottom-color:var(--machine);background:var(--bg);}
+.tc-tab-dot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.tc-tab.android .tc-tab-dot{background:var(--android);}
+.tc-tab.machine .tc-tab-dot{background:var(--machine);}
+.tc-tab-panel{display:none;padding:0;}
+.tc-tab-panel.active{display:grid;}
+.tc-tab-panel::before{display:none;}
+.tc-tabbed[data-active="android"] .tc-tab-panel.active::before{background:var(--android);}
+.tc-tabbed[data-active="machine"] .tc-tab-panel.active::before{background:var(--machine);}
+
+/* ─── DRAWER SPACING ─── */
+.hack-drawer-gap{height:20px;background:var(--bg-darker);}
+/* ─── HACK DRAWER inside TECH ─── */
+.hack-drawer-trigger{
+  grid-column:1/-1;background:var(--bg-darker);border:1px solid var(--line);
+  padding:20px 24px;cursor:pointer;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;transition:background .15s,border-color .15s;
+  position:relative;overflow:hidden;
+}
+.hack-drawer-trigger::before{
+  content:'';position:absolute;top:0;right:0;bottom:0;width:2px;background:#b8a870;
+}
+.hack-drawer-trigger:hover{background:var(--bg-light);border-color:var(--line-light);}
+.hack-drawer-trigger.open{border-color:#b8a870;background:rgba(184,168,112,0.06);}
+.hdt-left{display:flex;align-items:center;gap:16px;}
+.hdt-icon{font-size:1.3rem;opacity:0.55;flex-shrink:0;}
+.hdt-texts{}
+.hdt-num{font-family:var(--font-ui);font-size:0.44rem;letter-spacing:0.3em;color:var(--white-faint);margin-bottom:5px;}
+.hdt-title{font-family:var(--font-ui);font-size:0.8rem;letter-spacing:0.18em;color:var(--white);text-transform:uppercase;margin-bottom:4px;}
+.hdt-sub{font-family:var(--font-he);font-size:0.9rem;color:var(--white-dim);}
+.hdt-right{display:flex;align-items:center;gap:10px;flex-shrink:0;}
+.hdt-badge{font-family:var(--font-ui);font-size:0.42rem;letter-spacing:0.18em;padding:3px 9px;border:1px solid #b8a870;color:#b8a870;text-transform:uppercase;}
+.hdt-arrow{font-family:var(--font-ui);font-size:0.75rem;color:var(--white-faint);transition:transform .35s ease;line-height:1;}
+.hack-drawer-trigger.open .hdt-arrow{transform:rotate(90deg);}
+
+.hack-drawer{
+  grid-column:1/-1;max-height:0;overflow:hidden;opacity:0;
+  transition:max-height .55s cubic-bezier(.4,0,.2,1),opacity .3s ease;
+  background:var(--bg-darker);border-right:1px solid var(--line);
+  border-left:1px solid var(--line);border-top:none;
+}
+.hack-drawer.open{opacity:1;}
+.hack-drawer-inner{padding:32px 28px;display:flex;flex-direction:column;gap:28px;}
+
+/* flow steps inside drawer */
+.hd-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);}
+.hd-step{background:var(--bg);padding:18px 14px;display:flex;flex-direction:column;
+  align-items:center;gap:8px;text-align:center;transition:background .15s;}
+.hd-step:hover{background:var(--bg-light);}
+.hd-step-num{font-family:var(--font-ui);font-size:0.42rem;letter-spacing:0.28em;color:var(--white-faint);}
+.hd-step-icon{font-size:1.2rem;opacity:0.6;}
+.hd-step-label{font-family:var(--font-ui);font-size:0.6rem;letter-spacing:0.18em;color:var(--white);text-transform:uppercase;}
+.hd-step-sub{font-family:var(--font-he);font-size:0.85rem;color:var(--white-faint);line-height:1.6;}
+
+/* game cards inside drawer */
+.hd-games{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
+.hd-game{background:var(--bg);overflow:hidden;transition:background .15s;}
+.hd-game:hover{background:var(--bg-light);}
+.hd-game-top{height:3px;}
+.hd-game.shooter .hd-game-top{background:var(--android);}
+.hd-game.memory  .hd-game-top{background:var(--machine);}
+.hd-game.blocks  .hd-game-top{background:#b8a870;}
+.hd-game-inner{padding:18px 16px;}
+.hd-game-id{font-family:var(--font-ui);font-size:0.42rem;letter-spacing:0.26em;color:var(--white-faint);margin-bottom:6px;}
+.hd-game-icon{font-size:1.1rem;opacity:0.55;margin-bottom:8px;display:block;}
+.hd-game-name{font-family:var(--font-ui);font-size:0.72rem;letter-spacing:0.16em;color:var(--white);text-transform:uppercase;margin-bottom:8px;}
+.hd-game-desc{font-family:var(--font-he);font-size:0.9rem;color:var(--white-dim);line-height:1.85;margin-bottom:10px;}
+.hd-game-mode{font-family:var(--font-ui);font-size:0.4rem;letter-spacing:0.16em;padding:2px 8px;border:1px solid;display:inline-block;text-transform:uppercase;}
+.hd-game.shooter .hd-game-mode{color:var(--android);border-color:rgba(200,200,184,0.35);}
+.hd-game.memory  .hd-game-mode{color:var(--machine);border-color:rgba(160,184,184,0.35);}
+.hd-game.blocks  .hd-game-mode{color:#b8a870;border-color:rgba(184,168,112,0.35);}
+
+/* phone previews inside drawer */
+.hd-phones{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);}
+.hd-phone-wrap{background:var(--bg-darker);padding:20px 14px;display:flex;flex-direction:column;align-items:center;gap:10px;}
+.hd-phone-label{font-family:var(--font-ui);font-size:0.44rem;letter-spacing:0.26em;text-transform:uppercase;}
+.hd-phone-label.s{color:var(--android);}
+.hd-phone-label.m{color:var(--machine);}
+.hd-phone-label.b{color:#b8a870;}
+
+/* help codes inside drawer */
+.hd-help{border:1px solid rgba(204,51,51,0.35);background:rgba(18,8,8,0.7);
+  padding:16px 20px;display:flex;align-items:flex-start;gap:12px;direction:rtl;}
+.hd-help-icon{font-size:0.85rem;color:#cc3333;flex-shrink:0;margin-top:2px;}
+.hd-help-title{font-family:var(--font-ui);font-size:0.64rem;letter-spacing:0.2em;color:#cc3333;text-transform:uppercase;margin-bottom:7px;}
+.hd-help-body{font-family:var(--font-he);font-size:0.9rem;color:var(--white-dim);line-height:1.8;margin-bottom:8px;}
+.hd-codes{display:flex;flex-wrap:wrap;gap:5px;direction:rtl;}
+.hd-code{font-family:var(--font-ui);font-size:0.42rem;letter-spacing:0.14em;padding:3px 9px;border:1px solid var(--line);color:var(--white-faint);}
+.hd-code span{color:var(--white-dim);}
+
+@media(max-width:800px){
+  .hd-flow,.hd-games,.hd-phones{grid-template-columns:1fr;}
+  .hd-phone-wrap{flex-direction:row;gap:16px;justify-content:center;}
+}
+
+/* ─── TECH FIELD ─── */
+#tech{background:var(--bg-darker);position:relative;overflow:hidden;}
+.tech-flow{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);max-width:860px;margin:0 auto 48px auto;}
+.tf-step{background:var(--bg);padding:22px 16px;display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center;position:relative;transition:background .15s;}
+.tf-step:hover{background:var(--bg-light);}
+.tf-step::after{content:'◀';position:absolute;left:-10px;top:50%;transform:translateY(-50%);font-family:var(--font-ui);font-size:0.5rem;color:var(--line-light);z-index:2;background:var(--line);padding:2px 0;}
+.tf-step:first-child::after{display:none;}
+.tf-num{font-family:var(--font-ui);font-size:0.44rem;letter-spacing:0.3em;color:var(--white-faint);}
+.tf-icon{font-size:1.5rem;opacity:0.6;}
+.tf-label{font-family:var(--font-ui);font-size:0.62rem;letter-spacing:0.18em;color:var(--white);text-transform:uppercase;}
+.tf-sub{font-family:var(--font-he);font-size:0.85rem;color:var(--white-faint);line-height:1.7;}
+.tech-intro-box{max-width:720px;margin:0 auto 48px;border:1px solid var(--line);padding:22px 28px;background:var(--bg-dark);position:relative;text-align:center;}
+.tech-intro-box::before{content:'// HOW IT WORKS //';position:absolute;top:-9px;left:50%;transform:translateX(-50%);font-family:var(--font-ui);font-size:0.44rem;letter-spacing:0.28em;color:var(--white-faint);background:var(--bg-dark);padding:0 12px;}
+.tech-intro-box p{font-family:var(--font-he);font-size:1rem;color:var(--white-dim);line-height:2;}
+.tech-sys-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);max-width:860px;margin:0 auto;}
+.tech-card{background:var(--bg);padding:26px 22px;position:relative;overflow:hidden;transition:background .15s;}
+.tech-card:hover{background:var(--bg-light);}
+.tech-card::before{content:'';position:absolute;top:0;right:0;bottom:0;width:2px;}
+.tech-card.android::before{background:var(--android);}
+.tech-card.machine::before{background:var(--machine);}
+.tech-card.neutral::before{background:var(--line-light);}
+.tc-num{font-family:var(--font-ui);font-size:0.46rem;letter-spacing:0.3em;color:var(--white-faint);margin-bottom:10px;}
+.tc-icon{font-size:1.4rem;margin-bottom:10px;display:block;opacity:0.55;}
+.tc-title{font-family:var(--font-ui);font-size:0.8rem;letter-spacing:0.18em;color:var(--white);text-transform:uppercase;margin-bottom:10px;}
+.tc-body{font-family:var(--font-he);font-size:0.95rem;color:var(--white-dim);line-height:1.9;}
+.tc-badge{display:inline-block;margin-top:10px;font-family:var(--font-ui);font-size:0.42rem;letter-spacing:0.2em;border:1px solid var(--line);padding:3px 9px;text-transform:uppercase;color:var(--white-faint);}
+.tc-badge.android{border-color:rgba(200,200,184,0.4);color:var(--android);}
+.tc-badge.machine{border-color:rgba(160,184,184,0.4);color:var(--machine);}
+
+/* ─── HACK GAMES ─── */
+#hackgames{background:var(--bg-dark);position:relative;overflow:hidden;}
+.hg-flow-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);max-width:860px;margin:0 auto 48px;}
+.hg-games-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);max-width:1000px;margin:0 auto 40px;}
+.hg-card{background:var(--bg);overflow:hidden;transition:background .15s;cursor:default;}
+.hg-card:hover{background:var(--bg-light);}
+.hg-top{height:3px;}
+.hg-card.shooter .hg-top{background:var(--android);}
+.hg-card.memory .hg-top{background:var(--machine);}
+.hg-card.blocks .hg-top{background:#b8a870;}
+.hg-inner{padding:22px 20px;}
+.hg-id{font-family:var(--font-ui);font-size:0.44rem;letter-spacing:0.28em;color:var(--white-faint);margin-bottom:8px;}
+.hg-icon{font-size:1.3rem;opacity:0.6;margin-bottom:10px;display:block;}
+.hg-name{font-family:var(--font-ui);font-size:0.82rem;letter-spacing:0.18em;color:var(--white);text-transform:uppercase;margin-bottom:10px;}
+.hg-desc{font-family:var(--font-he);font-size:0.95rem;color:var(--white-dim);line-height:1.9;margin-bottom:12px;}
+.hg-mode{font-family:var(--font-ui);font-size:0.42rem;letter-spacing:0.18em;padding:3px 9px;border:1px solid;display:inline-block;text-transform:uppercase;}
+.hg-card.shooter .hg-mode{color:var(--android);border-color:rgba(200,200,184,0.35);}
+.hg-card.memory .hg-mode{color:var(--machine);border-color:rgba(160,184,184,0.35);}
+.hg-card.blocks .hg-mode{color:#b8a870;border-color:rgba(184,168,112,0.35);}
+.hg-phones{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);max-width:1000px;margin:0 auto 40px;}
+.hg-phone-wrap{background:var(--bg-darker);padding:24px 16px;display:flex;flex-direction:column;align-items:center;gap:12px;}
+.hg-phone-label{font-family:var(--font-ui);font-size:0.46rem;letter-spacing:0.28em;text-transform:uppercase;}
+.hg-phone-label.s{color:var(--android);}
+.hg-phone-label.m{color:var(--machine);}
+.hg-phone-label.b{color:#b8a870;}
+.phone-frame-mini{width:110px;background:#0d0d0d;border:1.5px solid var(--line);border-radius:14px;padding:7px;flex-shrink:0;}
+.phone-frame-mini.shooter{border-color:#3a3a2a;}
+.phone-frame-mini.memory{border-color:#2a3a3a;}
+.phone-frame-mini.blocks{border-color:#3a3020;}
+.pfm-notch{width:28px;height:5px;background:#1a1a1a;border-radius:3px;margin:0 auto 6px;}
+.pfm-screen{background:#080808;border-radius:6px;overflow:hidden;}
+.pfm-hd{padding:3px 6px;display:flex;justify-content:space-between;border-bottom:1px solid #1a1a1a;}
+.pfm-hd span{font-family:var(--font-ui);font-size:7px;letter-spacing:0.1em;color:#686868;}
+.pfm-hd .live{color:#44aa44;}
+.pfm-body{padding:7px 6px;display:flex;flex-direction:column;align-items:center;gap:5px;}
+.pfm-lbl{font-family:var(--font-ui);font-size:7px;letter-spacing:0.15em;color:var(--white-dim);text-align:center;text-transform:uppercase;}
+.pfm-sub{font-family:var(--font-ui);font-size:6px;color:var(--white-faint);text-align:center;}
+.sv{width:76px;height:60px;position:relative;background:#050505;border:1px solid #1a1a1a;}
+.sv-core{width:11px;height:11px;border-radius:50%;background:#111;border:1.5px solid #777;position:absolute;top:9px;left:50%;transform:translateX(-50%);}
+.sv-w{width:6px;height:6px;background:#444;border:1px solid #777;position:absolute;}
+.sv-player{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;border-bottom:8px solid #e8e8e8;}
+.sv-b{width:2px;height:2px;background:#fff;border-radius:50%;position:absolute;}
+.mv{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;padding:3px;width:76px;}
+.mv-n{aspect-ratio:1;border-radius:2px;border:1px solid #2a2a2a;display:flex;align-items:center;justify-content:center;font-family:var(--font-ui);font-size:7px;font-weight:bold;}
+.bv{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;padding:3px;background:#1a1a1a;width:76px;}
+.bv-e{aspect-ratio:1;background:#0a0a0a;}
+.bv-w{aspect-ratio:1;background:#3a3a3a;border:1px solid #686868;}
+.bv-c{aspect-ratio:1;background:#1a1a1a;border:1.5px solid #e8e8e8;}
+.hg-help{max-width:1000px;margin:0 auto;border:1px solid rgba(204,51,51,0.35);background:rgba(18,8,8,0.7);padding:18px 22px;display:flex;align-items:flex-start;gap:14px;direction:rtl;}
+.hg-help-icon{font-family:var(--font-ui);font-size:0.9rem;color:#cc3333;flex-shrink:0;margin-top:2px;opacity:0.8;}
+.hg-help-title{font-family:var(--font-ui);font-size:0.68rem;letter-spacing:0.2em;color:#cc3333;text-transform:uppercase;margin-bottom:8px;}
+.hg-help-body{font-family:var(--font-he);font-size:0.95rem;color:var(--white-dim);line-height:1.85;margin-bottom:10px;}
+.hg-codes{display:flex;flex-wrap:wrap;gap:6px;direction:rtl;}
+.hg-code{font-family:var(--font-ui);font-size:0.44rem;letter-spacing:0.15em;padding:3px 10px;border:1px solid var(--line);color:var(--white-faint);}
+.hg-code span{color:var(--white-dim);}
+
 /* ─── RESPONSIVE ─── */
 @media(max-width:800px){
   .hud-nav{display:none;}
@@ -480,6 +688,9 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
   .team-card{grid-template-columns:130px 1fr;}
   .timeline{padding-right:28px;}
   .hud-enlist-btn{padding:0 10px;font-size:0.5rem;}
+  .tech-flow,.tech-sys-grid,.hg-flow-grid,.hg-games-grid,.hg-phones{grid-template-columns:1fr;}
+  .tf-step::after{display:none;}
+  .hg-phone-wrap{flex-direction:row;gap:20px;justify-content:center;}
 }
 @media(max-width:500px){
   .rules-grid,.gallery-grid{grid-template-columns:1fr;}
@@ -487,8 +698,52 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
   .team-photo{min-height:180px;}
   .footer-stats{display:none;}
 }
+/* ─── COUNTDOWN ─── */
+#countdown-bar{
+  position:relative;z-index:2;
+  margin-top:28px;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+}
+.cd-label{
+  font-family:var(--font-ui);font-size:0.48rem;letter-spacing:0.38em;
+  color:var(--white-faint);text-transform:uppercase;
+}
+.cd-units{display:flex;align-items:flex-end;gap:2px;}
+.cd-unit{
+  display:flex;flex-direction:column;align-items:center;gap:4px;
+  min-width:clamp(52px,12vw,70px);
+}
+.cd-num{
+  font-family:var(--font-ui);font-size:clamp(1.6rem,5vw,2.6rem);
+  font-weight:400;color:var(--white);line-height:1;
+  background:var(--bg-darker);border:1px solid var(--line);
+  padding:8px 10px;width:100%;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cd-num::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--line-light),transparent);
+}
+.cd-sep{
+  font-family:var(--font-ui);font-size:clamp(1.2rem,3.5vw,2rem);
+  color:var(--white-faint);padding-bottom:18px;opacity:0.4;
+  animation:blink 1.4s step-end infinite;
+}
+.cd-sublabel{
+  font-family:var(--font-ui);font-size:0.4rem;letter-spacing:0.22em;
+  color:var(--white-faint);text-transform:uppercase;
+}
+.cd-tbd{
+  font-family:var(--font-ui);font-size:clamp(0.9rem,2.5vw,1.3rem);
+  letter-spacing:0.35em;color:var(--white-faint);
+  border:1px solid var(--line);padding:10px 28px;
+  background:var(--bg-darker);
+}
+.cd-tbd-sub{
+  font-family:var(--font-ui);font-size:0.46rem;letter-spacing:0.28em;
+  color:var(--white-faint);opacity:0.5;margin-top:4px;
+}
 </style>
-</head>
 <body>
 
 <!-- PRELOADER -->
@@ -571,6 +826,7 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
       <li><a href="#history">HISTORY</a></li>
       <li><a href="#factions">FACTIONS</a></li>
       <li><a href="#lore">ARCHIVES</a></li>
+      <li><a href="#tech">TECH</a></li>
       <li><a href="#rules">DIRECTIVES</a></li>
       <li><a href="#gallery">RECORDS</a></li>
       <li><a href="#team">TEAM</a></li>
@@ -594,6 +850,12 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
     <div class="nier-div"><div class="nd-line"></div><div class="nd-dot"></div><div class="nd-d"></div><div class="nd-dot"></div><div class="nd-line"></div></div>
     <div class="hero-sub" id="hero-sub">Glory to Mankind</div>
     <p class="hero-tagline" id="hero-tagline"></p>
+
+    <!-- COUNTDOWN -->
+    <div id="countdown-bar">
+      <div class="cd-label">// T-MINUS — TIME TO DEPLOYMENT //</div>
+      <div id="cd-display"></div>
+    </div>
   </div>
   <div class="hero-stripe"></div>
   <div class="hero-scroll">SCROLL DOWN<div class="scroll-bar"></div></div>
@@ -696,6 +958,265 @@ footer{background:var(--bg-darker);border-top:1px solid var(--line);}
       <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">CLEARANCE: DELTA</span><div class="sh-line-bar"></div></div>
     </div>
     <div class="timeline reveal" id="lore-wrap"></div>
+  </div>
+</section>
+
+<div class="sep"></div>
+
+<!-- TECH -->
+<section id="tech">
+  <div class="container">
+    <div class="sh reveal">
+      <div class="sh-tag">Field Technology</div>
+      <h2 class="sh-title">טכנולוגיית שדה // DEVICE PROTOCOL</h2>
+      <div class="sh-line"><div class="sh-line-bar"></div><span class="sh-line-txt">// TECH INTEGRATION MANUAL // v1.0 //</span><div class="sh-line-bar"></div></div>
+    </div>
+
+    <div class="tech-intro-box reveal">
+      <p>בעולם שלאחר קריסת הציוויליזציה, הטכנולוגיה עדיין פועלת — אך בידיים אחרות. הטלפון שבכיסכם אינו עוד מכשיר פרטי. בשטח הוא הופך לממשק הרשמי שלכם: מגשר בין אנדרואידים לרשת YoRHa, ובין מכונות לרשת המשותפת שלהן.</p>
+    </div>
+
+    <div class="tech-flow reveal">
+      <div class="tf-step">
+        <div class="tf-num">SYS_01</div>
+        <div class="tf-icon">📡</div>
+        <div class="tf-label">קבלת פקודות</div>
+        <div class="tf-sub">פקודות שדה ומשימות נשלחות ישירות לטלפון</div>
+      </div>
+      <div class="tf-step">
+        <div class="tf-num">SYS_02</div>
+        <div class="tf-icon">🗺️</div>
+        <div class="tf-label">מודיעין</div>
+        <div class="tf-sub">נקודות עניין ומפות — נעולות לפי סיעה</div>
+      </div>
+      <div class="tf-step">
+        <div class="tf-num">SYS_03</div>
+        <div class="tf-icon">🔗</div>
+        <div class="tf-label">רשת קולקטיבית</div>
+        <div class="tf-sub">מכונות משתפות מידע בין כל תאי הרשת</div>
+      </div>
+      <div class="tf-step" id="tf-hack-trigger" style="cursor:pointer;border:1px solid transparent;transition:border-color .2s,background .15s;">
+        <div class="tf-num">SYS_04</div>
+        <div class="tf-icon">🔓</div>
+        <div class="tf-label">פריצת תיבות</div>
+        <div class="tf-sub">סריקת ברקוד → משחק → קוד → פתיחה</div>
+        <div style="margin-top:6px;font-family:var(--font-ui);font-size:0.4rem;letter-spacing:0.18em;color:#b8a870;opacity:0.8;" id="tf-hack-hint">[ לחץ לפרטים ▼ ]</div>
+      </div>
+    </div>
+
+    <div class="tech-sys-grid reveal" style="grid-template-columns:1fr 1fr;">
+      <!-- כרטיסיית רשת מאוחדת — רוחב מלא -->
+      <div class="tech-card tc-tabbed" data-active="android" id="tc-network-card" style="padding:0;grid-column:1/-1;position:relative;">
+        <!-- פס צבע עליון במקום ימני, כי הכרטיס ברוחב מלא -->
+        <div style="position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--android) 50%,var(--machine) 50%);z-index:1;"></div>
+        <div class="tc-tab-bar" style="margin-top:2px;">
+          <div class="tc-tab active android" data-tab="android" data-card="tc-network-card">
+            <span class="tc-tab-dot"></span>YoRHa // אנדרואידים
+          </div>
+          <div class="tc-tab machine" data-tab="machine" data-card="tc-network-card">
+            <span class="tc-tab-dot"></span>מכונות // Machine
+          </div>
+        </div>
+        <div class="tc-tab-panel active" data-panel="android" style="display:block;">
+          <div style="padding:22px 24px;">
+            <div class="tc-num">NET_01</div>
+            <span class="tc-icon">📡</span>
+            <div class="tc-title">רשת YoRHa // אנדרואידים</div>
+            <p class="tc-body">אנדרואידים ניגשים לרשת YoRHa דרך ממשק הטלפון. הרשת מאפשרת קבלת פקודות ממפקדים, גישה לנתוני מודיעין על מיקום מכונות, ושידור דיווחי שדה בזמן אמת אל מרכז הפיקוד.</p>
+            <span class="tc-badge android">// ANDROID ACCESS</span>
+          </div>
+        </div>
+        <div class="tc-tab-panel" data-panel="machine" style="display:none;">
+          <div style="padding:22px 24px;">
+            <div class="tc-num">NET_02</div>
+            <span class="tc-icon">🔗</span>
+            <div class="tc-title">הרשת המשותפת // מכונות</div>
+            <p class="tc-body">מכונות מחוברות לרשת הקולקטיבית — מרחב שיתופי שבו כל מידע שנאסף ע"י מכונה אחת זמין לכלל הרשת. ניתן לשדר הודעות, לשתף ממצאים, ולתאם פעולה ללא מפקד מרכזי.</p>
+            <span class="tc-badge machine">// MACHINE NETWORK</span>
+          </div>
+        </div>
+      </div>
+      <!-- NET_03 ו-NET_04 זה לצד זה -->
+      <div class="tech-card neutral" style="grid-column:1/-1;">
+        <div class="tc-num">NET_03</div>
+        <span class="tc-icon">📋</span>
+        <div class="tc-title">קבלת משימות // ORDERS</div>
+        <p class="tc-body">פקודות שדה, בריפינגים ועדכוני מצב יישלחו אל הטלפון במהלך המשחק. חובה לבדוק את המכשיר מעת לעת — מידע קריטי לא יוכרז בצעקות, הוא יוזרם ישירות לממשק שלכם.</p>
+        <span class="tc-badge">// ALL FACTIONS</span>
+      </div>
+    </div>
+
+    <!-- HACK THE BOX DRAWER -->
+    <div class="hack-drawer-gap"></div>
+    <div class="hack-drawer-trigger reveal" id="hack-drawer-trigger">
+      <div class="hdt-left">
+        <span class="hdt-icon">🔓</span>
+        <div class="hdt-texts">
+          <div class="hdt-num">SYS_04 // BREACH PROTOCOL</div>
+          <div class="hdt-title">HACK THE BOX // פריצת תיבות</div>
+          <div class="hdt-sub">תיבות נעולות בשטח — סרקו, שחקו, פרצו. לחצו לפרטים מלאים.</div>
+        </div>
+      </div>
+      <div class="hdt-right">
+        <span class="hdt-badge">ACTIVE</span>
+        <span class="hdt-arrow">▶</span>
+      </div>
+    </div>
+
+    <div class="hack-drawer" id="hack-drawer">
+      <div class="hack-drawer-inner">
+
+        <!-- 4-step flow -->
+        <div class="hd-flow">
+          <div class="hd-step">
+            <div class="hd-step-num">STEP 01</div>
+            <div class="hd-step-icon">📦</div>
+            <div class="hd-step-label">מצאו תיבה</div>
+            <div class="hd-step-sub">תיבות נעולות מפוזרות בשטח, מסומנות בסמל HACK</div>
+          </div>
+          <div class="hd-step">
+            <div class="hd-step-num">STEP 02</div>
+            <div class="hd-step-icon">📷</div>
+            <div class="hd-step-label">סרקו ברקוד</div>
+            <div class="hd-step-sub">פיתחו מצלמה וסרקו את הברקוד שעל התיבה</div>
+          </div>
+          <div class="hd-step">
+            <div class="hd-step-num">STEP 03</div>
+            <div class="hd-step-icon">🎮</div>
+            <div class="hd-step-label">שחקו ונצחו</div>
+            <div class="hd-step-sub">השלימו את משחק הפריצה תוך זמן מוגבל</div>
+          </div>
+          <div class="hd-step">
+            <div class="hd-step-num">STEP 04</div>
+            <div class="hd-step-icon">🔓</div>
+            <div class="hd-step-label">הזינו קוד</div>
+            <div class="hd-step-sub">הקוד שקיבלתם פותח את המנעול הפיזי</div>
+          </div>
+        </div>
+
+        <!-- section label -->
+        <div style="font-family:var(--font-ui);font-size:0.5rem;letter-spacing:0.38em;color:var(--white-faint);text-align:center;display:flex;align-items:center;justify-content:center;gap:10px;">
+          <span style="display:block;width:18px;height:1px;background:var(--line-light);"></span>
+          // 3 סוגי משחקי פריצה //
+          <span style="display:block;width:18px;height:1px;background:var(--line-light);"></span>
+        </div>
+
+        <!-- 3 game cards -->
+        <div class="hd-games">
+          <div class="hd-game shooter">
+            <div class="hd-game-top"></div>
+            <div class="hd-game-inner">
+              <div class="hd-game-id">BREACH_01</div>
+              <span class="hd-game-icon">🎯</span>
+              <div class="hd-game-name">Shooter Protocol</div>
+              <p class="hd-game-desc">שני ג'ויסטיקים על המסך — אחד לתנועה, אחד לירי. הרסו את שכבות ההגנה ופגעו בגרעין המרכזי לפני שהזמן אוזל.</p>
+              <span class="hd-game-mode">Landscape Mode</span>
+            </div>
+          </div>
+          <div class="hd-game memory">
+            <div class="hd-game-top"></div>
+            <div class="hd-game-inner">
+              <div class="hd-game-id">BREACH_02</div>
+              <span class="hd-game-icon">🧠</span>
+              <div class="hd-game-name">Memory Breach</div>
+              <p class="hd-game-desc">רצף צמתים מוצג ולאחר מכן נעלם — חזרו עליו בדיוק. שלושה רצפים לפריצה מלאה, כל אחד ארוך מקודמו.</p>
+              <span class="hd-game-mode">Portrait Mode</span>
+            </div>
+          </div>
+          <div class="hd-game blocks">
+            <div class="hd-game-top"></div>
+            <div class="hd-game-inner">
+              <div class="hd-game-id">BREACH_03</div>
+              <span class="hd-game-icon">🧩</span>
+              <div class="hd-game-name">Block Infiltration</div>
+              <p class="hd-game-desc">החליקו בלוקים ימינה ושמאלה כדי לפנות מסלול לגרעין. פאזל קלאסי — בלוק אחד זזה בציר אחד בלבד.</p>
+              <span class="hd-game-mode">Portrait Mode</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- phone previews -->
+        <div class="hd-phones">
+          <div class="hd-phone-wrap">
+            <div class="hd-phone-label s">SHOOTER</div>
+            <div class="phone-frame-mini shooter">
+              <div class="pfm-notch"></div>
+              <div class="pfm-screen">
+                <div class="pfm-hd"><span>YoRHa Net</span><span class="live">● ON</span></div>
+                <div class="pfm-body">
+                  <div class="sv">
+                    <div class="sv-core"></div>
+                    <div class="sv-w" style="top:17px;left:10px;"></div>
+                    <div class="sv-w" style="top:17px;right:10px;"></div>
+                    <div class="sv-w" style="top:26px;left:26px;"></div>
+                    <div class="sv-b" style="top:36px;left:36px;"></div>
+                    <div class="sv-b" style="top:28px;left:41px;"></div>
+                    <div class="sv-player"></div>
+                  </div>
+                  <div class="pfm-lbl">Hack 42%</div>
+                  <div class="pfm-sub">HP ■ ■ □ &nbsp;|&nbsp; 38s</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hd-phone-wrap">
+            <div class="hd-phone-label m">MEMORY</div>
+            <div class="phone-frame-mini memory">
+              <div class="pfm-notch"></div>
+              <div class="pfm-screen">
+                <div class="pfm-hd"><span>Memory Breach</span><span class="live">● ON</span></div>
+                <div class="pfm-body">
+                  <div class="pfm-sub" style="font-size:7px;letter-spacing:0.2em;color:var(--white-faint);">— WATCH —</div>
+                  <div class="mv">
+                    <div class="mv-n" style="background:#1a2a3a;border-color:#4a8fa8;color:#4a8fa8;">A</div>
+                    <div class="mv-n" style="background:#111;border-color:#2a2a2a;color:#333;">B</div>
+                    <div class="mv-n" style="background:#1a2a1a;border-color:#6a8a4a;color:#6a8a4a;">C</div>
+                    <div class="mv-n" style="background:#111;border-color:#2a2a2a;color:#333;">D</div>
+                    <div class="mv-n" style="background:#111;border-color:#2a2a2a;color:#333;">E</div>
+                    <div class="mv-n" style="background:#2a1a1a;border-color:#8a4a6a;color:#8a4a6a;">F</div>
+                    <div class="mv-n" style="background:#111;border-color:#2a2a2a;color:#333;">G</div>
+                    <div class="mv-n" style="background:#111;border-color:#2a2a2a;color:#333;">H</div>
+                  </div>
+                  <div class="pfm-sub">SEQ 1/3 &nbsp;|&nbsp; 28s</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="hd-phone-wrap">
+            <div class="hd-phone-label b">BLOCKS</div>
+            <div class="phone-frame-mini blocks">
+              <div class="pfm-notch"></div>
+              <div class="pfm-screen">
+                <div class="pfm-hd"><span>Block Infiltration</span><span class="live">● ON</span></div>
+                <div class="pfm-body">
+                  <div class="bv">
+                    <div class="bv-e"></div><div class="bv-w"></div><div class="bv-w"></div><div class="bv-e"></div><div class="bv-e"></div>
+                    <div class="bv-e"></div><div class="bv-e"></div><div class="bv-w"></div><div class="bv-e"></div><div class="bv-w"></div>
+                    <div class="bv-c"></div><div class="bv-c"></div><div class="bv-e"></div><div class="bv-e"></div><div class="bv-e" style="font-family:var(--font-ui);font-size:8px;color:#686868;display:flex;align-items:center;justify-content:center;">▶</div>
+                    <div class="bv-e"></div><div class="bv-w"></div><div class="bv-e"></div><div class="bv-w"></div><div class="bv-e"></div>
+                    <div class="bv-e"></div><div class="bv-e"></div><div class="bv-w"></div><div class="bv-w"></div><div class="bv-e"></div>
+                  </div>
+                  <div class="pfm-sub">Moves: 3 &nbsp;|&nbsp; 41s</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- help codes -->
+        <div class="hd-help">
+          <div class="hd-help-icon">⚠</div>
+          <div style="flex:1;">
+            <div class="hd-help-title">// HELP CODES — מערכת קודי עזרה</div>
+            <p class="hd-help-body">נתקעתם? הנאפסים יכולים להעניק קודי עזרה חד-פעמיים שניתן להזין ישירות במשחק. כל קוד תקף לשימוש אחד בלבד ונרשם במערכת — אחרי השימוש הוא בטל.</p>
+            <div class="hd-codes">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -948,12 +1469,13 @@ const CONTENT = {
   ],
   faq:[
     { q:"האם צריך ניסיון קודם ב-LARP?", a:"לא! פרויקט ריבוט מתאים לכל רמה. נקיים תדריך מלא לפני האירוע שיסביר את כל הכללים, המכאניקות והעולם. כל מה שצריך הוא רצון להשתתף." },
-    { q:"מה לובשים לאירוע?", a:"אחת המטרות שלנו היא לאפשר תלבושות פשוטות, נוחות ומשתלמות כלכלית  קיטים שכל שחקן יוכל להרכיב בלי להסתבך ובלי להוציא סכומים גדולים. הלארפ מתקיים בעולם פוסט־אפוקליפטי עתידני, ולכן הנראות הכללית צריכה לשמר את האווירה הזו: מעט שחוק, מעט טכנולוגי, מעט זר ולא לגמרי “רגיל”. עם זאת, מכיוון שמכונות ואנדרואידים נוטים לעיתים לחקות בני אדם, אפשר בהחלט לשלב בקיט גם פריטי לבוש יומיומיים כל עוד הם מתאימים לצבעים ולתחושה הכללית של העולם. הכלל המרכזי לגבי לבוש הוא צבעוני: אנדרואידים לובשים שחור / לבן. מכונות לובשות כסף / זהב" },
-    { q:"מה קורה אם נפצעים אמיתית?", a:' בסביבת המשחק יהיה חובש זמין עם עזרה ראשונה זמינה.במידה ונפצעת מיד קראו לחובש, בתדריך הפתיחה יוסבר כיצד לגשת אליו. הבטיחות תמיד קודמת לכל דבר אחר.' },
-    { q:"כמה זמן נמשך האירוע?", a:"האירוע נמשך כיום וחצי כולל שינה, בתחילת הלארפ יהיה תדריך בבוקר, הלארפ יפעל מהצהריים ועד הבוקר למחרת, בסוף הלארפ יהיה תדריך בסיום. פרטים מדויקים יעודכנו לרשומים." },
-    { q:" האם אפשר להגיע ללא נשק משחקי ?", a:"כן. ניתן לשאול נשק ספוג בסיסי מהצוות בהודעה מראש . אם מגיעים עם נשק משלכם — הוא חייב לעבור בדיקת בטיחות בכניסה." },
-    { q:" האם הלארפ מספק אוכל?", a:"הלארפ מספק נשנושים קלים ומים אך, לא ארוחות מסודרות , במתחם קיימים מקררים ויהיה ניתן לבשל , יש לדאוג להגיע עם אוכל מהבית ." },
-    { q:"כיצד בוחרים צד?", a:"עם הרשמה למשחק תקבלו טופס עם מספר שאלות שיעזור לו לעצב את חווית המשחק שלכם בטופס זה תבחרו גם את הצד אליו אתם משתייכים." }
+    { q:"מה לובשים לאירוע?", a:"אחת המטרות שלנו היא לאפשר תלבושות פשוטות, נוחות ומשתלמות כלכלית. הלארפ מתקיים בעולם פוסט-אפוקליפטי עתידני. הכלל המרכזי: אנדרואידים לובשים שחור / לבן. מכונות לובשות כסף / זהב." },
+    { q:"מה קורה אם נפצעים אמיתית?", a:"בסביבת המשחק יהיה חובש זמין עם עזרה ראשונה זמינה. במידה ונפצעת מיד קראו לחובש. הבטיחות תמיד קודמת לכל דבר אחר." },
+    { q:"כמה זמן נמשך האירוע?", a:"האירוע נמשך כיום וחצי כולל שינה. בתחילת הלארפ יהיה תדריך בבוקר, הלארפ יפעל מהצהריים ועד הבוקר למחרת. פרטים מדויקים יעודכנו לרשומים." },
+    { q:"האם אפשר להגיע ללא נשק משחקי?", a:"כן. ניתן לשאול נשק ספוג בסיסי מהצוות בהודעה מראש. אם מגיעים עם נשק משלכם — הוא חייב לעבור בדיקת בטיחות בכניסה." },
+    { q:"האם הלארפ מספק אוכל?", a:"הלארפ מספק נשנושים קלים ומים אך לא ארוחות מסודרות. במתחם קיימים מקררים ויהיה ניתן לבשל. יש לדאוג להגיע עם אוכל מהבית." },
+    { q:"כיצד בוחרים צד?", a:"עם הרשמה למשחק תקבלו טופס עם מספר שאלות שיעזור לעצב את חווית המשחק שלכם. בטופס זה תבחרו גם את הצד אליו אתם משתייכים." },
+    { q:"כיצד עובדת פריצת התיבות?", a:"בשטח תמצאו תיבות נעולות המסומנות בברקוד. סרקו את הברקוד עם מצלמת הטלפון — תועברו ישירות למשחק דיגיטלי. נצחו במשחק וקבלו קוד סודי. הזינו את הקוד — התיבה נפתחת. שימו לב: כל משחק שונה — Shooter, Memory Breach, ו-Block Infiltration." }
   ],
   join:{
     title:"הצטרף עכשיו",
@@ -973,11 +1495,7 @@ const CONTENT = {
   const plBar=document.getElementById('pl-bar');
   const plPct=document.getElementById('pl-pct');
   const pl=document.getElementById('preloader');
-  const steps=[
-    'INITIALIZING BOOT SEQUENCE','LOADING YORHA NETWORK','SYNCING ANDROID DATABASE',
-    'SYNCING MACHINE NETWORK','LOADING TACTICAL ASSETS','ESTABLISHING NODE CONNECTION',
-    'CALIBRATING COMBAT SYSTEMS','ALL SYSTEMS NOMINAL'
-  ];
+  const steps=['INITIALIZING BOOT SEQUENCE','LOADING YORHA NETWORK','SYNCING ANDROID DATABASE','SYNCING MACHINE NETWORK','LOADING TACTICAL ASSETS','ESTABLISHING NODE CONNECTION','CALIBRATING COMBAT SYSTEMS','ALL SYSTEMS NOMINAL'];
   let pct=0;
   steps.forEach((s,i)=>{
     const el=document.createElement('div');
@@ -1046,10 +1564,11 @@ function playClick(type){
   try{
     const ctx=getSfxCtx(),o=ctx.createOscillator(),g=ctx.createGain();
     o.connect(g);g.connect(ctx.destination);
-    if(type==='ui'){o.frequency.setValueAtTime(1200,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(800,ctx.currentTime+0.04);g.gain.setValueAtTime(0.18,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.07);o.start();o.stop(ctx.currentTime+0.07);}
-    else if(type==='enter'){const o2=ctx.createOscillator(),g2=ctx.createGain();o2.connect(g2);g2.connect(ctx.destination);o.frequency.setValueAtTime(80,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(40,ctx.currentTime+0.3);g.gain.setValueAtTime(0.4,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.3);o2.frequency.setValueAtTime(2000,ctx.currentTime);o2.frequency.exponentialRampToValueAtTime(1000,ctx.currentTime+0.15);g2.gain.setValueAtTime(0.2,ctx.currentTime+0.05);g2.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.2);o.start();o.stop(ctx.currentTime+0.3);o2.start(ctx.currentTime+0.05);o2.stop(ctx.currentTime+0.2);}
-    else if(type==='modal'){o.type='sine';o.frequency.setValueAtTime(440,ctx.currentTime);o.frequency.exponentialRampToValueAtTime(600,ctx.currentTime+0.05);g.gain.setValueAtTime(0.12,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.12);o.start();o.stop(ctx.currentTime+0.12);}
-    else if(type==='hover'){o.frequency.setValueAtTime(1800,ctx.currentTime);g.gain.setValueAtTime(0.06,ctx.currentTime);g.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.03);o.start();o.stop(ctx.currentTime+0.03);}
+    const n=ctx.currentTime;
+    if(type==='ui'){o.frequency.setValueAtTime(1200,n);o.frequency.exponentialRampToValueAtTime(800,n+.04);g.gain.setValueAtTime(0.018,n);g.gain.exponentialRampToValueAtTime(0.0001,n+.07);o.start(n);o.stop(n+.07);}
+    else if(type==='enter'){const o2=ctx.createOscillator(),g2=ctx.createGain();o2.connect(g2);g2.connect(ctx.destination);o.frequency.setValueAtTime(80,n);o.frequency.exponentialRampToValueAtTime(40,n+.3);g.gain.setValueAtTime(0.4,n);g.gain.exponentialRampToValueAtTime(0.0001,n+.3);o2.frequency.setValueAtTime(2000,n);o2.frequency.exponentialRampToValueAtTime(1000,n+.15);g2.gain.setValueAtTime(0.2,n+.05);g2.gain.exponentialRampToValueAtTime(0.0001,n+.2);o.start(n);o.stop(n+.3);o2.start(n+.05);o2.stop(n+.2);}
+    else if(type==='modal'){o.type='sine';o.frequency.setValueAtTime(440,n);o.frequency.exponentialRampToValueAtTime(600,n+.05);g.gain.setValueAtTime(0.12,n);g.gain.exponentialRampToValueAtTime(0.0001,n+.12);o.start(n);o.stop(n+.12);}
+    else if(type==='hover'){o.frequency.setValueAtTime(1800,n);g.gain.setValueAtTime(0.06,n);g.gain.exponentialRampToValueAtTime(0.0001,n+.03);o.start(n);o.stop(n+.03);}
   }catch(e){}
 }
 
@@ -1255,6 +1774,148 @@ document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   elCollapse.addEventListener('click',()=>{elPlayer.classList.toggle('collapsed');elCollapse.textContent=elPlayer.classList.contains('collapsed')?'◈':'—';});
   music.addEventListener('play',setUI);music.addEventListener('pause',setUI);
 })();
+/* ─── NETWORK TABS ─── */
+(function(){
+  document.querySelectorAll('.tc-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const which = tab.dataset.tab;
+      const cardId = tab.dataset.card;
+      const card = document.getElementById(cardId);
+      if (!card) return;
+      card.querySelectorAll('.tc-tab').forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      card.querySelectorAll('.tc-tab-panel').forEach(p => {
+        if (p.dataset.panel === which) {
+          p.classList.add('active');
+          p.style.display = 'block';
+        } else {
+          p.classList.remove('active');
+          p.style.display = 'none';
+        }
+      });
+      card.dataset.active = which;
+      playClick('ui');
+    });
+    tab.addEventListener('mouseenter', () => playClick('hover'));
+  });
+})();
+
+/* ─── HACK DRAWER ─── */
+(function(){
+  const trigger = document.getElementById('hack-drawer-trigger');
+  const drawer  = document.getElementById('hack-drawer');
+  const tfTrigger = document.getElementById('tf-hack-trigger');
+  const tfHint    = document.getElementById('tf-hack-hint');
+  if (!trigger || !drawer) return;
+
+  function openDrawer() {
+    trigger.classList.add('open');
+    drawer.classList.add('open');
+    drawer.style.maxHeight = drawer.scrollHeight + 'px';
+    if (tfTrigger) {
+      tfTrigger.style.borderColor = '#b8a870';
+      tfTrigger.style.background  = 'rgba(184,168,112,0.07)';
+    }
+    if (tfHint) tfHint.textContent = '[ לחץ לסגירה ▲ ]';
+    // scroll drawer into view smoothly
+    setTimeout(() => trigger.scrollIntoView({behavior:'smooth', block:'start'}), 50);
+    playClick('modal');
+  }
+
+  function closeDrawer() {
+    trigger.classList.remove('open');
+    drawer.classList.remove('open');
+    drawer.style.maxHeight = '0';
+    if (tfTrigger) {
+      tfTrigger.style.borderColor = 'transparent';
+      tfTrigger.style.background  = '';
+    }
+    if (tfHint) tfHint.textContent = '[ לחץ לפרטים ▼ ]';
+    playClick('ui');
+  }
+
+  trigger.addEventListener('click', () => {
+    trigger.classList.contains('open') ? closeDrawer() : openDrawer();
+  });
+
+  // also open when clicking the SYS_04 flow step
+  if (tfTrigger) {
+    tfTrigger.addEventListener('click', () => {
+      if (!trigger.classList.contains('open')) {
+        openDrawer();
+      } else {
+        closeDrawer();
+      }
+    });
+    tfTrigger.addEventListener('mouseenter', () => playClick('hover'));
+  }
+
+  // recalc max-height on window resize while open
+  window.addEventListener('resize', () => {
+    if (drawer.classList.contains('open')) {
+      drawer.style.maxHeight = drawer.scrollHeight + 'px';
+    }
+  });
+})();
+/* ─── COUNTDOWN ─── */
+(function(){
+  // ✏️ שנה כאן את תאריך האירוע כשיהיה ידוע:
+  // פורמט: 'YYYY-MM-DDTHH:MM:SS' — לדוגמה: '2025-09-15T10:00:00'
+  const EVENT_DATE = null; // null = TBD
+
+  const display = document.getElementById('cd-display');
+  if (!display) return;
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  function render(){
+    if (!EVENT_DATE) {
+      display.innerHTML = `
+        <div class="cd-tbd">DATE: TBD</div>
+        <div class="cd-tbd-sub">// תאריך יפורסם בקרוב //</div>`;
+      return;
+    }
+
+    const target = new Date(EVENT_DATE).getTime();
+    const now    = Date.now();
+    const diff   = target - now;
+
+    if (diff <= 0) {
+      display.innerHTML = `<div class="cd-tbd" style="color:var(--white);border-color:var(--white-dim);">// REBOOT IS NOW //</div>`;
+      return;
+    }
+
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000)  / 60000);
+    const secs  = Math.floor((diff % 60000)    / 1000);
+
+    display.innerHTML = `
+      <div class="cd-units">
+        <div class="cd-unit">
+          <div class="cd-num">${pad(days)}</div>
+          <div class="cd-sublabel">ימים</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit">
+          <div class="cd-num">${pad(hours)}</div>
+          <div class="cd-sublabel">שעות</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit">
+          <div class="cd-num">${pad(mins)}</div>
+          <div class="cd-sublabel">דקות</div>
+        </div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit">
+          <div class="cd-num">${pad(secs)}</div>
+          <div class="cd-sublabel">שניות</div>
+        </div>
+      </div>`;
+  }
+
+  render();
+  if (EVENT_DATE) setInterval(render, 1000);
+})();
 </script>
-</body>
 </html>
